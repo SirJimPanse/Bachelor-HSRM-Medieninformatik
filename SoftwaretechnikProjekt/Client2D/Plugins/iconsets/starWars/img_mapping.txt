@@ -1,0 +1,5 @@
+﻿1:lego_red.png:Don't underestimate the power of the dark side!
+2:darth_vader.png:I am your father..
+3:roboti_positi.jpg:May, the 4th, be with you!
+4:plus.png:'RRRrrruurgh! Arrggg!' - Wookie for 'I am not happy about the overall situation!'
+5:truck.png:Use the force, Luke.

@@ -1,0 +1,5 @@
+﻿1:changer.jpg:Ändert Waren
+2:consumer.jpg:Warenausgang - Waren im fertigen Zustand werden hier entgegengenommen
+3:product.jpg:Falsch
+4:producer.jpg:Wareneingang
+5:transporterband.jpg:Förderband - Auf dem Förderband laufen die Waren durch die Fabrik

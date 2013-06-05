@@ -1,0 +1,37 @@
+11;UI - Menüs und Tools - Prototyp;ready_for_review;12.11.2012;
+20;Simulation 1;assigned;28.11.2012;
+25;3D-Ansicht;assigned;28.11.2012;
+35;Setzen der Objekte auf Gitter aus Toolbox;new;28.11.2012;
+36;Objekte markieren (einzeln + multi);new;28.11.2012;
+37;Objekte auf Gitter verschieben;new;28.11.2012;
+38;Objekte auf Gitter drehen;assigned;28.11.2012;
+41;Maschinen sind Observables;assigned;28.11.2012;
+43;Persistente Fabrik;assigned;28.11.2012;
+51;Datenbankverbindung von außen konfigurierbar;ready_for_review;28.11.2012;
+52;Berechtigungskonfiguration in GUI;new;28.11.2012;
+59;Dynamische Feldgröße;assigned;12.12.2012;
+60;Verändern der Gittergröße mit Objekten;new;12.12.2012;
+61;Größenänderungen von Hauptfenster;new;12.12.2012;
+62;Popups als eigene Fenster;new;12.12.2012;
+66;CLIENT 2D connectToFactory;closed;18.12.2012;02.01.2013
+67;CLIENT 2D eventbasierte Positionierung;new;18.12.2012;
+68;Löschenbutton - Factory;closed;19.12.2012;02.01.2013
+69;Multi-User;new;19.12.2012;
+70;GUI Simulation;new;19.12.2012;
+71;Scripting API für Maschinen;new;19.12.2012;
+72;Simulation mit Animation;new;19.12.2012;
+73;GUI Simulation;new;19.12.2012;
+74;Simulation 2;new;19.12.2012;
+75;Produkt erzeugen;new;19.12.2012;
+76;Produkt bewegen;new;19.12.2012;
+77;Stauanzeige bei der Animation;new;19.12.2012;
+78;Produkt aufnehmen;new;19.12.2012;
+79;Optionsfenster in der GUI;new;19.12.2012;
+80;WebService Schnittstelle;new;19.12.2012;
+81;SimulationController;ready_for_test;19.12.2012;
+82;Zugriffsrechte Verwaltung;new;19.12.2012;
+83;AddMemberToMemberAccess in FactoryService;ready_for_test;19.12.2012;
+84;ServiceMethoden Threadsafe;new;19.12.2012;
+85;Reaktion auf MQMessages;new;19.12.2012;
+86;Logger / Statistik;new;19.12.2012;
+87;Registrierung;ready_for_approval;19.12.2012;02.01.2013

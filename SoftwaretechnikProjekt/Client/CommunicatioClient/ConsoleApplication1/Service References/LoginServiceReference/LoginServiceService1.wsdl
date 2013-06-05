@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" name="LoginServiceService" targetNamespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://pc13-118.intern.mi.hs-rm.de:8080/LoginService?xsd=1" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+    </xsd:schema>
+  </types>
+  <message name="connect">
+    <part name="arg0" type="xsd:string" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="connectResponse">
+    <part name="return" type="xsd:long" />
+  </message>
+  <message name="getFactories">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="getFactoriesResponse">
+    <part name="return" type="tns:factoryList" />
+  </message>
+  <message name="connectToFactory">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="connectToFactoryResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <portType name="LoginService">
+    <operation name="connect" parameterOrder="arg0 arg1">
+      <input message="tns:connect" />
+      <output message="tns:connectResponse" />
+    </operation>
+    <operation name="getFactories">
+      <input message="tns:getFactories" />
+      <output message="tns:getFactoriesResponse" />
+    </operation>
+    <operation name="connectToFactory" parameterOrder="arg0 arg1">
+      <input message="tns:connectToFactory" />
+      <output message="tns:connectToFactoryResponse" />
+    </operation>
+  </portType>
+  <binding name="LoginServicePortBinding" type="tns:LoginService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="connect">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getFactories">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="connectToFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="LoginServiceService">
+    <port name="LoginServicePort" binding="tns:LoginServicePortBinding">
+      <soap:address location="http://pc13-118.intern.mi.hs-rm.de:8080/LoginService" />
+    </port>
+  </service>
+</definitions>

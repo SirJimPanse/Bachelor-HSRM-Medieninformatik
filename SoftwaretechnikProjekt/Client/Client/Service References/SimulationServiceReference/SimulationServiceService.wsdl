@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" name="SimulationServiceService" targetNamespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/SimulationServices?xsd=1" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+    </xsd:schema>
+  </types>
+  <message name="getSimulation">
+    <part name="arg0" type="xsd:int" />
+  </message>
+  <message name="getSimulationResponse">
+    <part name="return" type="tns:machineMap" />
+  </message>
+  <message name="deleteSimulation">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+  </message>
+  <message name="deleteSimulationResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <message name="getSimulations">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="getSimulationsResponse">
+    <part name="return" type="tns:factoryMap" />
+  </message>
+  <message name="produce">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+    <part name="arg2" type="xsd:int" />
+  </message>
+  <message name="produceResponse" />
+  <message name="getProducts">
+    <part name="arg0" type="xsd:int" />
+  </message>
+  <message name="getProductsResponse">
+    <part name="return" type="tns:productMap" />
+  </message>
+  <message name="createSimulation">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="createSimulationResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="addMemberToSimulation">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+    <part name="arg2" type="xsd:string" />
+  </message>
+  <message name="addMemberToSimulationResponse" />
+  <message name="stopSimulation">
+    <part name="arg0" type="xsd:int" />
+  </message>
+  <message name="stopSimulationResponse" />
+  <message name="getSimulationAreaWidth">
+    <part name="arg0" type="xsd:int" />
+  </message>
+  <message name="getSimulationAreaWidthResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <message name="getSimulationAreaHeight">
+    <part name="arg0" type="xsd:int" />
+  </message>
+  <message name="getSimulationAreaHeightResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <portType name="SimulationService">
+    <operation name="getSimulation">
+      <input message="tns:getSimulation" />
+      <output message="tns:getSimulationResponse" />
+    </operation>
+    <operation name="deleteSimulation" parameterOrder="arg0 arg1">
+      <input message="tns:deleteSimulation" />
+      <output message="tns:deleteSimulationResponse" />
+    </operation>
+    <operation name="getSimulations">
+      <input message="tns:getSimulations" />
+      <output message="tns:getSimulationsResponse" />
+    </operation>
+    <operation name="produce" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:produce" />
+      <output message="tns:produceResponse" />
+    </operation>
+    <operation name="getProducts">
+      <input message="tns:getProducts" />
+      <output message="tns:getProductsResponse" />
+    </operation>
+    <operation name="createSimulation">
+      <input message="tns:createSimulation" />
+      <output message="tns:createSimulationResponse" />
+    </operation>
+    <operation name="addMemberToSimulation" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:addMemberToSimulation" />
+      <output message="tns:addMemberToSimulationResponse" />
+    </operation>
+    <operation name="stopSimulation">
+      <input message="tns:stopSimulation" />
+      <output message="tns:stopSimulationResponse" />
+    </operation>
+    <operation name="getSimulationAreaWidth">
+      <input message="tns:getSimulationAreaWidth" />
+      <output message="tns:getSimulationAreaWidthResponse" />
+    </operation>
+    <operation name="getSimulationAreaHeight">
+      <input message="tns:getSimulationAreaHeight" />
+      <output message="tns:getSimulationAreaHeightResponse" />
+    </operation>
+  </portType>
+  <binding name="SimulationServicePortBinding" type="tns:SimulationService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="getSimulation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="deleteSimulation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getSimulations">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="produce">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getProducts">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="createSimulation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="addMemberToSimulation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="stopSimulation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getSimulationAreaWidth">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getSimulationAreaHeight">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="SimulationServiceService">
+    <port name="SimulationServicePort" binding="tns:SimulationServicePortBinding">
+      <soap:address location="http://localhost:8080/SimulationServices" />
+    </port>
+  </service>
+</definitions>

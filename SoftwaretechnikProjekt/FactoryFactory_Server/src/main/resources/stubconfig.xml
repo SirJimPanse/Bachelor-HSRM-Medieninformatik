@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	
+	<bean id="databaseDAO"
+		class="de.hsrm.mi.swtpro03.FactoryFactory.persistence.StubDAOImpl" />
+
+
+	<bean id="sessionManager" class="de.hsrm.mi.swtpro03.FactoryFactory.manager.SessionManager" />	
+		
+	<bean id="factoryManager" class="de.hsrm.mi.swtpro03.FactoryFactory.manager.FactoryManager" 
+		autowire="constructor" depends-on="databaseDAO"/>		
+	
+	<bean id="memberManager" class="de.hsrm.mi.swtpro03.FactoryFactory.manager.MemberManager" 
+		autowire="constructor" depends-on="databaseDAO" />		
+	
+
+	<bean id="factoryController"
+		class="de.hsrm.mi.swtpro03.FactoryFactory.controller.FactoryController"
+		autowire="constructor" depends-on="sessionManager, factoryManager" init-method="start" />
+
+	<bean id="loginController"
+		class="de.hsrm.mi.swtpro03.FactoryFactory.controller.LoginController"
+		autowire="constructor" depends-on="sessionManager, factoryManager, memberManager" init-method="start" />
+
+	<bean id="simulationController"
+		class="de.hsrm.mi.swtpro03.FactoryFactory.controller.SimulationController"
+		autowire="constructor" depends-on="factoryController" init-method="start" />
+
+</beans>

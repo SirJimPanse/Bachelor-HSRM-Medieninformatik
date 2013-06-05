@@ -1,0 +1,11 @@
+﻿kiste:_.obj:0, 0, 0
+changed-kiste:_.obj: 0, 255, 0
+apfel:apfel.obj:139,0,0
+mango:mango.obj:154,205,50
+apfelsaft:saft.obj:139,0,0,200
+mangosaft:saft.obj:154,205,50,200
+mango-apfelsaft:saft.obj:255,175,5
+apfel-mangosaft:saft.obj:255,175,5
+apfel-apfelsaft:saft.obj:139,0,0
+mango-mangosaft:saft.obj:154,205,50
+saft:saft.obj:255,175,5

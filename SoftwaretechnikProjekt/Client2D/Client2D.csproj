@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{77346093-4631-445F-809D-92A09CC2F584}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Client</RootNamespace>
+    <AssemblyName>Client</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20901.0</ExpressionBlendVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apache.NMS">
+      <HintPath>..\..\..\..\..\apache kram\lib\Apache.NMS\net-4.0\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ">
+      <HintPath>..\..\..\..\..\apache kram\build\net-4.0\debug\Apache.NMS.ActiveMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="HelixToolkit.Wpf">
+      <HintPath>..\..\..\..\Downloads\HelixToolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Communication\IMqInterface.cs" />
+    <Compile Include="Service References\FactoryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\LoginServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SimulationServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\IconSet.cs" />
+    <Compile Include="View\Common\ConsoleManager.cs" />
+    <Compile Include="View\2D\GridCanvas.cs" />
+    <Compile Include="View\2D\GridItem.cs" />
+    <Compile Include="View\2D\GridThumb.cs" />
+    <Compile Include="View\Common\Toolbox.cs" />
+    <Compile Include="View\Common\ToolboxFactory.cs" />
+    <Compile Include="View\Common\ToolboxItem.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\2D\GridItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Common\Toolbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Communication\ActiveMQListener.cs" />
+    <Compile Include="Communication\ClientServerUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Plugins\iconsets\machines\obj\changer.obj" />
+    <None Include="Plugins\iconsets\machines\obj\consumer.obj" />
+    <None Include="Plugins\iconsets\machines\obj\producer.obj" />
+    <None Include="Plugins\iconsets\machines\obj\product.obj" />
+    <None Include="Plugins\iconsets\machines\obj\transporterband.obj" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\FactoryServiceReference\Client.FactoryServiceReference.machineMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FactoryServiceReference\Client.FactoryServiceReference.position.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServices.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServices1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServices3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServiceService.wsdl" />
+    <None Include="Service References\FactoryServiceReference\FactoryServiceService5.wsdl" />
+    <None Include="Service References\LoginServiceReference\Client.LoginServiceReference.factoryMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LoginServiceReference\LoginServices.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginServiceReference\LoginServices1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginServiceReference\LoginServices3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginServiceReference\LoginServices4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginServiceReference\LoginServiceService11.wsdl" />
+    <None Include="Service References\LoginServiceReference\LoginServiceService2.wsdl" />
+    <None Include="Service References\LoginServiceReference\LoginServiceService4.wsdl" />
+    <None Include="Service References\SimulationServiceReference\Client.SimulationServiceReference.machineMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SimulationServiceReference\Client.SimulationServiceReference.productMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SimulationServiceReference\SimulationServices.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SimulationServiceReference\SimulationServices1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SimulationServiceReference\SimulationServices3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SimulationServiceReference\SimulationServices4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SimulationServiceReference\SimulationServiceService.wsdl" />
+    <None Include="Service References\SimulationServiceReference\SimulationServiceService2.wsdl" />
+    <None Include="Service References\SimulationServiceReference\SimulationServiceService4.wsdl" />
+    <None Include="Service References\SimulationServiceReference\SimulationServiceService5.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\curser_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\curser_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\hand_cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\zoom_in.png" />
+    <Resource Include="View\Common\icons\zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_rotate_anticlockwise.png" />
+    <Resource Include="View\Common\icons\arrow_rotate_clockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\starWars\img_mapping.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\starWars\img\truck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\starWars\img\roboti_positi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\starWars\img\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\starWars\img\lego_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\starWars\img\darth_vader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\machines\img\consumer.jpg" />
+    <Resource Include="Plugins\iconsets\machines\img_mapping.txt" />
+    <Resource Include="Plugins\iconsets\machines\img\producer.jpg" />
+    <Resource Include="Plugins\iconsets\machines\img\product.jpg" />
+    <Resource Include="Plugins\iconsets\machines\img\transporterband.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FactoryServiceReference\" />
+    <WCFMetadataStorage Include="Service References\LoginServiceReference\" />
+    <WCFMetadataStorage Include="Service References\SimulationServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LoginServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FactoryServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FactoryServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FactoryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SimulationServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SimulationServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SimulationServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\machines\img\changer.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,10 @@
+# Vorschlag Definition of Done
+
+Ein Item kann dann als abgeschlossenen bezeichnet werden wenn:
+
+- Es die formale Beschreibung der User-Story erfüllt
+- relevante Funktionen mit Unit-Tests abgedeckt werden (simple getter und setter unnötig)
+- alle Unit-Tests grün sind, also keine neuen Fehler erzeugt wurden
+- ein Code Review durch einen nicht an der Umsetzung beteiligten Entwickler durchgeführt wurde und keinerlei Mängel sichtbar wurden
+- die Funktionalität von einem nicht beteiligten Entwickler ausprobiert wurde
+- Es vom PO abgenommen wurde

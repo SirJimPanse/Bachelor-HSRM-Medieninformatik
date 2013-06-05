@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" name="LoginServiceService" targetNamespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/LoginServices?xsd=1" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+    </xsd:schema>
+  </types>
+  <message name="createFactory">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+    <part name="arg2" type="xsd:int" />
+    <part name="arg3" type="xsd:int" />
+  </message>
+  <message name="createFactoryResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <message name="getFactories">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="getFactoriesResponse">
+    <part name="return" type="tns:factoryMap" />
+  </message>
+  <message name="connectToFactory">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+  </message>
+  <message name="connectToFactoryResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="disconnectFromFactory">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="disconnectFromFactoryResponse" />
+  <message name="welcome" />
+  <message name="welcomeResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="register">
+    <part name="arg0" type="xsd:string" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="registerResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="connect">
+    <part name="arg0" type="xsd:string" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="connectResponse">
+    <part name="return" type="xsd:long" />
+  </message>
+  <message name="disconnect">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="disconnectResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <portType name="LoginService">
+    <operation name="createFactory" parameterOrder="arg0 arg1 arg2 arg3">
+      <input message="tns:createFactory" />
+      <output message="tns:createFactoryResponse" />
+    </operation>
+    <operation name="getFactories">
+      <input message="tns:getFactories" />
+      <output message="tns:getFactoriesResponse" />
+    </operation>
+    <operation name="connectToFactory" parameterOrder="arg0 arg1">
+      <input message="tns:connectToFactory" />
+      <output message="tns:connectToFactoryResponse" />
+    </operation>
+    <operation name="disconnectFromFactory">
+      <input message="tns:disconnectFromFactory" />
+      <output message="tns:disconnectFromFactoryResponse" />
+    </operation>
+    <operation name="welcome">
+      <input message="tns:welcome" />
+      <output message="tns:welcomeResponse" />
+    </operation>
+    <operation name="register" parameterOrder="arg0 arg1">
+      <input message="tns:register" />
+      <output message="tns:registerResponse" />
+    </operation>
+    <operation name="connect" parameterOrder="arg0 arg1">
+      <input message="tns:connect" />
+      <output message="tns:connectResponse" />
+    </operation>
+    <operation name="disconnect">
+      <input message="tns:disconnect" />
+      <output message="tns:disconnectResponse" />
+    </operation>
+  </portType>
+  <binding name="LoginServicePortBinding" type="tns:LoginService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="createFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getFactories">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="connectToFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="disconnectFromFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="welcome">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="register">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="connect">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="disconnect">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="LoginServiceService">
+    <port name="LoginServicePort" binding="tns:LoginServicePortBinding">
+      <soap:address location="http://localhost:8080/LoginServices" />
+    </port>
+  </service>
+</definitions>

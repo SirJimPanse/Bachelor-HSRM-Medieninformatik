@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource">
+		<property name="databaseName" value="sdost001_factory"/>
+		<property name="serverName" value="db.intern.mi.hs-rm.de:5432" />
+		<property name="user" value="sdost001" />
+		<property name="password" value="factory" />
+		<property name="maxConnections" value="10" />
+	</bean>
+
+</beans>

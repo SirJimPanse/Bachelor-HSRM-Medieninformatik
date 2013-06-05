@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" name="FactoryServiceService" targetNamespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://pc13-118.intern.mi.hs-rm.de:8080/FactoryService?xsd=1" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+    </xsd:schema>
+  </types>
+  <message name="getFactory">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="getFactoryResponse">
+    <part name="return" type="tns:factory" />
+  </message>
+  <message name="moveItem">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+    <part name="arg2" type="tns:position" />
+  </message>
+  <message name="moveItemResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="deleteItem">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="deleteItemResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="createItem">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+    <part name="arg2" type="tns:position" />
+  </message>
+  <message name="createItemResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="getItemInformation">
+    <part name="arg0" type="xsd:string" />
+  </message>
+  <message name="getItemInformationResponse">
+    <part name="return" type="tns:position" />
+  </message>
+  <portType name="FactoryService">
+    <operation name="getFactory">
+      <input message="tns:getFactory" />
+      <output message="tns:getFactoryResponse" />
+    </operation>
+    <operation name="moveItem" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:moveItem" />
+      <output message="tns:moveItemResponse" />
+    </operation>
+    <operation name="deleteItem" parameterOrder="arg0 arg1">
+      <input message="tns:deleteItem" />
+      <output message="tns:deleteItemResponse" />
+    </operation>
+    <operation name="createItem" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:createItem" />
+      <output message="tns:createItemResponse" />
+    </operation>
+    <operation name="getItemInformation">
+      <input message="tns:getItemInformation" />
+      <output message="tns:getItemInformationResponse" />
+    </operation>
+  </portType>
+  <binding name="FactoryServicePortBinding" type="tns:FactoryService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="getFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="moveItem">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="deleteItem">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="createItem">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getItemInformation">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://services.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="FactoryServiceService">
+    <port name="FactoryServicePort" binding="tns:FactoryServicePortBinding">
+      <soap:address location="http://pc13-118.intern.mi.hs-rm.de:8080/FactoryService" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" name="FactoryServiceService" targetNamespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/FactoryServices?xsd=1" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/FactoryServices?xsd=2" namespace="http://jaxb.dev.java.net/array" />
+    </xsd:schema>
+  </types>
+  <message name="addMemberToMemberAccess">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+    <part name="arg2" type="xsd:string" />
+  </message>
+  <message name="addMemberToMemberAccessResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="saveFactory">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="saveFactoryResponse" />
+  <message name="deleteFactory">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+  </message>
+  <message name="deleteFactoryResponse" />
+  <message name="createMachine">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+    <part name="arg2" type="xsd:int" />
+    <part name="arg3" type="xsd:int" />
+    <part name="arg4" type="tns:direction" />
+  </message>
+  <message name="createMachineResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="moveMachine">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+    <part name="arg2" type="xsd:int" />
+    <part name="arg3" type="xsd:int" />
+  </message>
+  <message name="moveMachineResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="deleteMachines">
+    <part name="arg0" type="xsd:long" />
+    <part xmlns:ns1="http://jaxb.dev.java.net/array" name="arg1" type="ns1:stringArray" />
+  </message>
+  <message name="deleteMachinesResponse" />
+  <message name="getMachinePosition">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="getMachinePositionResponse">
+    <part name="return" type="tns:position" />
+  </message>
+  <message name="scriptMachine">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+    <part name="arg2" type="xsd:string" />
+  </message>
+  <message name="scriptMachineResponse" />
+  <message name="getMachineScript">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="getMachineScriptResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="resizeFactory">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:int" />
+    <part name="arg2" type="xsd:int" />
+  </message>
+  <message name="resizeFactoryResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="getAreaWidth">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="getAreaWidthResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <message name="getAreaHeight">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="getAreaHeightResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <message name="setMachineCapacity">
+    <part name="arg0" type="xsd:long" />
+    <part xmlns:ns2="http://jaxb.dev.java.net/array" name="arg1" type="ns2:stringArray" />
+    <part name="arg2" type="xsd:int" />
+  </message>
+  <message name="setMachineCapacityResponse" />
+  <message name="getMachineCapacity">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="getMachineCapacityResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <message name="sendChatMessage">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="sendChatMessageResponse" />
+  <message name="getEmptyConsumerTickCount">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+  </message>
+  <message name="getEmptyConsumerTickCountResponse">
+    <part name="return" type="xsd:int" />
+  </message>
+  <message name="setEmptyConsumerTickCount">
+    <part name="arg0" type="xsd:long" />
+    <part name="arg1" type="xsd:string" />
+    <part name="arg2" type="xsd:int" />
+  </message>
+  <message name="setEmptyConsumerTickCountResponse" />
+  <message name="getScriptableMachines" />
+  <message name="getScriptableMachinesResponse">
+    <part xmlns:ns3="http://jaxb.dev.java.net/array" name="return" type="ns3:intArray" />
+  </message>
+  <message name="rotateMachinesLeft">
+    <part name="arg0" type="xsd:long" />
+    <part xmlns:ns4="http://jaxb.dev.java.net/array" name="arg1" type="ns4:stringArray" />
+  </message>
+  <message name="rotateMachinesLeftResponse" />
+  <message name="rotateMachinesRight">
+    <part name="arg0" type="xsd:long" />
+    <part xmlns:ns5="http://jaxb.dev.java.net/array" name="arg1" type="ns5:stringArray" />
+  </message>
+  <message name="rotateMachinesRightResponse" />
+  <message name="getFactory">
+    <part name="arg0" type="xsd:long" />
+  </message>
+  <message name="getFactoryResponse">
+    <part name="return" type="tns:machineMap" />
+  </message>
+  <portType name="FactoryService">
+    <operation name="addMemberToMemberAccess" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:addMemberToMemberAccess" />
+      <output message="tns:addMemberToMemberAccessResponse" />
+    </operation>
+    <operation name="saveFactory">
+      <input message="tns:saveFactory" />
+      <output message="tns:saveFactoryResponse" />
+    </operation>
+    <operation name="deleteFactory" parameterOrder="arg0 arg1">
+      <input message="tns:deleteFactory" />
+      <output message="tns:deleteFactoryResponse" />
+    </operation>
+    <operation name="createMachine" parameterOrder="arg0 arg1 arg2 arg3 arg4">
+      <input message="tns:createMachine" />
+      <output message="tns:createMachineResponse" />
+    </operation>
+    <operation name="moveMachine" parameterOrder="arg0 arg1 arg2 arg3">
+      <input message="tns:moveMachine" />
+      <output message="tns:moveMachineResponse" />
+    </operation>
+    <operation name="deleteMachines" parameterOrder="arg0 arg1">
+      <input message="tns:deleteMachines" />
+      <output message="tns:deleteMachinesResponse" />
+    </operation>
+    <operation name="getMachinePosition" parameterOrder="arg0 arg1">
+      <input message="tns:getMachinePosition" />
+      <output message="tns:getMachinePositionResponse" />
+    </operation>
+    <operation name="scriptMachine" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:scriptMachine" />
+      <output message="tns:scriptMachineResponse" />
+    </operation>
+    <operation name="getMachineScript" parameterOrder="arg0 arg1">
+      <input message="tns:getMachineScript" />
+      <output message="tns:getMachineScriptResponse" />
+    </operation>
+    <operation name="resizeFactory" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:resizeFactory" />
+      <output message="tns:resizeFactoryResponse" />
+    </operation>
+    <operation name="getAreaWidth">
+      <input message="tns:getAreaWidth" />
+      <output message="tns:getAreaWidthResponse" />
+    </operation>
+    <operation name="getAreaHeight">
+      <input message="tns:getAreaHeight" />
+      <output message="tns:getAreaHeightResponse" />
+    </operation>
+    <operation name="setMachineCapacity" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:setMachineCapacity" />
+      <output message="tns:setMachineCapacityResponse" />
+    </operation>
+    <operation name="getMachineCapacity" parameterOrder="arg0 arg1">
+      <input message="tns:getMachineCapacity" />
+      <output message="tns:getMachineCapacityResponse" />
+    </operation>
+    <operation name="sendChatMessage" parameterOrder="arg0 arg1">
+      <input message="tns:sendChatMessage" />
+      <output message="tns:sendChatMessageResponse" />
+    </operation>
+    <operation name="getEmptyConsumerTickCount" parameterOrder="arg0 arg1">
+      <input message="tns:getEmptyConsumerTickCount" />
+      <output message="tns:getEmptyConsumerTickCountResponse" />
+    </operation>
+    <operation name="setEmptyConsumerTickCount" parameterOrder="arg0 arg1 arg2">
+      <input message="tns:setEmptyConsumerTickCount" />
+      <output message="tns:setEmptyConsumerTickCountResponse" />
+    </operation>
+    <operation name="getScriptableMachines">
+      <input message="tns:getScriptableMachines" />
+      <output message="tns:getScriptableMachinesResponse" />
+    </operation>
+    <operation name="rotateMachinesLeft" parameterOrder="arg0 arg1">
+      <input message="tns:rotateMachinesLeft" />
+      <output message="tns:rotateMachinesLeftResponse" />
+    </operation>
+    <operation name="rotateMachinesRight" parameterOrder="arg0 arg1">
+      <input message="tns:rotateMachinesRight" />
+      <output message="tns:rotateMachinesRightResponse" />
+    </operation>
+    <operation name="getFactory">
+      <input message="tns:getFactory" />
+      <output message="tns:getFactoryResponse" />
+    </operation>
+  </portType>
+  <binding name="FactoryServicePortBinding" type="tns:FactoryService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="addMemberToMemberAccess">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="saveFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="deleteFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="createMachine">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="moveMachine">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="deleteMachines">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getMachinePosition">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="scriptMachine">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getMachineScript">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="resizeFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getAreaWidth">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getAreaHeight">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="setMachineCapacity">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getMachineCapacity">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="sendChatMessage">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getEmptyConsumerTickCount">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="setEmptyConsumerTickCount">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getScriptableMachines">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="rotateMachinesLeft">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="rotateMachinesRight">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+    <operation name="getFactory">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="FactoryServiceService">
+    <port name="FactoryServicePort" binding="tns:FactoryServicePortBinding">
+      <soap:address location="http://localhost:8080/FactoryServices" />
+    </port>
+  </service>
+</definitions>

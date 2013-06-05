@@ -1,0 +1,3 @@
+﻿apfel:apfel.obj:100,0,0
+mango:mango.obj:120,200,50
+saft:saft.obj:200,100,5

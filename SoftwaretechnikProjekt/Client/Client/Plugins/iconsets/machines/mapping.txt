@@ -1,0 +1,5 @@
+﻿1:changer.jpg:changer.obj:Changer - Ändert Waren
+2:consumer.jpg:consumer.obj:Consumer - Warenausgang - Waren im fertigen Zustand werden hier entgegengenommen
+3:positioner.jpg:positioner.obj:Position - Beamt Produkte von A nach B, C...
+4:producer.jpg:producer.obj:Producer - Wareneingang - Waren werden hier Produziert
+5:transporterband.jpg:transporterband.obj:Transportband - Förderband - Auf dem Förderband laufen die Waren durch die Fabrik

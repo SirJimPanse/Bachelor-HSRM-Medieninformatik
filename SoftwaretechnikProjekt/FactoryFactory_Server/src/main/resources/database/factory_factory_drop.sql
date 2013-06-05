@@ -1,0 +1,4 @@
+DROP DOMAIN user_name CASCADE;
+DROP TABLE member_access CASCADE;
+DROP TABLE member CASCADE;
+DROP TABLE factory CASCADE;

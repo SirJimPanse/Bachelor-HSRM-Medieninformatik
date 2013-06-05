@@ -1,0 +1,47 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="Client.OptionsWindow"
+	x:Name="Options"
+	Title="Factory Einstellungen"
+	Width="600" Height="350">
+
+	<DockPanel x:Name="LayoutRoot" LastChildFill="True">
+		<ResizeGrip DockPanel.Dock="Bottom"/>
+		<StackPanel x:Name="ActionPanel" DockPanel.Dock="Bottom" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button Content="Abbrechen" HorizontalAlignment="Left" Width="75" Padding="2" Margin="5" Click="CancelClicked" />
+			<Button Content="Anmelden" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="1.013,0.273" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="2" Margin="5" Click="OkClicked" />
+        </StackPanel>
+		<TabControl x:Name="SettingsPanel" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" DockPanel.Dock="Top">
+			<TabItem Header="Verbindung">
+				<Grid Background="#FFE5E5E5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions> 
+					
+					<GroupBox Grid.Column="0"  Header="Server" d:LayoutOverrides="Width" Padding="10" Margin="10" VerticalAlignment="Top" BorderBrush="DarkGray">
+						<DockPanel Background="#FFE5E5E5" >
+							<StackPanel Orientation="Vertical" Margin="0,0,20,0">
+								<Label Content="URL" BorderThickness="0,0,0,1" Padding="0,5"/>
+								<TextBox Name="url" Style="{DynamicResource SimpleTextBox}" TextWrapping="Wrap" Text="" Height="23.96" Width="157" />
+							</StackPanel>
+                            <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
+                                <Label Content="Port" BorderThickness="0,0,0,1" Padding="0,5"/>
+                                <TextBox Name="port" Style="{DynamicResource SimpleTextBox}" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="54" />
+                            </StackPanel>
+                        </DockPanel>
+					</GroupBox>
+					<GroupBox Grid.Column="1" Header="Account" Padding="10" d:LayoutOverrides="Width, Height" Margin="10" VerticalAlignment="Top" BorderBrush="DarkGray">
+						<StackPanel Background="#FFE5E5E5">
+							<Label Content="Benutzername" BorderThickness="0,0,0,1" Padding="0,5" HorizontalAlignment="Left"/>
+							<TextBox Name="username" Style="{DynamicResource SimpleTextBox}" TextWrapping="Wrap" Text="" Height="23.96"/>
+							<Label Content="Passwort" BorderThickness="0,0,0,1" Padding="0,5" d:LayoutOverrides="Width"/>
+							<TextBox Name="password" Style="{DynamicResource SimpleTextBox}" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+							<CheckBox Name="autoconnect" Content="automatisch anmelden" Margin="0,10,0,0"/>
+						</StackPanel>
+					</GroupBox>
+                    <Button Name="registerButton" Content="Registrieren" Padding="2" Width="75" Margin="183,115,26,78" Click="RegisterClicked" Height="25" />
+                </Grid>
+			</TabItem>
+		</TabControl>
+	</DockPanel>
+</Window>

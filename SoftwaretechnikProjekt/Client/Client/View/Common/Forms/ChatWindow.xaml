@@ -1,0 +1,17 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="Client.ChatWindow" x:Name="chatWindow"
+	Title="FactoryChat" Width="700" Height="500" mc:Ignorable="d" Closing="Window_Closing" KeyDown="OnKeyPressed">
+
+    <DockPanel Width="Auto" Height="Auto">
+        <StackPanel Height="Auto" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="688" d:LayoutOverrides="VerticalAlignment" DockPanel.Dock="Top">
+            <Label x:Name="nachricht" Content="Nachricht:" FontWeight="Medium" Width="65.527"/>
+            <TextBox MinWidth="548" Width="333" Height="25" Text="" TextWrapping="Wrap" x:Name="inputBox" HorizontalAlignment="Stretch" ToolTip="Hier Nachricht eingeben" KeyDown="InputBoxKeyDown"/>
+            <Button x:Name="sendButton" Content="senden" Click="click_sendMessage" Width="70" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <ScrollViewer x:Name="sv" HorizontalAlignment="Stretch" Margin="0,2,0,0" DockPanel.Dock="Top">
+            <TextBlock x:Name="chatBlock" Background="Ivory" FontStyle="Italic" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True"/>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

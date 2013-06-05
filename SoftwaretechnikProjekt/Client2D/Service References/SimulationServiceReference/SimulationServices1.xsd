@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" targetNamespace="http://service.FactoryFactory.swtpro03.mi.hsrm.de/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="machineMap">
+    <xs:sequence>
+      <xs:element name="map">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string" />
+                  <xs:element minOccurs="0" name="value" type="tns:position" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="position">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="direction" type="tns:direction" />
+      <xs:element name="x" type="xs:int" />
+      <xs:element name="y" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="productMap">
+    <xs:sequence>
+      <xs:element name="productMap">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="tns:position" />
+                  <xs:element minOccurs="0" name="value" type="tns:productArray" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="product">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+      <xs:element name="price" type="xs:double" />
+      <xs:element minOccurs="0" name="type" type="xs:string" />
+      <xs:element name="weight" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="direction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NORTH" />
+      <xs:enumeration value="SOUTH" />
+      <xs:enumeration value="EAST" />
+      <xs:enumeration value="WEST" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="productArray" final="#all">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="item" nillable="true" type="tns:product" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

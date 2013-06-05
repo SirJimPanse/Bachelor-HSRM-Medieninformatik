@@ -1,0 +1,16 @@
+-Bilder für Maschinen in XAML zur Laufzeit laden (nicht als Ressource).
+-GridItems in die Toolbox (=>ToolboxItems, TbI != GI).
+-Plugin Schnittstelle definieren (+ID in GridItem).
+-Simulation klont Factory und markiert sie als Klon.
+-Login auf SIM => Zuschauer.
+-Login auf Factory => Bob (Ja, der Baumeister). 
+-Simulationen und Factories zusammen in einem Dropdown-Menü.
+	+Es existieren beispielsweise "fact009" und "sim009".
+-Server ist den Clients immer einen Schritt voraus:
+	+Client schickt Update an Server.
+	+Server broadcastet an alle anderen.
+-Was wenn ein take=>take...take=>take länger dauert, als ein tick!?
+
+
+
+

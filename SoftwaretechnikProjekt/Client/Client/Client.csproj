@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{77346093-4631-445F-809D-92A09CC2F584}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Client</RootNamespace>
+    <AssemblyName>Client</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20901.0</ExpressionBlendVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>Z:\win_data.V2\Desktop\CLIENTTEST\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>BA1544BEDEE53AF6BF9DE7165592672A6DB2EFB6</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Client_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Client.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apache.NMS">
+      <HintPath>..\..\..\..\..\activemq\windows\lib\Apache.NMS\net-4.0\Apache.NMS.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ">
+      <HintPath>..\..\..\..\..\activemq\windows\build\net-4.0\debug\Apache.NMS.ActiveMQ.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="HelixToolkit.Wpf, Version=2013.1.8.1, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\HelixToolkit.2013.1.8.1\lib\NET40\HelixToolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="View\Common\Forms\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Communication\ConnectionUtils.cs" />
+    <Compile Include="Communication\LoginHandler.cs" />
+    <Compile Include="Communication\IMqInterface.cs" />
+    <Compile Include="Communication\SimulationLoader.cs" />
+    <Compile Include="ConfigHelper.cs" />
+    <Compile Include="Communication\FactoryLoader.cs" />
+    <Compile Include="HelperFunctions.cs" />
+    <Compile Include="View\Common\Forms\OptionsWindow.xaml.cs">
+      <DependentUpon>OptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\PluginWindow.xaml.cs">
+      <DependentUpon>PluginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FactoryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\LoginServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SimulationServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="View\3D\GridItem3D.cs" />
+    <Compile Include="View\3D\GridModel.cs" />
+    <Compile Include="View\3D\Product.cs" />
+    <Compile Include="View\Common\Converter.cs" />
+    <Compile Include="View\Common\Forms\PluginInfoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\PluginInfoWindow.Designer.cs">
+      <DependentUpon>PluginInfoWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\ScriptingInfoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\ScriptingInfoWindow.Designer.cs">
+      <DependentUpon>ScriptingInfoWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\InfoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\InfoWindow.Designer.cs">
+      <DependentUpon>InfoWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\ShortcutInfoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\ShortcutInfoWindow.Designer.cs">
+      <DependentUpon>ShortcutInfoWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\YesNoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\YesNoWindow.Designer.cs">
+      <DependentUpon>YesNoWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\SettingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\SettingWindow.Designer.cs">
+      <DependentUpon>SettingWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\ScriptingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\ScriptingWindow.Designer.cs">
+      <DependentUpon>ScriptingWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\NewFactoryWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\NewFactoryWindow.Designer.cs">
+      <DependentUpon>NewFactoryWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Forms\RegistrationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Forms\RegistrationWindow.Designer.cs">
+      <DependentUpon>RegistrationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\IconSet.cs" />
+    <Compile Include="View\Common\ConsoleManager.cs" />
+    <Compile Include="View\Common\Toolbox.cs" />
+    <Compile Include="View\Common\ToolboxFactory.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\Common\Forms\ChatWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Communication\ActiveMQListener.cs" />
+    <Compile Include="Communication\ClientServerUtil.cs" />
+    <Page Include="View\Common\Forms\OptionsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Common\Forms\PluginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Simple Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\PluginInfoWindow.resx">
+      <DependentUpon>PluginInfoWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\ScriptingInfoWindow.resx">
+      <DependentUpon>ScriptingInfoWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\InfoWindow.resx">
+      <DependentUpon>InfoWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\ShortcutInfoWindow.resx">
+      <DependentUpon>ShortcutInfoWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\YesNoWindow.resx">
+      <DependentUpon>YesNoWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\NewFactoryWindow.resx">
+      <DependentUpon>NewFactoryWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\RegistrationWindow.resx">
+      <DependentUpon>RegistrationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\ScriptingWindow.resx">
+      <DependentUpon>ScriptingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Forms\SettingWindow.resx">
+      <DependentUpon>SettingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Plugins\iconsets\asdf\obj\changer.obj" />
+    <None Include="Plugins\iconsets\asdf\obj\consumer.obj" />
+    <None Include="Plugins\iconsets\asdf\obj\positioner.obj" />
+    <None Include="Plugins\iconsets\asdf\obj\producer.obj" />
+    <None Include="Plugins\iconsets\asdf\obj\transporterband.obj" />
+    <None Include="Plugins\iconsets\asdf\product\apfel.obj" />
+    <None Include="Plugins\iconsets\asdf\product\mango.obj" />
+    <None Include="Plugins\iconsets\asdf\product\saft.obj" />
+    <None Include="Plugins\iconsets\asdf\product\_.obj" />
+    <None Include="Plugins\iconsets\machines\obj\changer.obj" />
+    <None Include="Plugins\iconsets\machines\obj\consumer.obj" />
+    <None Include="Plugins\iconsets\machines\obj\positioner.obj" />
+    <None Include="Plugins\iconsets\machines\obj\producer.obj" />
+    <None Include="Plugins\iconsets\machines\obj\transporterband.obj" />
+    <None Include="Plugins\iconsets\machines\product\saft.obj" />
+    <None Include="Plugins\iconsets\machines\product\_.obj" />
+    <None Include="Plugins\iconsets\machines\product\apfel.obj" />
+    <None Include="Plugins\iconsets\machines\product\mango.obj" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\FactoryServiceReference\Client.FactoryServiceReference.machineMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FactoryServiceReference\Client.FactoryServiceReference.position.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServices.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServices1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServices3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServices4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FactoryServiceReference\FactoryServiceService.wsdl" />
+    <None Include="Service References\FactoryServiceReference\FactoryServiceService2.wsdl" />
+    <None Include="Service References\LoginServiceReference\Client.LoginServiceReference.factoryMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LoginServiceReference\LoginServices1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoginServiceReference\LoginServiceService1.wsdl" />
+    <None Include="Service References\SimulationServiceReference\Client.SimulationServiceReference.factoryMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SimulationServiceReference\Client.SimulationServiceReference.machineMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SimulationServiceReference\Client.SimulationServiceReference.productMap.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SimulationServiceReference\SimulationServices1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SimulationServiceReference\SimulationServiceService1.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\bin_closed.png" />
+    <Resource Include="View\Common\icons\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\curser_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\curser_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\hand_cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\zoom_in.png" />
+    <Resource Include="View\Common\icons\zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\arrow_rotate_anticlockwise.png" />
+    <Resource Include="View\Common\icons\arrow_rotate_clockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Plugins\iconsets\machines\mapping.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\ok.png" />
+    <Resource Include="View\Common\icons\script1.png" />
+    <Resource Include="View\Common\icons\script2.png" />
+    <Resource Include="View\Common\icons\stop.png" />
+    <Resource Include="View\Common\icons\user_add.png" />
+    <Resource Include="View\Common\icons\user_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Common\icons\stop2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\Apache.NMS.ActiveMQ.dll" />
+    <Content Include="Libraries\Apache.NMS.dll" />
+    <Content Include="Libraries\HelixToolkit.Wpf.dll" />
+    <None Include="Service References\SimulationServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SimulationServiceReference\configuration.svcinfo" />
+    <None Include="Service References\SimulationServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\FactoryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\FactoryServiceReference\configuration.svcinfo" />
+    <None Include="Service References\FactoryServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\LoginServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\LoginServiceReference\configuration.svcinfo" />
+    <None Include="Service References\LoginServiceReference\configuration91.svcinfo" />
+    <Resource Include="Plugins\iconsets\asdf\img\changer.jpg" />
+    <Resource Include="Plugins\iconsets\asdf\img\consumer.jpg" />
+    <Resource Include="Plugins\iconsets\asdf\img\positioner.jpg" />
+    <Resource Include="Plugins\iconsets\asdf\img\producer.jpg" />
+    <Resource Include="Plugins\iconsets\asdf\img\transporterband.jpg" />
+    <Resource Include="Plugins\iconsets\asdf\mapping.txt" />
+    <Resource Include="Plugins\iconsets\asdf\product_mapping.txt" />
+    <Resource Include="View\Common\icons\chat.png" />
+    <Resource Include="Plugins\iconsets\machines\img\changer.jpg" />
+    <Resource Include="Plugins\iconsets\machines\img\consumer.jpg" />
+    <Resource Include="Plugins\iconsets\machines\img\positioner.jpg" />
+    <Resource Include="Plugins\iconsets\machines\img\producer.jpg" />
+    <Resource Include="Plugins\iconsets\machines\img\transporterband.jpg" />
+    <Resource Include="Plugins\iconsets\choice.txt" />
+    <Resource Include="View\Common\icons\muell.png" />
+    <Resource Include="Plugins\iconsets\machines\product_mapping.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FactoryServiceReference\" />
+    <WCFMetadataStorage Include="Service References\LoginServiceReference\" />
+    <WCFMetadataStorage Include="Service References\SimulationServiceReference\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

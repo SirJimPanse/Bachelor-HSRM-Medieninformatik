@@ -1,0 +1,25 @@
+﻿<Window x:Class="Client.PluginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PluginWindow" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="223" Width="395">
+    <Grid>
+        <TabControl Height="142" HorizontalAlignment="Left" Margin="10,6,0,0" Name="pluginPanel" VerticalAlignment="Top" Width="357">
+            <TabItem Header="IconSets" Name="iconSetsTab">
+                <Grid Height="103" Width="338">
+                    <GroupBox Header="verfügbare IconSets" Height="72" HorizontalAlignment="Left" Margin="6,15,0,0" Name="groupBox1" VerticalAlignment="Top" Width="321">
+                        <Grid>
+                            <StackPanel Height="48" Orientation="Horizontal" HorizontalAlignment="Left" Name="stackPanel2" VerticalAlignment="Top" Width="309">
+                                <Button Content="Info" Margin="5" Height="25" Name="button1" Width="102" Click="InfoClicked" />
+                                <ComboBox Name="DefinedIconSets" Margin="5" Height="25" Width="179" SelectionChanged="DefinedIconSets_SelectionChanged" />
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StackPanel Name="stackPanel1" Orientation="Horizontal"  DockPanel.Dock="Bottom" HorizontalAlignment="Right" Height="32" VerticalAlignment="Bottom">
+            <Button Content="Abbrechen" Name="cancelButton" Width="75" Padding="2" Margin="5" Click="CancelClicked" />
+            <Button Content="Übernehmen" Name="applyButton" Width="85" Padding="2" Margin="5" Click="ApplyClicked" />
+        </StackPanel>
+    </Grid>
+</Window>
