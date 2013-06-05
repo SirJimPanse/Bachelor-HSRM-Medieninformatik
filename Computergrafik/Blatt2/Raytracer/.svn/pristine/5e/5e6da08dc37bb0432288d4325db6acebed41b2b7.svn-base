@@ -1,0 +1,37 @@
+'''
+Created on 18.04.2013
+
+@author: tland001
+'''
+class Color(object):
+    
+    def __init__(self,R,G,B):
+        self.color = (R,G,B)
+        self.r = R
+        self.g = G
+        self.b = B
+        
+    def __repr__(self):
+        return "".join(("(",str(self.r),",",str(self.g),",",str(self.b),")"))
+    
+    def __mul__(self,factor):
+        if type(factor) == float or type(factor) == int:
+            return Color(self.r * factor, self.g * factor, self.b * factor)
+        return (self.r * factor[0], self.g * factor[1], self.b * factor[2])
+    
+    def __add__(self,factor):
+        if type(factor) == float or type(factor) == int:
+            return Color(self.r + factor, self.g + factor,self.b + factor)
+        return (self.r + factor[0], self.g + factor[1], self.b + factor[2])
+    
+    def __rmul__(self,factor):
+        return self.__mul__(factor)
+    
+    def __radd__(self,factor):
+        return self.__add__(factor)
+    
+    def getColor(self):
+        return self.color
+    
+    def __getitem__(self, index):
+        return self.color[index]

@@ -1,0 +1,63 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+from vector import Vector
+from point import Point
+from camera import Camera
+from ray import Ray
+from sphere import Sphere
+from plane import Plane
+from light import Light
+from material import Material
+from color import Color
+import Image
+
+WIDTH = 320
+HEIGHT = 240
+BACKGROUND_COLOR = (0,0,0)
+
+def drawView(camera,objectlist,width,height,background_color,light):
+    camera.setViewport(width, height)
+    image = Image.new("RGB", (width,height))
+    for x in range(width):
+        for y in range(height):
+            ray = camera.calcRay(x,y)
+            maxdist = float('inf')
+            color = background_color
+            for object in objectlist:
+                hitdist = object.intersectionParameter(ray)
+                if hitdist < maxdist and hitdist > 0:
+                    if camera.shadow(ray.pointAtParameter(hitdist),light.position,objectlist):
+                        color = object.material.getAmbient()
+                    else:
+                        maxdist = hitdist
+                        color = object.material.color.getColor()
+            image.putpixel((x, y), color)
+    image.save("raytracer1.png","PNG")
+        
+if __name__ == "__main__":
+
+    """Camerasettings"""  
+    camera = Camera(45,Point(0,2,10),Vector(0,1,0), Point(0,3,0))
+    
+    """Light"""
+    light = Light(Point(30,30,10),1)
+    
+    """Objectsettings"""
+    redMaterial = Material(Color(255,0,0),0.7,0.5,0.2,light)
+    greenMaterial = Material(Color(0,255,0),0.7,0.5,0.2)
+    blueMaterial = Material(Color(0,0,255),0.7,0.5,0.2)
+    planeMaterial = Material(Color(int(0.5*255),int(0.5*255),int(0.5*255)),0.7,0.5,0.2)
+    
+    sphereRed = Sphere(Point(2.5,3,-10),2, redMaterial)
+    sphereGreen = Sphere(Point(-2.5,3,-10),2, greenMaterial)
+    sphereBlue = Sphere(Point(0,7,-10),2, blueMaterial)
+    plane = Plane(Point(0,0,0),Vector(0,1,0),planeMaterial)
+    
+    objlist = [sphereRed,sphereGreen,sphereBlue,plane]
+
+    """Initialize Viewport"""
+    drawView(camera,objlist, WIDTH, HEIGHT, BACKGROUND_COLOR,light)
+    

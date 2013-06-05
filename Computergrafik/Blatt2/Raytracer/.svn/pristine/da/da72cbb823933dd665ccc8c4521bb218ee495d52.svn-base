@@ -1,0 +1,31 @@
+'''
+Created on 14.04.2013
+
+@author: medieninf
+'''
+class Point(object):
+    def __init__(self, x, y, z):
+        self.point = (x,y,z)
+        
+    def __repr__(self):
+        return "".join(("(",str(self.x),",",str(self.y),",",str(self.z),")"))
+    
+    def __sub__(self, w):
+        return type(self)(self.point[0]-w[0],\
+                self.point[1]-w[1],\
+                self.point[2]-w[2])
+    
+    def __add__(self, w):
+        return type(self)(self.point[0]+w[0],\
+                self.point[1]+w[1],\
+                self.point[2]+w[2])
+    
+    def __div__(self,w):
+        return type(self)(self.point[0]/w,\
+                self.point[1]/w,\
+                self.point[2]/w)
+    
+    def __getitem__(self,index):
+        return self.point[index]
+        
+        

@@ -1,0 +1,66 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+import math, Image
+from ray import Ray
+from vector import Vector
+from point import Point
+from plane import Plane
+class Camera(object):
+    def __init__(self,angle,position,upVec,centre):
+        self.angle = angle * math.pi / 180
+        self.e = position
+        self.up = upVec
+        self.c = centre
+        
+        """Definition of coordinate system"""
+        self.f = (self.c - self.e).normalized()
+        self.s = self.f.crossproduct(self.up).normalized()
+        self.u = self.s.crossproduct(self.f) * (-1)
+          
+    def setViewport(self,width, height):
+        self.alpha = self.angle/2
+        self.aspectratio = (width/float(height))
+        self.height = 2*math.tan(self.alpha)
+        self.width = self.aspectratio * self.height
+        self.pixelWidth = self.width /(width-1)
+        self.pixelHeight = self.height/(height-1)
+        
+    def calcRay(self,x,y):
+            xcomp = self.s.scale(x*self.pixelWidth - self.width/2.0)
+            ycomp = self.u.scale(y*self.pixelHeight - self.height/2.0)
+            return Ray(self.e, self.f + xcomp + ycomp) 
+            
+    def drawView(self,objectlist,width,height,background_color,light):
+        self.setViewport(width, height)
+        image = Image.new("RGB", (width,height))
+        for x in range(width):
+            for y in range(height):
+                ray = self.calcRay(x,y)
+                maxdist = float('inf')
+                color = background_color
+                for object in objectlist:
+                    hitdist = object.intersectionParameter(ray)
+                    if hitdist < maxdist and hitdist > 0:
+                        if self.shadow(ray.pointAtParameter(hitdist),light.position,objectlist):
+                            color = (0,0,0)
+                        else:
+                            maxdist = hitdist
+                            color = (255,255,255)#object.colorAt(ray)
+                            if type(object) == Plane:
+                                color = (int(0.5*255),int(0.5*255),int(0.5*255))
+                image.putpixel((x, y), color)
+        image.save("raytracer1.png","PNG")
+        
+    def shadow(self,hit,light,objectlist): 
+        lightray = Ray(hit , light - hit)
+        for object in objectlist:
+            t = object.intersectionParameter(lightray)
+            if t > 0:
+                return 1
+        return 0
+              
+    def __repr__(self):
+        return "".join(("Camera: ", "(", "Angle: ",  str(self.angle),",", " Camera Position: ", str(self.e),",", " Up-Vector: ", str(self.up),",", " Centre: ",str(self.c),")"))

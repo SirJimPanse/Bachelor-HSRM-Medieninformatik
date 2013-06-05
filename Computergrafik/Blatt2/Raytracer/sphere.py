@@ -5,19 +5,23 @@ Created on 12.04.2013
 '''
 import math
 from ray import Ray
+
+
 class Sphere(object):
     def __init__(self, center, radius, material):
         self.center = center # point
         self.radius = radius # scalar
         self.material = material
 
+
     def __repr__(self):
         return 'Sphere(%s,%s)' % (repr(self.center), self.radius)
+
 
     def intersectionParameter(self, ray):
         co = self.center - ray.origin
         v = co.dot(ray.direction)
-        discriminant = (self.radius * self.radius) - (co.dot(co) - v*v)
+        discriminant = (self.radius * self.radius) - (co.dot(co) - v * v)
         if discriminant < 0:
             return None
         else:

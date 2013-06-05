@@ -1,0 +1,49 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+import math, Image
+from ray import Ray
+class Camera(object):
+    def __init__(self,angle,position,upVec,centre):
+        self.angle = angle
+        self.e = position
+        self.up = upVec
+        self.c = centre
+        
+        """Definition of coordinate system"""
+        self.f = (self.c - self.e).normalized()
+        self.s = self.f.crossproduct(self.up).normalized()
+        self.u = self.s.crossproduct(self.f)
+          
+    def setViewport(self,width, height):
+        alpha = self.angle/2.0
+        aspectratio = (width/float(height))
+        self.height = 2*math.tan(alpha)
+        self.width = aspectratio * height
+        
+    def calcRay(self,x,y):
+            xcomp = self.s.scale(x*self.width - x/2)
+            ycomp = self.u.scale(y*self.height - y/2)
+            return Ray(self.e, self.f + xcomp + ycomp)
+            
+    def drawView(self,objectlist,width,height,background_color):
+        self.setViewport(width, height)
+        image = Image.new("RGB", (width,height))
+        for x in range(width):
+            for y in range(height):
+                ray = self.calcRay(x,y)
+                maxdist = float('inf')
+                color = background_color
+                for object in objectlist:
+                    hitdist = object.intersectionParameter(ray)
+                    if hitdist:
+                        if hitdist < maxdist:
+                            maxdist = hitdist
+                            color = (1,0,0)#object.colorAt(ray)
+                image.putpixel((x, y), color)
+        image.save("raytracer1.png")
+              
+    def __repr__(self):
+        return "".join(("Camera: ", "(", "Angle: ",  str(self.angle),",", " Camera Position: ", str(self.e),",", " Up-Vector: ", str(self.up),",", " Centre: ",str(self.c),")"))

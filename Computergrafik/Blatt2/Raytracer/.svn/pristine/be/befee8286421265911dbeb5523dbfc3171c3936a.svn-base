@@ -1,0 +1,117 @@
+'''
+Created on 17.04.2013
+
+@author: tland001
+'''
+class Light(object):
+    
+    def __init__(self, position, intansity):
+        self.position = position
+        self.intansity = intansity
+        
+"""       
+from raytracing_classes import *
+from point import Point
+import sys
+
+BACKGROUND_COLOR = Color(0.0, 0.0, 0.0)
+AMBIENT_LIGHT = Color(1.0, 1.0, 1.0)
+COLOR_WHITE = Color(0.0, 0.0, 0.0)
+EPSILON = 0.000001
+
+class Scene(object):
+    def __init__(self, camera, lights, objs):
+        self.camera = camera   #Camera obj
+        self.lights = lights   #list of Light objs
+        self.objects = objs #list of (Sphere, Plane, ...)
+        
+    def render(self, image):
+        wRes = image.size[0]
+        hRes = image.size[1]
+        pixelWidth = self.camera.width / (wRes - 1)
+        pixelHeight = self.camera.height / (hRes - 1)
+        print (pixelWidth, pixelHeight)
+        print "rendering..."
+        for y in range(hRes):
+            for x in range(wRes):
+                xcomp = self.camera.s.scale(x*pixelWidth - self.camera.width/2.0)
+                ycomp = self.camera.u.scale(y*pixelHeight - self.camera.height/2.0)
+                ray = Ray(self.camera.e, self.camera.f + xcomp + ycomp)
+                color = self._traceRay(0, ray)
+                image.putpixel((x,y), color.toRGB255Tuple())
+
+    
+    def _colorAt(self, ray, intersectedObj, hitdist, level):
+        intersectionPoint = ray.pointAtParameter(hitdist)
+        rayToLight = Ray(intersectionPoint, self.lights[0].point - intersectionPoint)
+        for obj in self.objects:
+            if obj is not intersectedObj:
+                dist = obj.intersectionParameter(rayToLight)
+                # in shadow
+                if dist and dist > EPSILON:
+                    return intersectedObj.material.calcAmbient() * AMBIENT_LIGHT
+        # not in shadow
+            
+        directColor = self._colorWithPhong(ray, intersectedObj, intersectionPoint, rayToLight)
+        reflectedColor = Color(0.0,0.0,0.0)
+        if level > 0:
+            reflectedRay = self._calculateReflectedRay(intersectedObj,intersectionPoint, ray)
+            reflectedColor = self._traceRay(level - 1, reflectedRay)
+        return directColor + reflectedColor.scale(0.2)
+
+    def _calculateReflectedRay(self, intersectedObj, intersectionPoint, ray):
+        n = intersectedObj.normalAt(intersectionPoint)
+        l = ray.direction
+        reflectedVector = n.scale(-2 * n.dot(l)) + l
+        return Ray(intersectionPoint, reflectedVector)
+        
+    def _colorWithPhong(self, ray, intersectedObj, intersectionPoint, rayToLight):
+        LIGHT_COLOR = self.lights[0].color
+        n = intersectedObj.normalAt(intersectionPoint).normalized()
+        l = rayToLight.direction.normalized()
+        d = ray.direction
+        Lr = n.scale(-2 * n.dot(l.scale(-1))) + l.scale(-1)
+        
+        objAmbient = intersectedObj.material.calcAmbient()
+        ambient = AMBIENT_LIGHT * objAmbient
+
+        objDiffuse = intersectedObj.material.calcDiffuse()
+        if l.dot(n) > 0:
+            diffuse = LIGHT_COLOR * (objDiffuse.scale(l.dot(n)))
+        else:
+            diffuse = COLOR_WHITE
+ 
+        objSpecular = intersectedObj.material.calcSpecular()
+        if Lr.dot(d.scale(-1)) > 0:      
+            specular = LIGHT_COLOR * (objSpecular.scale(Lr.dot(d.scale(-1))**intersectedObj.material.surface))
+        else:
+            specular = COLOR_WHITE
+        return ambient + diffuse + specular
+
+    def _colorWithPhong1(self, ray, intersectedObj, intersectionPoint, rayToLight):
+        LIGHT_COLOR = self.lights[0].color
+        n = intersectedObj.normalAt(intersectionPoint).normalized()
+        l = rayToLight.direction.normalized()
+        d = ray.direction
+        Lr = n.scale(-2 * n.dot(l.scale(-1))) + l.scale(-1)
+        
+        objAmbient = intersectedObj.material.calcAmbient() 
+        ambient = objAmbient * AMBIENT_LIGHT
+
+        objDiffuse = intersectedObj.material.calcDiffuse()
+        diffuse = LIGHT_COLOR * (objDiffuse.scale(l.dot(n)))
+ 
+        objSpecular = intersectedObj.material.calcSpecular()
+        specular = LIGHT_COLOR * (objSpecular.scale(Lr.dot(d.scale(-1))**intersectedObj.material.surface))
+        return ambient + diffuse + specular
+
+    def _traceRay(self, level, ray):
+        maxdist = float('inf')
+        for obj in self.objects:
+            hitdist = obj.intersectionParameter(ray)
+            if hitdist:
+                if hitdist < maxdist and hitdist > EPSILON:
+                    maxdist = hitdist
+                    return self._colorAt(ray, obj, hitdist, level)
+        return BACKGROUND_COLOR
+ """       

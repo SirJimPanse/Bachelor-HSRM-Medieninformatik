@@ -1,0 +1,40 @@
+'''
+Created on 18.04.2013
+
+@author: tland001
+'''
+from vector import Vector
+from light import Light
+from color import Color
+class Material(object):
+    
+    def __init__(self,color, ambientParameter, diffusParameter, specularParameter, n=1):
+        self.color = color
+        self.ka = self.color * ambientParameter
+        self.kd = diffusParameter
+        self.ks = specularParameter
+        self.n = n
+    
+    def getAmbientColor(self):
+        return Color(self.ka[0],self.ka[1],self.ka[2])
+        
+    def getDiffusColor(self,lightray,lightIntansity,norm, rayVector):
+        diff = (lightray.direction.dot(norm) * self.kd)
+        if diff > 0:
+            dif = Color(0,0,0) + self.color * (diff * self.kd) * lightIntansity
+            return Color(dif[0],dif[1], dif[2])
+        return self.ka
+    
+    def getSpecularColor(self,lightray, norm, lightIntansity, ray):
+            lr = (lightray.direction - 2*(lightray.direction.dot(norm) * norm)) * (-1)
+            specular = lr.dot(ray.direction*(-1))**self.n #Skalarprodukt aus (Lightvektor und rayVektor) ** n
+            if specular > 0:
+                return Color(0,0,0) + lightIntansity * self.ks * specular
+            return self.ka + self.getDiffusColor(lightray, lightIntansity, norm, ray)
+
+    def getPhongShader(self,lightray, lightIntansity, norm, ray):
+        return Color(0,0,0) + self.getAmbientColor() +\
+                              self.getDiffusColor(lightray, lightIntansity, norm, ray.direction) +\
+                              self.getSpecularColor(lightray, norm, lightIntansity, ray)
+        
+    

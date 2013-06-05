@@ -10,6 +10,7 @@ from vector import Vector
 from point import Point
 from plane import Plane
 from color import Color
+
 class Camera(object):
     def __init__(self,angle,position,upVec,centre):
         self.angle = angle * math.pi / 180
@@ -22,6 +23,7 @@ class Camera(object):
         self.s = self.f.crossproduct(self.up).normalized()
         self.u = self.s.crossproduct(self.f) * (-1)
           
+          
     def setViewport(self,width, height):
         self.alpha = self.angle/2
         self.aspectratio = (width/float(height))
@@ -29,6 +31,7 @@ class Camera(object):
         self.width = self.aspectratio * self.height
         self.pixelWidth = self.width /(width-1)
         self.pixelHeight = self.height/(height-1)
+        
         
     def calcRay(self,x,y):
         xcomp = self.s.scale(x*self.pixelWidth - self.width/2.0)
@@ -43,6 +46,7 @@ class Camera(object):
                     return True
         return False
     
+    
     """ Gives distance and hitobject from actual Ray back"""
     def getDist(self, ray, objectlist):
         maxdist = float('inf')
@@ -53,6 +57,7 @@ class Camera(object):
                 maxdist = hitdist
                 hitobj = object
         return (maxdist, hitobj)
+    
     
     """calculate recursive Color for Pixel"""
     def traceRay(self, level, objlist, light, ray, backgroundcolor):
@@ -70,6 +75,7 @@ class Camera(object):
                 return color + reflectColor * hitobj.material.reflexFactor
             return color
         return backgroundcolor
+   
    
     def __repr__(self):
         return "".join(("Camera: ", "(", "Angle: ",  str(self.angle),",", " Camera Position: ", str(self.e),",", " Up-Vector: ", str(self.up),",", " Centre: ",str(self.c),")"))

@@ -1,0 +1,71 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+import math, Image
+from ray import Ray
+from vector import Vector
+from point import Point
+from plane import Plane
+from color import Color
+class Camera(object):
+    def __init__(self,angle,position,upVec,centre):
+        self.angle = angle * math.pi / 180
+        self.e = position
+        self.up = upVec
+        self.c = centre
+        
+        """Definition of coordinate system"""
+        self.f = (self.c - self.e).normalized()
+        self.s = self.f.crossproduct(self.up).normalized()
+        self.u = self.s.crossproduct(self.f) * (-1)
+          
+    def setViewport(self,width, height):
+        self.alpha = self.angle/2
+        self.aspectratio = (width/float(height))
+        self.height = 2*math.tan(self.alpha)
+        self.width = self.aspectratio * self.height
+        self.pixelWidth = self.width /(width-1)
+        self.pixelHeight = self.height/(height-1)
+        
+    def calcRay(self,x,y):
+        xcomp = self.s.scale(x*self.pixelWidth - self.width/2.0)
+        ycomp = self.u.scale(y*self.pixelHeight - self.height/2.0)
+        return Ray(self.e, self.f + xcomp + ycomp)
+        
+    def shadow(self,lightray,objectlist, aktobject): 
+        for object in objectlist:
+            if object.intersectionParameter(lightray) > -0.0001 and object == aktobject and type(object) != Plane:
+                    return True
+            elif object.intersectionParameter(lightray) > 0.0001:
+                return True
+        return False
+    
+    def intersection(self, ray, norm):
+        dr = ray.direction - 2 * norm.dot(ray.direction) * norm
+        return dr
+    
+    def shade(self, level, hitpoint, newR, backgroundColor, objectlist, object, light, lightray, norm):
+        colorTup = object.material.getPhongShader(lightray,light.intansity,norm, newR)      
+        directColor = Color(colorTup[0], colorTup[1], colorTup[2])
+        reflectedColor = self.traceRay(level-1, newR, backgroundColor, objectlist, light)   
+        return directColor + reflectedColor
+ 
+    def traceRay(self, level, ray, backgroundColor, objectlist, light):
+        for object in objectlist:
+            hitdist = object.intersectionParameter(ray)
+            color = backgroundColor
+            if hitdist < float('inf') and hitdist > 0:
+                hitpoint = ray.pointAtParameter(hitdist)
+                if hitpoint:
+                    if level > 0:
+                        lightray = Ray(hitpoint, light.position - ray.pointAtParameter(hitdist))
+                        norm = object.normalAt(hitpoint)
+                        dr = self.intersection(ray, norm)
+                        newR = Ray(hitpoint, dr)
+                        return self.shade(level, hitpoint, newR, backgroundColor, objectlist, object, light, lightray, norm)
+            return backgroundColor
+              
+    def __repr__(self):
+        return "".join(("Camera: ", "(", "Angle: ",  str(self.angle),",", " Camera Position: ", str(self.e),",", " Up-Vector: ", str(self.up),",", " Centre: ",str(self.c),")"))

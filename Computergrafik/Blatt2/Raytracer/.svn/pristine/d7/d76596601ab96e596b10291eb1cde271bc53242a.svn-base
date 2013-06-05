@@ -1,0 +1,51 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+from vector import Vector
+from point import Point
+from camera import Camera
+from ray import Ray
+from sphere import Sphere
+from plane import Plane
+import Image
+
+WIDTH = 320
+HEIGHT = 240
+BACKGROUND_COLOR = (0.5,0.5,0.5)
+       
+def drawScene():
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            ray = calcRay(x, y)
+            maxdist = float('inf')
+            color = BACKGROUND_COLOR
+            for object in objectlist:
+                hitdist = object.intersectionParameter(ray)
+                if hitdist:
+                    if hitdist < maxdist:
+                        maxdist = hitdist
+                        color = object.colorAt(ray)
+            image.putpixel((x, y), color)
+        
+if __name__ == "__main__":
+    
+    """Camerasettings"""  
+    camera = Camera(45,Point(0,2,10),Vector(0,1,0),Vector(0,3,0))
+    
+    """Light"""
+    light = Point(30,30,10)
+    
+    """Objectsettings"""
+    sphereRed = Sphere(Point(2.5,3,-10),2)
+    sphereGreen = Sphere(Point(-2.5,3,-10),2)
+    sphereBlue = Sphere(Point(0,7,-10),2)
+    plane = Plane(Point(0,0,0),Vector(0,1,0))
+    
+    """Initialize Viewport"""
+    camera.setViewport(WIDTH,HEIGHT)
+     
+    print camera.f 
+    print camera.s  
+    print camera.u

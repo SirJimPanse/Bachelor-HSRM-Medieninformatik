@@ -1,0 +1,42 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+import math
+class Vector(object):
+    def __init__(self, x, y, z):
+        self.vec = (x, y, z)
+        
+    def scalarproduct(self,w):
+        return self.vec[0]*w[0] + self.vec[1]*w[1] + self.vec[2]*w[2]
+    
+    def vectorlength(self):
+        return math.sqrt(math.fabs(self.vec[0]**2 + self.vec[1]**2 + self.vec[2]**2))
+    
+    def crossproduct(self,w):
+        return type(self)(self.vec[1]*w[2]-self.vec[2]*w[1],\
+                self.vec[2]*w[0]-self.vec[0]*w[2],\
+                self.vec[0]*w[1]-self.vec[1]*w[0])
+    
+    def normalized(self):
+        return self/self.vectorlength()
+    
+    def scale(self, scale):
+        return self * scale
+        
+    def __repr__(self):
+        return "".join(("(",str(self.vec[0]),",",str(self.vec[1]),",",str(self.vec[2]),")"))
+    
+    def __sub__(self, w):
+        return type(self)(self.vec[0]-w[0],self.vec[1]-w[1],self.vec[2]-w[2])
+    
+    def __add__(self, w):
+        return type(self)(self.vec[0]+w[0],self.vec[1]+w[1],self.vec[2]+w[2])
+    
+    def __div__(self,w):
+        return type(self)(self.vec[0]/w, self.vec[1]/w, self.vec[2]/w)
+    
+    def __getitem__(self,index):
+        return self.vec[index]
+

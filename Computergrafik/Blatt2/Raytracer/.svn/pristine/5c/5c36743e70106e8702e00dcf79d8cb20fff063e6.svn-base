@@ -1,0 +1,22 @@
+'''
+Created on 18.04.2013
+
+@author: tland001
+'''
+from vector import Vector
+from light import Light
+class Material(object):
+    
+    def __init__(self,color, ambientParameter, diffusParameter, spekulaerParameter, light=None):
+        self.color = color
+        self.light = light
+        self.ambient = self.color * ambientParameter
+        self.diffus = self.light.intansity * diffusParameter * dot() #Skalarprodukt von Vektor(Schnittpunkt zu licht).normalAt() und Kreisvektor.normalAt()
+        self.spekulaer = spekulaerParameter
+        
+        
+    def getAmbient(self):
+        return (self.ambient[0],self.ambient[1],self.ambient[2])
+        
+        
+    

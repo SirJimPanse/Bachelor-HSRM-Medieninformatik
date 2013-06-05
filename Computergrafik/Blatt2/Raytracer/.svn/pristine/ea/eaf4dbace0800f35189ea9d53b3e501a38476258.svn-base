@@ -1,0 +1,24 @@
+'''
+Created on 18.04.2013
+
+@author: tland001
+'''
+class Color(object):
+    
+    def __init__(self,R,G,B):
+        self.color = (R,G,B)
+        self.r = R
+        self.g = G
+        self.b = B
+        
+    def __repr__(self):
+        return "".join(("(",str(self.r),",",str(self.g),",",str(self.b),")"))
+    
+    def __mul__(self,factor):
+        return Color(int(self.r * factor), int(self.g * factor), int(self.b * factor))
+    
+    def getColor(self):
+        return self.color
+    
+    def __getitem__(self, index):
+        return self.color[index]

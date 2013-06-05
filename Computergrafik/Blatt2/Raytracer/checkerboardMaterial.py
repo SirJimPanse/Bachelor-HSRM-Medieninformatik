@@ -3,7 +3,9 @@ Created on 12.04.2013
 
 @author: tland001
 '''
-import Vector
+import vector
+
+
 class CheckerboardMaterial(object):
     def __init__(self):
         self.baseColor = (1,1,1)
@@ -12,6 +14,7 @@ class CheckerboardMaterial(object):
         self.diffuseCoefficient =  0.6
         self.specularCoefficient = 0.2
         self.checkSize = 1
+
 
     def baseColourAt(self, p):
         v = Vector(p)

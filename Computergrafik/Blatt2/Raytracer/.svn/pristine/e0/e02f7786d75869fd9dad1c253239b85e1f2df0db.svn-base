@@ -1,0 +1,11 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+
+class Vector(object):
+    def init(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z

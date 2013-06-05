@@ -1,0 +1,2 @@
+scene.py ausführen
+generieren des Bildes kann 2 - 3 Minuten dauern

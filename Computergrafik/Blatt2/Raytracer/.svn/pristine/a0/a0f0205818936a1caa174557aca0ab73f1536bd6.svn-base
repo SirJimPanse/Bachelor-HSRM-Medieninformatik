@@ -1,0 +1,36 @@
+'''
+Created on 12.04.2013
+
+@author: tland001
+'''
+import math
+from ray import Ray
+class Camera(object):
+    def __init__(self,angle,position,upVec,centre):
+        self.angle = angle
+        self.e = position
+        self.up = upVec
+        self.c = centre
+        
+        """Definition of coordinate system"""
+        self.f = (self.c - self.e).normalized()
+        self.s = self.f.crossproduct(self.up).normalized()
+        self.u = self.s.crossproduct(self.f)
+          
+    def setViewport(self,width, height):
+        alpha = self.angle/2.0
+        aspectratio = (width/float(height))
+        self.height = 2*math.tan(alpha)
+        self.width = aspectratio * height
+        
+    def calcRay(self,width,height):
+        for y in range(width):
+            for x in range(height):
+                xcomp = self.s.scale(x*self.width - width/2)
+                ycomp = self.u.scale(y*self.height - height/2)
+                ray = Ray(self.e, ((self.f + xcomp) + ycomp))
+                print ray
+                return ray
+              
+    def __repr__(self):
+        return "".join(("Camera: ", "(", "Angle: ",  str(self.angle),",", " Camera Position: ", str(self.e),",", " Up-Vector: ", str(self.up),",", " Centre: ",str(self.c),")"))
