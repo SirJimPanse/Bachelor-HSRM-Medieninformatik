@@ -1,0 +1,27 @@
+\paragraph{UseCase: Spiel speichern}
+\begin{center}
+	\begin{tabular}{|r l|}
+	  \hline
+	  \textbf{Titel}: & Spiel speichern \\
+	  \textbf{Akteur}: & Spieler \\
+	  \textbf{Fachlicher Auslöser}: & Spieler pausiert Spiel und möcht Spiel speichern \\
+	  \textbf{Vorbedingungen}: & Spiel(InGame) läuft bereits \\
+	  \hline
+	  \textbf{Standardablauf}:
+		& 1. Spieler: wählt neuen oder belegten Spielstandslot \\
+		& 2. Spieler: wählt speichern  \\
+		& 3. System:  erzeugt neuen Spielstand oder überschreibt vorhandenen \\
+	 \textbf{Änderung}:
+		& 4.a Spieler: löscht Spielstand \\
+		& 4.b System: löscht Spielstand, gibt Speicher frei \\
+	\textbf{Abbruch}:
+                & 1.a Spieler: möchte Spiel nicht speichern\\
+                & 1.b System: verwirft Speichervorgang und kehrt zunächst ins Pausemenü zurück \\
+	  \hline
+	  \textbf{Nachbedingung}: & Spielstand wurde überschrieben oder neuer Spielstand wurde angelegt\\
+	  \textbf{NF-Anf}.: & k.A. \\
+	  \textbf{Parameter}.: & k.A. \\
+	  \textbf{Nutzungshäufigkeit}: & Spiel kann ohne zu Speichern, durchgespielt werden \\
+	  \hline
+	\end{tabular}
+\end{center}

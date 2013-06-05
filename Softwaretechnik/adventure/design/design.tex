@@ -1,0 +1,104 @@
+\documentclass[ngerman,a4paper,11pt,twoside,cleardoubleempty,halfparskip]{scrreprt}
+
+% Erforderliche Pakete
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage[autokw]{svn-multi}
+\usepackage[toc]{glossaries}
+\usepackage[implicit=false]{hyperref} % implizit stört irgendwie beim Lesen
+
+% weiteren, nützliche Pakete
+%\usepackage{subfigure} 
+%\usepackage{varioref}
+%\usepackage{framed}
+%\usepackage{longtable}
+%\usepackage{floatflt}
+%\usepackage{amsmath}
+%\usepackage{url}
+% ...
+
+% Pakete für Verzeichnisse. Diese sind hier aufgeführt, da mindestens das
+% 'glossaries' Paket nach z.B. hyperref geladen werden muss.
+\usepackage{bibgerm}
+
+\svnid{$Id: design.tex 180 2012-05-24 15:26:04Z dgens001 $}
+
+% Glossar(e) laden und erstellen
+\makeglossaries
+\loadglsentries{meta/glossar} % Name der Glossardatei (ohne .tex)
+
+% Befehlsdefinitionen
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+
+% Globale Formatierungseinstellungen
+%\renewcommand*\cleardoublepage{\clearpage\if@twoside \ifodd\c@page
+%  \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\renewcommand{\encodingdefault}{OT1}
+\renewcommand{\familydefault}{cmss} % Schriftfamilie auf Sans Serif
+\renewcommand{\glsdisplayfirst}[4]{\textit{#1#4}}
+\setcapindent{1em}
+
+% Anpassung der Ränder und Breitenverhältnisse
+% Der letzte Wert in oddsidemargin bestimmt die Bindekorrektur
+\setlength{\oddsidemargin}{2cm - 1in + 0.5cm}
+\setlength{\textwidth}{\paperwidth - (1in + \hoffset) - \oddsidemargin - 4cm}
+\setlength{\evensidemargin}{\paperwidth - (1in + \hoffset)*2 - \oddsidemargin - \textwidth}
+\setlength{\marginparwidth}{4cm - \marginparsep{} - 1cm}
+
+% Wenn größerer Zeilenabstand gewünscht ist, je nach Schriftgröße:
+% Abstand        10pt    11pt    12pt
+% -----------------------------------
+% anderthalb     1.25    1.21    1.24
+% doppelt        1.67    1.62    1.66
+%
+%\renewcommand{\baselinestretch}{1.21}
+
+% Kopf- und Fußzeilen einrichten
+\pagestyle{plain}
+\setlength{\headwidth}{\textwidth}
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+	{\fancyplain{}{\bfseries\rightmark}}
+\rhead[\fancyplain{}{\bfseries\leftmark}]%
+	{\fancyplain{}{\bfseries\thepage}}
+\cfoot{}
+
+\begin{document}
+\pagenumbering{arabic}
+\input{meta/titel} % Titelseite (wird automatisch mit Werten von oben gefüllt)
+\clearemptydoublepage % Sorgt dafür, dass die nächste Seite rechts beginnt
+\input{meta/svnlog} % die letzten paar SVN-Logs als TEX-Tabelle formatiert
+                    % (siehe meta/svnlog-gen.sh und meta/svnlog.xslt)
+\clearemptydoublepage
+\tableofcontents % Inhaltsverzeichnis generieren
+\clearemptydoublepage
+
+% --------------------------------- Hauptteil ----------------------------------
+% Im diesen Teil werden die einzelnen Kapitel eingefügt, die sinnvollerweise
+% im Verzeichnis 'kapitel' abgelegt werden.
+\include{kapitel/einfuehrung}
+\include{kapitel/bausteinsicht}
+\include{kapitel/laufzeitsicht}
+\include{kapitel/musterundkonzepte}
+%\include{kapitel/entwurfsentscheidungen}
+
+% ---------------------------------- Anhänge -----------------------------------
+% In diesem Teil werden alle Anhänge eingefügt, die auch als ganz normale Kapi-
+% tel abgelegt werden.
+%\appendix
+%\include{kapitel/anhang}
+
+% Ausgabe des Glossars (oder der Glossare, wenn mehrere definiert sind)
+%\glsaddall
+\printglossary
+\end{document}

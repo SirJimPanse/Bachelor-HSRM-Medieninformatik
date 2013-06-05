@@ -1,0 +1,30 @@
+\paragraph{UseCase: Charakter konfigurieren}
+\begin{center}
+	\begin{tabular}{|r l|}
+	  \hline
+	  \textbf{Titel}: & Charakter konfigurieren \\
+	  \textbf{Akteur}: & Spieler \\
+	  \textbf{Fachlicher Auslöser}: & Spieler startet ein neues Spiel \\
+	  \textbf{Vorbedingungen}: & Spiel und Map sind bereits konfiguriert \\
+	  \hline
+	  \textbf{Standardablauf}:
+		& 1. Spieler: Charakterdetails eingeben und CreditPoints verteilen \\
+		& 2. System:  Vollständigkeit und Plausibilität der Eingabe sicherstellen \\
+		& 3. System:  Charakter erzeugen und zur Bestätigung anzeigen \\
+		& 4. Spieler: Charakter bestätigen \\
+		& 5. System:  Charakterprofil abspeichern und in bereits vorgegebenes \\
+                & \ \ \ Spiel einbetten (eventuell Spiel starten?) \\
+	 \textbf{Abbruch}:
+                & 1.a Spieler: möchte zurück ins Hauptmenü \\
+                & 1.b System: verwirft Eingabe und wechselt ins Hauptmenü \\
+	 \textbf{Änderung}:
+		& 4.a Spieler: widerruft Eingabe \\
+		& 4.b System: kehrt zu 1. zurück \\
+	  \hline
+	  \textbf{Nachbedingung}: & System geht in Zustand \gls{Ingame} über \\
+	  \textbf{NF-Anf}.: & Persistenz nach Schritt 4 (Spielerprofil ladbar) \\
+	  \textbf{Parameter}: & Charakterdetails und CPs \\
+	  \textbf{Nutzungshäufigkeit}: & bei jedem neuen Spiel \\
+	  \hline
+	\end{tabular}
+\end{center}

@@ -1,0 +1,19 @@
+% SVN Keyword cache
+
+% Global values:
+\def \svnrev {100}
+\def \svndate {2012-04-30 00:05:16Z}
+\def \svnauthor {dgens001}
+\def \svnyear {2012}
+\def \svnmonth {04}
+\def \svnday {30}
+\def \svnhour {00}
+\def \svnminute {05}
+\def \svnsecond {16}
+\def \svntimezonehour {+00}
+\def \svntimezoneminute {00}
+\svn@gdefverb \svnurl {grundlagen.tex}
+\svn@gdefverb \svnfname {grundlagen.tex}
+
+
+

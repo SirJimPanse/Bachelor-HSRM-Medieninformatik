@@ -1,0 +1,257 @@
+[X] menu
+	[X] neues spiel
+		[X] GameFactory erstellt Spiel und kennt alle Builder (kann dadurch serialisieren für Savegame)
+			[X] MapBuilder			Liest Map-Datei ein und erzeugt Campus, Raum, Feld
+			[X] DialogBuilder		Liest Dialog-Datei ein und erzeugt Dialog, Erwiderung, NPC
+			[X] GameObjectBuilder	Liest GO-Datei ein und erzeugt GameObject (Automat, Eingang, Spieler, Schlüssel, GluecksKeks, Schein)
+				~ Objekt, Charakter, Gegenstand sind abstrakte klassen, die nicht instanziert werden
+			[X] TastaturBuilder		Liest Tastaturbelegung ein und erzeugt Map für TastaturC (evtl. mit TastaturM)	
+		[X] GameC startet Factories
+			benachrichtigt Fenster
+			Fenster macht drawIngame()
+
+	[X] optionen
+		[X] Tastaturlayout kann über TastaturM geändert werden
+		
+	[X] beenden
+		[X] schließen aller fenster, GarbageCollection räumt auf
+		[X] evtl. serialisierung / besser: aufforderung zum speichern
+
+		
+[X] programm starten
+	new() von Fenster, MenuV (bekommt GameC), TastaturC, GameC
+	dann ist man im hauptmenu
+	JButton "neues spiel"
+
+[X] PAUSEMENU
+	MenuCV zeigt passendes JPanel an
+		hat klickiBunti kram
+		speichern ist ein JButton, der speichert (actionLister vom button)
+	bei ESC läuft das ganze über GameC (menu bekommt nix mit)
+
+[X] HAUPTMENU
+	mit ner menge JButtons und deren actionListenern
+	
+	[X] spiel starten
+		JButton in MenuV ruft über "gameC"attribut:neuesSpiel()
+		new() GameFactory (erstellt alle daten-objekte)
+		gibt GameC das neu erstellte Ingame objekt
+		boolean ingame auf true setzten
+		Fenster benachrichtigen (drawIngame())
+		
+		GameC startet gameLoop
+			läuft solangem, bis spiel gewonnen ist
+			setzt dann ingame-state auf false
+			zeigt hauptmenu an		
+	
+	[X] spiel laden
+		JButton in MenuV ruft über "gameC"attribut:spielLaden(serialisiertes Ingame)
+		new() GameFactory (mit Savegame)
+		
+	[X] spiel speichern
+		MenuCV ruft gamec:spielSpeichern() auf
+		GameC leitet anfrage an Ingame:serialisieren weiter
+		speichert serialisiertes zeuch auf platte
+		
+		Es wird das zuvor serialisierte Ingame-Objekt wiederhergestellt
+		Da dieses Ingame-Objekt (und darunter rekursiv) alle Klassen referenztiert, 
+		sind alle Zustände gesichert und können 1:1 wiederhergestellt werden
+		Ingame-Klasse hat alle anderen Klassen der Logik (Models sind den Logik-Klassen selbst bekannt)
+		Es reicht daher serialisierung des Ingame zum speichern
+		alle objekte "serializabele"
+		
+	[X] optionen
+		MenuV optionen-panel anzeigen
+		änderungen am tastaturlayout - GameC:tastaturEdit(Character c, Event e)
+		
+			
+		
+[X] ingame
+	[X] spiel pausieren (mit ESC)
+		TastaturC sagt GameC bescheid "ESC gedrückt"
+		GameC benachrichtigt Fenster: drawMenu() und öndert state auf Menu-Referenz
+		MenuV:drawPause() zeigt Pauseoptionen an
+		GameC benachrichtigt bei events von TastaturC nur an Objekt in "state"
+		
+	[X] von pause wieder ins spiel
+		TastaturC sagt GameC bescheid "ESC gedrückt"
+		GameC switcht state auf ingame / benachrichtigt Fenster: drawIngame()()
+	
+	[X] item von Feld in hand
+		SpielerV holt sich Liste von aktFeld des Spielers
+		SpielerV -> Feld:getObjects()
+		SpielerV zeigt Liste an
+		
+		Mensch wählt Zahl (index in der Liste)
+		Spieler aktFeld:interagiere(int indexDerListe)
+		Feld macht auf FeldM take(indexDerListe)
+		gibt Spieler via interagiere das GameObject (Gegenstand) zurück
+		Spieler legt dieses in seine hand
+		
+		
+	[X] npc von feld ansprechen
+		wie oben (liste holen index wählen, feld gibt NPC via interagiere zurück)
+		Spieler legt NPC in sein attribut dialogMit:NPC
+		
+		Spieler ruft dialogMit:interagiere(this)
+		Spieler -> event an SpielerV
+		SpielerV fragt via spieler:dialogMit (ergibt npc) den dialog ab und zeigt an
+			getDialogMit()
+		
+		[X] dialog führen mit NPC
+			anzeige:
+				SpielerV fragt NPC getAktDialog():Dialog
+					Dialog:getText() / getErwiderung()
+			Mensch sieht antoworten mit nummer
+			tippt nummer ein
+			GameC benachrichtigt Spieler über Tastatureingabe
+			Spieler ruft dialogMit:interagiere(eingegeben nummer)
+			NPC setzt dialog weiter
+			Spieler -> event an SpielerV (nächster dialog)
+			Ende:
+				wenn NPC über rückgabewert von interagiere() NULL zurückgibt (ist der diaog beendet)
+				spieler -> spielerV event (dialog ende)
+			abbruch:
+				z.b. mit "0"
+				spieler -> spielerV event (dialog ende)
+			geschenk:
+				gibt dialog ein geschenk, wird dieses vom npc via interagiere-rückgabewert dem spieler gegebeb
+				spieler legt diesen gegenstand (item, schein) in seine hand
+				
+		[X] spieler: von hand zu npc (bei dialog)
+			mensch muss Gegenstand erst in hand nehmen
+			wenn erwiderung tribut erfordert, wird dieser in [] angezeigt hinter dem text
+			mensch kann zwar auswählen, es passiert aber nix, wenn gegenstand nicht in hand
+			npc kennt spieler nach erstem aufruf von interagiere(this) über dialogMit:Charakter
+			npc fragt dialogMit:getHand()
+			regiert dann passend nach tastatureingabe / erwiderung möglich oder nicht
+	
+	inventar interaktionen
+		[X] item von hand in inventar
+			Spieler ruft Spieler:inv:put(hand) auf -> exception, wenn voll
+			hand:null, wenn erfolgreich
+			Spieler feuert event für SpielerV (inventar change)
+			Spieler feuert event für SpielerV (hand change)
+			
+		[X] Spieler von inventar in hand
+			Mensch sieht auf Anzeige die Item-Nr
+			Spieler:inv:get(nummer) -> rückgabe -> Spieler:hand (mit Item gefüllt)
+			Spieler feuert event für SpielerV (inventar change)
+			Spieler feuert event für SpielerV (hand change)
+		
+		[X] spieler von hand auf feld
+			Spieler ruft Feld:interagiere(Gegenstand) auf
+				Feld entscheidet, dass der Gegenstand abgelegt werden soll
+				interagiere gibt true/false  zurück, wenn noch platz frei
+				wenn true -> hand:null / Feld:drop() aufrufen
+					FeldM macht den Rest
+			Spieler feuert event für SpielerV (hand change)
+	
+	[X] laufen
+		nur wenn Feld:begehbar == true
+		Spieler setzt sein aktFeld:Feld auf das neue Feld
+		neues Feld bekommt er von aktFeld:getNachbar(Richtung r)
+		von aktFeld das Model wird spielerSlot = NULL / neuen Feld bekommt spielerSlot bekommt Spieler
+		spieler -> sichtbereich event (feld wechsel)
+	
+	[X] drehen
+		spieler -> sichtbereich event (drehung) mit der richtung
+		spieler:blick wird auf neue richtung gesetzt
+		
+	
+[X] fenster darstellen
+	[X] sichtbereich
+		meldet sich beim spieler an, der events feuert wenn zb. das aktuelle Feld verändert wird.
+		daraufhin holt sich der sichtbereich das aktuelle feld (und die benachbarten), biegt die jeweiligen
+		referenzen von den drei feldV um, die dann das Feld darstellen.
+		Außerdem werden Wände, Himmel etc. vom Sichtbereich dargestellt und anhand der Spielderdaten "errechnet"
+
+		[X] felder (mit item) darstellen
+			feldV holt sich daten vom feld, stellt diese dar. feldV hat eine Eigenschaft, die die Position des
+			Feldes relativ zum Spieler angibt und in Abhängigkeit davon das JPanel zeichnet (Trapez kleiner / größer).
+			Dafür hat FeldV einen Constructor in dem der Enum Position mitgegeben wird (VORN / MITTEL / HINTEN).
+		
+	[X] spielerview
+		[X] infobereich (inventar /interaktion)
+		[X] statusbereich (portait spieler/npc)
+		[X] handbereich
+
+[X] controller
+	[X] tastaturc -> gamec
+		GameC meldet sich beim TastaturC an, bei ESC wird GameC state auf Ingame / Menu geschaltet
+	[X] tastaturc -> spieler
+		spieler meldet sich beim Ingame an, Ingame leitet Events direkt weiter an alle angemeldeten Listener
+		(bei uns meldet sich nur Spieler bei Ingame an)
+	[X] tastatur -> menu 	
+		Menu meldet sich beim GameC an, bekommt Events mit (genau wie Ingame)
+	[X] TastaturM geht an GameC - GameC entscheided, welche Aktion zur Taste passt
+	[X] TastaturM schreibt bei Änderungen direkt in die tastatur.xml (ist dann sofort gespeichert)
+	[X] TastaturM hat interne Klasse, die Mapping übernimmt (SteuerungsMap)
+	
+	[X] generelle aktionen
+		[X] laufen immer mit wasd, nur wenn nicht in interaktion und nicht in menu
+		[X] wenn interaktion: zahlen als indices für erwiderung oder objekt auswählen
+		[X] wenn laufbar, dann nummern für inventar->hand (wenn hand leer)
+		[X] wenn menu, klickbar / nur ESC
+		
+		
+		
+-------------------	
+
+info für doku
+
+<interagiere> ~ interface
+	wird mit Object aufgerufen (STring, gameObject, sonstwas)
+	Feld
+			Spieler ruft Feld:interagiere(this) auf
+			Feld entscheidet, dass es ein "Spieler" ist
+			gibt Liste aller Items aus
+				mit FeldM:getObjects (items / npc)
+			Spieler bekommt von interagiere() eine "List" zurück
+	Spieler
+			bekommt Liste zurück
+			setzt interactFeld = true
+			und schmeißt notify für SpielerV (mit der Liste)
+		pielerV aktualisiert Ansicht
+			wie? woher bekommt spielerV die daten?
+		
+			meldet sich bei TastaturC an ("warte auf [1-9]")
+			TastaturC wirft event, wenn entsp. Taste gedrückt wird
+			Spieler wartet auf event -> ruft dann eigene Methode auf
+				aktfeld:interagiere(int) ~ int kommt von tastatur-bean
+					interagiere vom Feld ruft dann (private)take() auf
+					FeldM:take(int) // löscht item
+					Spieler:hand // nimmt Item in Hand
+						in inventar ablegen
+						oder auf Feld ablegen
+				
+	Kommunikation Spieler-TastaturC läuft via Bean
+			Spieler hat interne States, ob Tastatureingaben angefordert werden
+			und reagiert NUR DANN darauf (2 boolean felder im spieler)
+
+[X] feld
+	jedes feldM hat boolean[4], ob seiten eine wand sind
+	FeldV kann via Feld:wand(richtung) fragen, ob wand zu zeichnen ist
+	
+[X] sichtbereich
+	zeichnet jedes mal alle 32 panels abhängig vom sichtbereich (wand, textur, andere schattierungen usw.)
+			
+			
+-------------------
+
+TODO
+[ ] Game in Spec in Ingame ändern (und überall sonst)
+
+~ geänderte Klassen sind GRÜN
+
+NEU
+
+	TastaturBuilder		Liest Tastaturbelegung ein und erzeugt Map für TastaturC (evtl. mit TastaturM)
+	TastaturM			Beinhaltet KeyMap der Tastaturbelegung, kann in den Optionen geändert werden (add(), remove(), edit())
+
+EDIT
+	
+	TastaturC			steuerung in TastaturM ausgelagert
+	Fenster				drawIngame(), drawMenu() public ~ so kann jeder das Spiel pausieren (insbesondere TastaturC)
+	Spiler				aktFeld:Feld für eigenes Feld hinzugefügt
+

@@ -1,0 +1,5 @@
+\subsection{Szenario - Item aufnehmen}
+Der \gls{Spieler} bewegt sich frei über den Campus. Dabei liegen auf dem Feld vor ihm drei \glspl{Item}. Der Spieler
+möchte nun das \gls{Item} aufnehmen. Es öffnet sich eine Liste, in der alle 
+\glspl{Item} aufgelistet werden. Der \gls{Spieler} browst nun durch die Liste und wählt einen Schlüssel aus, welcher
+auf dem Boden liegt und damit in der Liste befindet. Die anderen \glspl{Item} braucht er nicht. Jedoch bekommt er, bevor er den Gegenstand aufgenommen hat, eine Meldung das sein Inventar voll ist und der Schlüssel daher nicht aufgenommen werden kann. Aus diesem Grund wirft er das Sandwich aus seinem Inventar. Das Sandwich erscheint nun auf dem Feld und ein Slot im Inventar ist frei geworden. Nun kann er den Schlüssel aufnehmen. Der Schlüssel ist dabei vom Boden verschwunden und stattdessen in seinem Inventar.

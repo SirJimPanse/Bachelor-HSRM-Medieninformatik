@@ -1,0 +1,27 @@
+\paragraph{UseCase: Spiel laden}
+\begin{center}
+	\begin{tabular}{|r l|}
+	  \hline
+	  \textbf{Titel}: & Spiel laden \\
+	  \textbf{Akteur}: & Spieler \\
+	  \textbf{Fachlicher Auslöser}: & Spieler möchte einen Spielstand laden
+	  \textbf{Vorbedingungen}: & Spiel(InGame) läuft bereits oder Spiel wird gestartet(befindet sich im Hauptmenü) \\
+	  \hline
+	  \textbf{Standardablauf}:
+		& 1. Spieler: wählt einen belegten Speicherstandslot \\
+		& 2. Spieler: läd diesen  \\
+		& 3. System:  läd Spielstand (erzeugt Campus,NPC und Item Zustände aus gespeicherten Spielstandsdaten) \\
+	 \textbf{Änderung}:
+		& 4.a Spieler: löscht Spielstand \\
+		& 4.b System: löscht Spielstand, gibt Speicher frei \\
+	 \textbf{Abbruch}:
+                & 1.a Spieler: möchte kein Spiel laden \\
+                & 1.b System: verwirft Ladevorgang und kehrt zunächst ins Pausemenü/Hauptmenü zurück \\
+	  \hline
+	  \textbf{Nachbedingung}: & System geht ins Pausemenü oder Hauptmenü zurück\\
+	  \textbf{NF-Anf}.: & k.A. \\
+	  \textbf{Parameter}.: & k.A. \\
+	  \textbf{Nutzungshäufigkeit}: & Spiel kann ohne Ladefunktion, durchgespielt werden \\
+	  \hline
+	\end{tabular}
+\end{center}

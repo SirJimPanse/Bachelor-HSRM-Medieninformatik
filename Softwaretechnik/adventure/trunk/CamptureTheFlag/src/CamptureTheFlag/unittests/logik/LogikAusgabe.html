@@ -1,0 +1,303 @@
+
+<!-- saved from url=(0132)file:///C:/Users/Simon/workspace/hsrm/sem4/swt/adventure/trunk/CamptureTheFlag/src/CamptureTheFlag/unittests/logik/logikAusgabe.html -->
+<html xmlns:c="http://www.concordion.org/2007/concordion"><!-- 
+@author shard001
+ --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>* {
+  font-family: Arial;
+}
+body {
+  padding: 32px;  
+}
+pre {
+  padding: 6px 28px 6px 28px;
+  background-color: #E8EEF7;
+}
+pre, pre *, code, code *, kbd {
+  font-family: Courier New, Courier;
+  font-size: 10pt;
+}
+h1, h1 * {
+  font-size: 24pt;	
+}
+p, td, th, li, .breadcrumbs {
+  font-size: 10pt;
+}
+p, li {
+  line-height: 140%;
+  max-width: 720px;
+}
+table {
+  border-collapse: collapse;
+  empty-cells: show;
+  margin: 8px 0px 8px 0px;
+}
+th, td {
+  border: 1px solid black;
+  padding: 3px;
+}
+td {
+  background-color: white;
+  vertical-align: top;
+}
+th {
+  background-color: #C3D9FF;
+}
+li {
+  margin-top: 6px;
+  margin-bottom: 6px; 
+}
+
+
+.example {
+  padding: 2px 12px 6px 12px;
+  border: 1px solid #C3D9FF;
+  margin: 6px 0px 28px 0px;
+  background-color: #F5F9FD;
+}
+.example h3 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 12pt;
+}
+
+p.success {
+  padding: 2px;
+}
+.success, .success * {
+  background-color: #afa !important;
+}
+.success pre {
+  background-color: #bbffbb;
+}
+.failure, .failure * {
+  background-color: #ffb0b0;
+  padding: 1px;
+}
+.failure .expected {
+  text-decoration: line-through;
+  color: #bb5050;
+}
+.ignored, .ignored * {
+  background-color: #f0f0f0 !important;	
+}
+
+ins {
+  text-decoration: none;	
+}
+
+.exceptionMessage {
+  background-color: #fdd;
+  font-family: Courier New, Courier, Monospace;
+  font-size: 10pt;
+  display: block;
+  font-weight: normal;
+  padding: 4px;
+  text-decoration: none !important;
+}
+.stackTrace, .stackTrace * {
+  font-weight: normal;
+}
+.stackTrace {
+  display: none;
+  padding: 1px 4px 4px 4px;
+  background-color: #fdd;
+  border-top: 1px dotted black;
+}
+.stackTraceExceptionMessage {
+  display: block;
+  font-family: Courier New, Courier, Monospace;
+  font-size: 8pt;
+  white-space: wrap;
+  padding: 1px 0px 1px 0px;
+}
+.stackTraceEntry {
+  white-space: nowrap;
+  font-family: Courier New, Courier, Monospace;
+  display: block;
+  font-size: 8pt;
+  padding: 1px 0px 1px 32px;
+}
+.stackTraceButton {
+  font-size: 8pt;
+  margin: 2px 8px 2px 0px;
+  font-weight: normal;
+  font-family: Arial;
+}
+
+.special {
+  font-style: italic;
+}
+.missing, .missing * {
+  background-color: #ff9999;
+}
+.surplus, .surplus * {
+  background-color: #ff9999;
+}
+.footer {
+  text-align: right;
+  margin-top: 40px;
+  font-size: 8pt;
+  width: 100%;
+  color: #999;
+}
+.footer .testTime {
+  padding: 2px 10px 0px 0px;
+}
+
+.idea {
+  font-size: 9pt;
+  color: #888;
+  font-style: italic;	
+}
+.tight li {
+  margin-top: 1px;
+  margin-bottom: 1px; 
+}
+.commentary {
+  float: right;
+  width: 200px;
+  background-color: #ffffd0;
+  padding:8px;
+  border: 3px solid #eeeeb0;	 
+  margin: 10px 0px 10px 10px;	 
+}
+.commentary, .commentary * {
+  font-size: 8pt;
+}
+</style>
+	<title>CamptureTheFlag Logik-Test</title>
+	<style type="text/css">
+	.set {
+		font-weight: bold;
+	}
+	</style>
+</head>
+<body><span class="breadcrumbs"><a href="file:///C:/Users/Simon/workspace/hsrm/sem4/swt/adventure/trunk/CamptureTheFlag/src/CamptureTheFlag/unittests/logik/Logik.html">CamptureTheFlag Logik-Test</a> &gt;</span>
+	<h1>Logik-Test</h1>
+	
+	<h2>Spieler</h2>
+	<p>
+		Der Spieler wird mit dem Namen <span c:assertequals="getSpielerName()" class="success">Frettchen</span> erstellt 
+		und auf dem <span c:assertequals="getAktFeld()" class="success">Feld (1,5)</span> platziert.
+	</p>
+	
+	<h2>Interaktion</h2>
+	<h3>Mit Feldern</h3>
+	<p>
+		Wählt man die Interaktionstaste, werden alle GameObjects auf dem aktuellen Feld angezeigt.
+	</p>
+	<p>
+		<span c:assertequals="interagiereFeld()" class="success">
+			0 abbrechen 
+			1 Eingang (offen) 
+			2 Goldener Schlüssel (öffnet Raum XY) 
+			3 Keks 1 (Weise, du musst sein.) 
+			4 Homer (Fettwanst)
+		</span>
+	</p>
+	
+	<h3>Mit einem Eingang</h3>
+	<p>
+		Interagiert man mit dem Eingang an Stelle 
+		<span c:set="#num" class="set">1</span>, wird geprüft ob dieser 
+		offen ist. Ist er offen, wird der Spieler auf das dahinterliegende Feld 
+		<span c:assertequals="interagiereMitEingang(#num)" class="success">Feld (1,4)</span> gesetzt.
+	</p>	
+	
+	<h3>Mit Gegenständen</h3>
+	<h4>Gegenstand aufnehmen</h4>
+	<p>
+		Nimmt ein Spieler einen Gegenstand von einem Feld auf, wird er zuerst in der 
+		Hand des Spielers abgelegt. Dazu interagiert man beispielsweise mit dem 
+		Gegenstand an Stelle <span c:set="#num" class="set">2</span>. Danach befindet sich der 
+		<span c:assertequals="interagiereMitGegenstand(#num)" class="success">Goldener Schlüssel (öffnet Raum XY)</span> in 
+		der Hand des Spielers
+	</p>
+	<h4>Gegenstände von der Hand im Inventar ablegen</h4>
+	<p>
+		Hat man wie oben einen Gegenstand an der Stelle <span c:set="#num" class="set">2</span> in die Hand genommen, 
+		kann man ihn mit der passenden Taste im Inventar ablegen. Das Inventar ist dann wie folgt gefüllt:
+	</p>
+	<p>
+		<span c:assertequals="getGegenstandAndShowInventar(#num)" class="success">
+			1 Goldener Schlüssel (öffnet Raum XY)			
+		</span>
+	</p>
+	<p>
+		Die Hand des Spielers ist dann wieder 
+		<span c:assertequals="getGegenstandAndShowHand(#num)" class="success">leer</span>.
+	</p>
+	<h4>Gegenstände vom Inventar in die Hand nehmen</h4>
+	<p>
+		Drückt der Spieler eine Nummerntaste (außer der [0]) nimmt er den Gegenstand an dieser Stelle 
+		vom Inventar in seine Hand. Wurde beispielsweise der Gegenstand an der Stelle 
+		<span c:set="#num" class="set">2</span> 
+		vom Feld ins Inventar aufgenommen, kann danach durch Drücken von [1] der Gegenstand wieder in die 
+		Hand genommen werden. Die Hand beinhaltet dann wieder:
+		<span c:assertequals="getGegenstandFromInventar(#num)" class="success">Goldener Schlüssel (öffnet Raum XY)</span>.
+	</p>
+	<h4>Gegenstände von der Hand auf dem Feld ablegen</h4>
+	<p>
+		Nimmt der Spieler von Startfeld den Schlüssel an der Stelle <span c:set="#num" class="set">2</span> auf, 
+		geht auf das nächste Feld und legt ihn dort wieder ab, ist das Feld wie folgt gefüllt:
+	</p>
+	<p>
+		<span c:assertequals="dropGegenstandAufFeld(#num)" class="success">
+			0 abbrechen
+			1 Eingang (offen)
+			2 Goldener Schlüssel (öffnet Raum XY)
+			
+		</span>
+	</p>
+	
+	<h3>Mit NPC</h3>
+	<h4>NPC anprechen</h4>
+	<p>
+		Interagiert man mit dem NPC an Stelle 
+		<span c:set="#num" class="set">4</span>, wird er angesprochen und dessen aktueller Dialog und die passenden 
+		Erwiderungen werden angezeigt:
+	</p>
+	<blockquote>
+		<span c:assertequals="interagiereMitNPC(#num)" class="success">
+			Hallo wie gehts dir? 0 abbrechen 1 Schlecht :( 2 Naja.. 3 Gut!
+		</span>
+	</blockquote>
+	<h4>Dialog mit NPC führen</h4>
+	<p>
+		Wurde ein NPC wie oben angesprochen, kann man durch drücken der passenden Nummerntaste den 
+		Dialog weiterführen. Drückt man im Beispiel die <span c:set="#num" class="set">2</span>, 
+		lautet der Folgedialog:
+	</p>
+	<blockquote>
+		<span c:assertequals="interagiereMitNPCWeiter(#num)" class="success">
+			Cool! 0 abbrechen
+		</span>
+	</blockquote>
+	
+	
+	<h2>Bewegen</h2>
+	<h3>Drehen</h3>
+	<p>
+		Der Spieler kann seine Blickrichtung nach links und nach rechts drehen. Drückt er die passende Taste,
+		wird die Ansicht aktualisiert. Im Beispiel schaut der Spieler zu Beginn nach
+		<span c:assertequals="getSpielerBlick()" class="success">NORD</span>. Dreht man sich nun einmal nach links schaut man 
+		nach <span c:assertequals="dreheSpielerLinks()" class="success">WEST</span>. Dreht man sich nun wieder nach rechts, blickt 
+		man erneut nach <span c:assertequals="dreheSpielerRechts()" class="success">NORD</span>.
+	</p>
+	
+	<h3>Laufen</h3>
+	<p>
+		Ähnlich zum Drehen, kann der Spieler von Feld zu Feld laufen. Das Feld muss dazu erreichbar sein, d.h. 
+		es darf keine Wand im Weg sein. Er kann direkt in alle vier Richtungen laufen oder sich vorher drehen und 
+		dann in die aktuelle Blickrichtung laufen.
+	</p>
+	<p>
+		Läuft der Spieler vom aktuellen Feld nach <span c:set="#richtung" class="set">NORD</span>, stößt er gegen eine 
+		<span c:assertequals="laufe(#richtung)" class="success">Wand</span>. Benutzt er hingegen den Eingang vor ihm und läuft 
+		dann nach <span c:set="#richtung" class="set">WEST</span> kann er weiterlaufen und befindet sich dann auf 
+		<span c:assertequals="nutzeEingangUndLaufe(#richtung)" class="success">Feld (0,4)</span>.
+	</p>
+	
+<div class="footer">Results generated by <a href="http://www.concordion.org/"><img src="file:///C:/Users/Simon/workspace/hsrm/sem4/swt/adventure/trunk/CamptureTheFlag/src/image/concordion-logo.png" alt="Concordion" border="0"></a><div class="testTime">in 15750 ms on 28-Jun-2012 at 09:14:56 MESZ</div></div>
+	
+</body></html>

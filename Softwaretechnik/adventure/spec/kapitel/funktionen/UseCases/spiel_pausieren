@@ -1,0 +1,28 @@
+\subsection{UseCase: Spiel pausieren}
+\begin{center}
+	\begin{tabular}{|r l|}
+	  \hline
+	  \textbf{Titel}: & Spiel pausieren\\
+	  \textbf{Akteur}: & Spieler \\
+	  \textbf{Fachlicher Auslöser}: & Spieler möchte Spiel unterbrechen \\
+	  \textbf{Vorbedingungen}: & Spieler ist InGame \\
+	  \hline
+	  \textbf{Standardablauf}:
+		& 1. Spieler: wählt Pausenmenü \\
+		& 2. Spieler: gelangt ins Pausemenü \\
+		& 3. System:  Spiel bleibt erhalten und ist lediglich unterbrochen/angehalten
+	  \textbf{Abbruch}:
+                & 1.a Spieler: Spieler drückt Spiel fortsetzen \\
+                & 1.b Spieler:  gelangt zurück in sein aktuelles Spiel \\
+		& 1.c Spieler:  aktuelles Spiel wird wieder aufgenommen \\
+	 \textbf{Änderung}:
+		& 4.a Spieler: ändert Tastenbelegung unter Option \\
+		& 4.b System: ändert die entsprechende Taste um ins Pausemenü zu gelangen/Spiel zu unterbrechen \\
+	  \hline
+	  \textbf{Nachbedingung}: & k.A.\\
+	  \textbf{NF-Anf}.: & k.A. \\
+	  \textbf{Parameter}.: & k.A. \\
+	  \textbf{Nutzungshäufigkeit}.: &  Je nach Spieler öfter oder seltener \\
+	  \hline
+	\end{tabular}
+\end{center}

@@ -1,0 +1,41 @@
+\paragraph{UseCase: mit Items interagieren}
+\begin{center}
+	\begin{tabular}{|r l|}
+	  \hline
+	  \textbf{Titel}: & Item interaktion \\
+	  \textbf{Akteur}: & Spieler \\
+	  \textbf{Fachlicher Auslöser}: & Spieler findet ein Item \\
+	  \textbf{Vorbedingungen}: & Spieler ist Ingame und Inventar ist nicht voll \\
+	  \hline
+	  \textbf{Standardablauf}:
+		& 1. Spieler: bekommt per Tastendruck alle Items im Raum, in Form einer Liste angezeigt \\
+		& 2. Spieler: wählt ein oder mehr Items aus dieser Liste und nimmt dieses in sein Inventar auf \\
+		& 3. System:  Item wird vom Feld-Inventararray in das Chrakter-Inventararray übergeben \\ 
+		& 4. Spieler: nutzt Item um Tür zu öffnen oder um mit NPC zu interagieren \\
+		& 5. System:  Überprüft ob notwendiges Item vorhanden ist, wenn ja wird Tür geöffnet/mit NPC interagiert, ansonsten nicht \\
+	 \textbf{Abbruch}:
+                & 1.a Spieler: möchte zurück ins Hauptmenü \\
+                & 1.b System: verwirft Eingabe und wechselt ins Hauptmenü \\
+	 \textbf{Änderung}:
+		& 4.a Spieler: geht in sein Inventar, wählt item und wirft dieses heraus(dropt),dieses liegt wieder auf dem Feld \\
+		& 4.b System:  Item wird von Chrakter-Inventar wieder an das Feldinventar übergeben \\
+	  \hline
+	  \textbf{Nachbedingung}: & k.A. \\
+	  \textbf{NF-Anf}.: & k.A. \\
+	  \textbf{Parameter}: & Inventargröße/Größe des Items \\
+	  \textbf{Nutzungshäufigkeit}: & im gesamten InGame \\
+	  \hline
+	\end{tabular}
+\end{center}
+
+
+& 4. Spieler: Nutzt Item um Tür zu öffnen oder um mit NPCs \\
+		& zu interagieren \\
+		& 5. System:  Überprüft ob notwendiges Item vorhanden ist,\\
+		& wenn ja wird Tür geöffnet/mit NPC interagiert, ansonsten nicht \\
+
+	 \textbf{Änderung}:
+		& 4.a Spieler: geht in sein Inventar, wählt item und wirft dieses \\
+		& heraus(dropt),dieses liegt wieder auf dem Feld \\
+		& 4.b System:  Item wird von Charakter-Inventar wieder an das \\
+		& Feldinventar übergeben \\

@@ -1,0 +1,141 @@
+<html xmlns:c="http://www.concordion.org/2007/concordion">
+<!-- 
+@author shard001
+ -->
+<head>
+	<title>CamptureTheFlag Logik-Test</title>
+	<style type="text/css">
+	.set {
+		font-weight: bold;
+	}
+	</style>
+</head>
+<body>
+	<h1>Logik-Test</h1>
+	
+	<h2>Spieler</h2>
+	<p>
+		Der Spieler wird mit dem Namen <span c:assertEquals="getSpielerName()">Frettchen</span> erstellt 
+		und auf dem <span c:assertEquals="getAktFeld()">Feld (1,5)</span> platziert.
+	</p>
+	
+	<h2>Interaktion</h2>
+	<h3>Mit Feldern</h3>
+	<p>
+		Wählt man die Interaktionstaste, werden alle GameObjects auf dem aktuellen Feld angezeigt.
+	</p>
+	<p>
+		<span c:assertEquals="interagiereFeld()">
+			0 abbrechen 
+			1 Eingang (offen) 
+			2 Goldener Schlüssel (öffnet Raum XY) 
+			3 Keks 1 (Weise, du musst sein.) 
+			4 Homer (Fettwanst)
+		</span>
+	</p>
+	
+	<h3>Mit einem Eingang</h3>
+	<p>
+		Interagiert man mit dem Eingang an Stelle 
+		<span c:set="#num" class="set">1</span>, wird geprüft ob dieser 
+		offen ist. Ist er offen, wird der Spieler auf das dahinterliegende Feld 
+		<span c:assertEquals="interagiereMitEingang(#num)">Feld (1,4)</span> gesetzt.
+	</p>	
+	
+	<h3>Mit Gegenständen</h3>
+	<h4>Gegenstand aufnehmen</h4>
+	<p>
+		Nimmt ein Spieler einen Gegenstand von einem Feld auf, wird er zuerst in der 
+		Hand des Spielers abgelegt. Dazu interagiert man beispielsweise mit dem 
+		Gegenstand an Stelle <span c:set="#num" class="set">2</span>. Danach befindet sich der 
+		<span c:assertEquals="interagiereMitGegenstand(#num)">Goldener Schlüssel (öffnet Raum XY)</span> in 
+		der Hand des Spielers
+	</p>
+	<h4>Gegenstände von der Hand im Inventar ablegen</h4>
+	<p>
+		Hat man wie oben einen Gegenstand an der Stelle <span c:set="#num" class="set">2</span> in die Hand genommen, 
+		kann man ihn mit der passenden Taste im Inventar ablegen. Das Inventar ist dann wie folgt gefüllt:
+	</p>
+	<p>
+		<span c:assertEquals="getGegenstandAndShowInventar(#num)">
+			1 Goldener Schlüssel (öffnet Raum XY)			
+		</span>
+	</p>
+	<p>
+		Die Hand des Spielers ist dann wieder 
+		<span c:assertEquals="getGegenstandAndShowHand(#num)">leer</span>.
+	</p>
+	<h4>Gegenstände vom Inventar in die Hand nehmen</h4>
+	<p>
+		Drückt der Spieler eine Nummerntaste (außer der [0]) nimmt er den Gegenstand an dieser Stelle 
+		vom Inventar in seine Hand. Wurde beispielsweise der Gegenstand an der Stelle 
+		<span c:set="#num" class="set">2</span> 
+		vom Feld ins Inventar aufgenommen, kann danach durch Drücken von [1] der Gegenstand wieder in die 
+		Hand genommen werden. Die Hand beinhaltet dann wieder:
+		<span c:assertEquals="getGegenstandFromInventar(#num)">Goldener Schlüssel (öffnet Raum XY)</span>.
+	</p>
+	<h4>Gegenstände von der Hand auf dem Feld ablegen</h4>
+	<p>
+		Nimmt der Spieler von Startfeld den Schlüssel an der Stelle <span c:set="#num" class="set">2</span> auf, 
+		geht auf das nächste Feld und legt ihn dort wieder ab, ist das Feld wie folgt gefüllt:
+	</p>
+	<p>
+		<span c:assertEquals="dropGegenstandAufFeld(#num)">
+			0 abbrechen
+			1 Eingang (offen)
+			2 Goldener Schlüssel (öffnet Raum XY)
+			
+		</span>
+	</p>
+	
+	<h3>Mit NPC</h3>
+	<h4>NPC anprechen</h4>
+	<p>
+		Interagiert man mit dem NPC an Stelle 
+		<span c:set="#num" class="set">4</span>, wird er angesprochen und dessen aktueller Dialog und die passenden 
+		Erwiderungen werden angezeigt:
+	</p>
+	<blockquote>
+		<span c:assertEquals="interagiereMitNPC(#num)">
+			Hallo wie gehts dir? 0 abbrechen 1 Schlecht :( 2 Naja.. 3 Gut!
+		</span>
+	</blockquote>
+	<h4>Dialog mit NPC führen</h4>
+	<p>
+		Wurde ein NPC wie oben angesprochen, kann man durch drücken der passenden Nummerntaste den 
+		Dialog weiterführen. Drückt man im Beispiel die <span c:set="#num" class="set">2</span>, 
+		lautet der Folgedialog:
+	</p>
+	<blockquote>
+		<span c:assertEquals="interagiereMitNPCWeiter(#num)">
+			Cool! 0 abbrechen
+		</span>
+	</blockquote>
+	
+	
+	<h2>Bewegen</h2>
+	<h3>Drehen</h3>
+	<p>
+		Der Spieler kann seine Blickrichtung nach links und nach rechts drehen. Drückt er die passende Taste,
+		wird die Ansicht aktualisiert. Im Beispiel schaut der Spieler zu Beginn nach
+		<span c:assertEquals="getSpielerBlick()">NORD</span>. Dreht man sich nun einmal nach links schaut man 
+		nach <span c:assertEquals="dreheSpielerLinks()">WEST</span>. Dreht man sich nun wieder nach rechts, blickt 
+		man erneut nach <span c:assertEquals="dreheSpielerRechts()">NORD</span>.
+	</p>
+	
+	<h3>Laufen</h3>
+	<p>
+		Ähnlich zum Drehen, kann der Spieler von Feld zu Feld laufen. Das Feld muss dazu erreichbar sein, d.h. 
+		es darf keine Wand im Weg sein. Er kann direkt in alle vier Richtungen laufen oder sich vorher drehen und 
+		dann in die aktuelle Blickrichtung laufen.
+	</p>
+	<p>
+		Läuft der Spieler vom aktuellen Feld nach <span c:set="#richtung" class="set">NORD</span>, stößt er gegen eine 
+		<span c:assertEquals="laufe(#richtung)">Wand</span>. Benutzt er hingegen den Eingang vor ihm und läuft 
+		dann nach <span c:set="#richtung" class="set">WEST</span> kann er weiterlaufen und befindet sich dann auf 
+		<span c:assertEquals="nutzeEingangUndLaufe(#richtung)">Feld (0,4)</span>.
+	</p>
+	
+</body>
+	
+</html>

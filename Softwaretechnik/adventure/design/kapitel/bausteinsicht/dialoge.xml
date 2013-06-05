@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialoge>
+	<dialog npc="Lisa">
+		<text>Hallo wie gehts dir?</text>
+		<erwiderung>
+			<text>Naja..</text>
+			<dialog>
+				<text>Cool!</text>
+			</dialog>
+		</erwiderung>
+		<erwiderung>
+			<text>Gut!</text>
+			<dialog>
+				<text>Cool!</text>
+			</dialog>
+		</erwiderung>
+		<erwiderung>
+			<text>Schlecht :(</text>
+			<dialog>
+				<text>Oh wieso?</text>
+				<erwiderung>
+					<text>Weil!</text>
+					<dialog>
+						<text>Oh..</text>
+					</dialog>
+				</erwiderung>
+				<erwiderung>
+					<text>Hörst du nicht zu?</text>
+					<dialog><root/></dialog>
+				</erwiderung>
+				<erwiderung>
+					<text>Ach uninteressant..</text>
+					<dialog>
+						<text>Naja dann nicht.</text>
+					</dialog>
+				</erwiderung>
+			</dialog>
+		</erwiderung>
+	</dialog>
+	<dialog npc="Homer">
+		<text>Hey mein Sohn, gib mir deinen Doughnut!</text>
+		<erwiderung>
+			<text>Nein Homer, hol dir doch selbst einen.</text>
+			<dialog>
+				<text>Du frecher Bengel, dich werd ich lehren..!</text>
+				<erwiderung>
+					<text>Argh *würg* ..</text>
+					<dialog><back step="1"/></dialog>
+				</erwiderung>
+			</dialog>
+		</erwiderung>
+		<erwiderung>
+			<item method="POST">Doughnut</item>
+			<text>Nagut Homer, ich bin eh satt.</text>
+			<dialog>
+				<item method="GET" room="3">Key</item>
+				<text>Ah .. du bist so gut zu deinem alten Herrn, hier nimm das:</text>
+				<erwiderung>
+					<text>Hallo Homer.</text>
+					<dialog>
+						<repeat/>
+						<text>*mphfmphf*</text>
+					</dialog>
+				</erwiderung>
+			</dialog>
+		</erwiderung>
+	</dialog>
+</dialoge>

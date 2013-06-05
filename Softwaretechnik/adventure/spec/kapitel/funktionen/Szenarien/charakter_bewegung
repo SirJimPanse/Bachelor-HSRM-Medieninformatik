@@ -1,0 +1,12 @@
+\subsection{Szenario - Charakter bewegen}
+Der \gls{Spieler} steht am Start des Campus. Er bewegt sich nach vorne und rückt dadurch auf
+das vor ihm liegende Feld. Um zu sehen was in dem Raum neben ihm ist, dreht er seine Ansicht nach
+rechts ohne sich aber dabei vom aktuellen Feld wegzubewegen. Dort erspäht er eine offene Tür und
+entschließt sich den Raum hinter ihr zu erkunden. Dazu bewegt er sich zwei Räume nach vorne. Da er 
+nichts nützliches im Raum findet, möchte er den Raum verlassen. Da er dazu nicht 
+unnötiger Weise seine Sicht ändern will, geht er Rückwärts aus dem Raum. Dabei bleibt seine Sicht
+nach vorne gerichtet, jedoch bewegt er sich Rückwärts von Feld zu Feld. Zurück im Hauptraum, sieht
+er einiger Felder vor sich einen NPC. Er geht zu dem NPC welcher den Transponder aus dem Nachbarraum
+möchte und so bewegt sich der Spieler kurz seitlich in den Nachbarraum um seine Sich in Richtung NPS
+beizubehalten. Er nimmt den Transponder auf und geht in den Raum des NPC zurück und gibt diesem den
+Transponder, dafür erählt er einen Tipp.

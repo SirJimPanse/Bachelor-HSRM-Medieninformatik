@@ -1,0 +1,6 @@
+\subsection{Szenario - Item benutzen}
+Der \gls{Spieler} stößt auf eine verschlossene Tür. Er öffnet die Interaktionssicht und bekommt
+alle NPC, \glspl{Item} und Türen angezeigt, mit denen er interagieren kann. Er versucht zunächst 
+die Tür zu öffnen und bekommt die Meldung "Tür verschlossen". Nun geht er in sein Inventar
+und nimmt einen Schlüssel in die Hand, welchen er einige Felder zuvor fand. Der \glspl{Spieler} versucht noch
+einmal über die interaktionssicht die Tür zu öffnen und es funktioniert, dank des gefundenen Schlüssels.

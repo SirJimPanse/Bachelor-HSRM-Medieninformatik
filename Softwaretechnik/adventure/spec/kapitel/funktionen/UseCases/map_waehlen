@@ -1,0 +1,26 @@
+\paragraph{UseCase: Map wählen}
+\begin{center}
+	\begin{tabular}{|r l|}
+	  \hline
+	  \textbf{Titel}: & Map wählen \\
+	  \textbf{Akteur}: & Spieler \\
+	  \textbf{Fachlicher Auslöser}: & Spieler startet ein neues Spiel \\
+	  \textbf{Vorbedingungen}: & Neues Spiel wird ausgewählt/gestartet\\
+	  \hline
+	  \textbf{Standardablauf}:
+		& 1. Spieler: liest Ordner mit Map.txt-Datein aus \\
+		& 2. Spieler: wählt eine gewünschte Map datei \\
+		& 3. Spieler: beginnt Spiel  \\
+		& 4. System:  liest gewählte Map-Datei ein und erzeugt beim InGame-Start, den campus daraus \\
+	 \textbf{Abbruch}:
+                & 1.a Spieler: möchte zurück ins Hauptmenü \\
+                & 1.b System: verwirft Eingabe und wechselt ins Hauptmenü \\
+	 \textbf{Änderung}:
+	  \hline
+	  \textbf{Nachbedingung}: & geht ins InGame über \\
+	  \textbf{NF-Anf}.: & k.A. \\
+	  \textbf{Parameter}: & k.A. \\
+	  \textbf{Nutzungshäufigkeit}: & bei jedem neuen Spiel \\
+	  \hline
+	\end{tabular}
+\end{center}

@@ -1,0 +1,15 @@
+use cases
+
+[X] spieler bewegen
+
+[dom] spieler dialog mit NPC
+
+[X] spieler item aufnehmen (in hand)
+
+[X] item von hand in inventar <=> vice versa
+
+[X] neues spiel starten
+
+[X] spiel laden
+
+[toni] spiel speichern

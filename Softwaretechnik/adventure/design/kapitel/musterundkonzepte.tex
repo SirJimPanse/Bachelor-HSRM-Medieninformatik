@@ -1,0 +1,49 @@
+\svnid{$Id: musterundkonzepte.tex 180 2012-05-24 15:26:04Z dgens001 $}
+\chapter{Muster und Konzepte}
+
+\subsection{Listener-Konzept}
+Die Anwendung verwendet \textit{PropertyChangeListener} und \textit{PropertyChangeSupport}.
+Erstere werden von solchen Klassen verwendet, deren Objekte auf Ereignisse aus anderen Bereichen des \gls{Spiel}s warten.
+Sie melden sich als Listener für bestimmte Attribute und Funktionen an. Ändern sich diese, erfahren die Listener
+das und können im eigenen Objekt für Methodenaufrufe sorgen.
+ 
+Für das Erfahren dieser Änderungen ist der \textit{PropertyChangeSupport} zuständig. 
+Aus der Klasse heraus, in der er sich befindet, \textit{feuert} er \textit{PropertyChangeEvents}, 
+die an die zugehörigen \textit{PropertyChangeListener} adressiert sind.
+
+\subsection{MVC}
+Für die Darstellung der Anwendung ist die Klasse \textit{Fenster} verantwortlich, unabhängig davon in welchem Modus 
+- Menü oder Ingame - sich das \gls{Spiel} im Momemt befindet. Sie setzt sich wiederum aus verschiedenen Klassen, 
+den Views, zusammen. Diese vereinen in sich jeweils die Informationen, die für die Darstellung der entsprechenden 
+View von Nöten sind.
+
+Die \textit{SpielerV} ist für die Anzeige des \gls{Statusbereich}s verantwortlich. Ihre Informationen kommen zum einen vom
+\textit{Spieler} selbst und andererseits von \textit{NPC}s, \textit{Objekt}en oder \textit{Feld}ern mit denen aktuell interagiert wird.
+\textit{Spieler} feuert Events, die den View anweist, die benötigten Informationen aus den entsprechenden Models zu lesen.
+ 
+Beispiele für die Darstellung durch die \textit{SpielerV} sind \glspl{Dialog} und das Aufnehmen von \glspl{Item} von 
+einem \textit{Feld} in die \textit{Hand} von \textit{Spieler}.
+
+Bei der Klasse \textit{Sichtbereich} handelt es sich um die \gls{Welt} aus der Ego-Perspektive des \gls{Spieler}s.
+Der gesamte \textit{Sichtbereich} setzt sich aus 32 \textit{JPanel}s zusammen, durch die sichergestellt wird, dass jede in der
+Anwendung vorgesehene Kombination von Texturen darstellbar ist.
+
+Es lassen sich zwei Unterbereiche abgrenzen. Das \textit{Feld} auf dem sich der \gls{Spieler} aktuell befindet und die beiden
+in \gls{Blickrichtung} vor ihm liegenden \glspl{Feld} werden samt darauf befindlicher \glspl{Gegenstand} und \gls{npcs} dargestellt.
+Alle anderen \glspl{Feld} und zugehörige Wände werden ausschließlich als Texturen angezeigt.
+
+Unabhängig davon werden alle \glspl{Feld} einzeln durch eine separate \textit{FeldV} erstellt. Die Informationen hierzu 
+kommen wiederum von den Models der einzelnen Felder(\textit{FeldM}).
+
+Die letzte verbleibende View ist die \textit{MenuCV}, die gleichzeitig als Controller fungiert. 
+Da das Menü nur eine grafische Oberfläche ohne abgrenzbare Logik ist, ist diese Zusammenführung sinnvoll.
+Das Menü wird vor dem Start eines neuen oder Laden eines bereits begonennen \gls{Spiel}s als Hauptmenü angezeigt. 
+Es dient gleichzeitig als Pausemenü, sollte das \gls{Spiel} zwischendurch unterbrochen werden.
+In diesem Fall behalten die oben genannten Views ihre aktuellen Informationen, werden aber nicht angezeigt während
+das Menü aktiv ist.
+
+Die einzelnen Views erben jeweils von der Klasse \textit{JPanel}. Die Klasse \textit{Fenster}, die, wie oben erklärt die 
+Views zur gesamten \gls{Anzeige} zusammensetzt, erbt von der Klasse \textit{JFrame}.
+Die Views und das \textit{Fenster} implementieren Funktionen des o.g. Listener-Konzeptes, um ihre
+Darstellungs-Informationen von den entsprechenden Models zu erhalten.
+

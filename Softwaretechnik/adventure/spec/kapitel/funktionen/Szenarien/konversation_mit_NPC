@@ -1,0 +1,6 @@
+\subsection{Szenario - Konversation mit NPC}
+Der \gls{Spieler} trifft auf dem Campus auf einen NPC. Er öffnet die Interaktionssicht und 
+wählt den NPC aus. Darauf beginnt der NPC mit der Konversation. Er erzählt dem \gls{Spieler}
+sein Anliegen und bittet ihn um seine Hilfe. Der Spieler hat nun mehrere Antwortmöglichkeiten.
+Er Kann es ablehnen ihm zu helfen, ihm anbieten zu einem späteren Zeitpunkt zu helfen, ihn nach
+dem Wetter fragen oder direkt helfen. Der \gls{Spieler} entschließt sich ihm sofort zu helfen.

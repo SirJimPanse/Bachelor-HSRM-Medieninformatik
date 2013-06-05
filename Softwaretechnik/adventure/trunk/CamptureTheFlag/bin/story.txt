@@ -1,0 +1,29 @@
+/**
+ * @author shard001
+ */
+ 
+Ablauf der Story
+Es wurden Dialoge, NPC, Gegenstände für folgende Story erstellt
+------------------
+
+Hinweise:
+	- Wichtige Elemente werden GROSS geschrieben
+	- Schlüsselnummern sind in Klammern angegeben (#3)
+	- es wird room_story.ppm verwendet
+
+------------------
+
+Man startet im FLUR.
+Hier steht HOMER, welcher den KEY_BESENKAMMER(#3) gibt, wenn man ihm einen DOUGHNUT anbietet.
+Ein Doughnut liegt im Flur rum, wein weiterer im PRÜFUNGSRAUM.
+
+Die BESENKAMMER(#3) ist verschlossen, darin befindet sich ein SPICKER.
+Mit dem Spicker kann man bestimmte Prüfungen (z.Z. ADS) direkt bestehen.
+
+MEISTER BERDUX steht im Flur und gibt den KEY_PRUEFUNGSZIMMER(#4), wenn man sich im QIS für die Prüfungen angemeldet hat.
+
+Das PRÜFUNGSZIMMER(#4) ist veschlossen.
+Darin befinden sich die Profs für folgende SCHEINE: ADS, Rechnernetzte
+
+Spielziel ist es, den Schein für Rechnernetzte zu erhalten.
+Das Spiel ist dann gewonnen. 

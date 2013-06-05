@@ -1,0 +1,69 @@
+formerly todo
+"campture the flag" (man unterscheide rote und blaue scheine)
+
+
+legende:
+	[ ] todo (abhaken)
+	- info zum punkt (nur hinweis)
+	
+------------------------------
+subsysteme
+
+[ ] darstellung (zu Klärendes, Denkanstöße in Klammern)
+	[ ] ingame
+		[ ] szene (wie wird die aus den einzelnen feldviews zusammengebaut?)
+		[ ] feld
+		[ ] statusleiste (wird immer ausgetauscht wenn interagiert wird)
+		[ ] spieler
+			[ ] inventar
+			[ ] hand
+		[ ] interaktion mit npc
+		[ ] interaktion mit GameObject
+
+	[ ] menu
+		[ ] hauptmenu / pause (ganz andere art als szene, nur ein panel mit buttons.. 
+								ist das immer im hintergrund aktiv?)
+		[ ] optionen (was kann man hier wie einstellen? wann wird das abgespeichert und wie?)
+		
+hinweise:		
+	- views melden sich als observer an den models an
+
+[ ] logik
+	[ ] steuerung (via tastatur)
+	[ ] ingame
+		[ ] spieler
+	[ ] menu controller/view (kein model)
+		[ ] savegame (hier mit model)
+		[ ] optionen (mit model)
+			[ ] tastaturlayout (mit model)
+	
+[ ] daten
+	[ ] karte
+	[ ] optionen
+	[ ] savegame
+		[ ] versionierung (stand alter version nicht mit neuer ladbar)
+	[ ] dialoge als textdatei
+		- keine schnittstelle, nur intern leichter dialoge zu verfassen
+
+
+abschnitte der design-spec:
+	[ ] bausteine
+		- klassen, tapete
+	[ ] laufzeit
+		- laufzeitdiagramme
+		- wie kommunizieren die klassen untereinander?
+	[ ] muster / konzepte
+		- observer pattern (state, command etc.)
+	[ ] entscheidungen
+		- warum haben wir uns für den ganzen kram oben in dieser form entschieden
+
+
+Gedanken zum Model:
+	- FensterV zeigt Spielfeld und SpielerV an
+		- SpielerV unterscheidet je nach Situation den anzuzeigenden View (InteraktionV, InventarV, usw.)
+		- SpielerV ist unten die Infoleiste
+		- Charakter bekommt InventarM (statt Inventar)
+		- SceneV holt sich vom Spieler das aktFeld, und erzeugt mit diesem FeldM einen neuen FeldV
+		- nur ein model verwenden, wenn inhalt zur laufzeit geändert werden soll
+
+

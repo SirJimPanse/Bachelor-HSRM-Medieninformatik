@@ -1,0 +1,44 @@
+// TODO und Funktionalitäten, die noch nicht fertig sind
+   
+[ ] CamptureTheFlag - Game
+	[ ] Szenendarstellung (Sichtbereich)
+	[X] Infoleiste (SpielerV)	
+	[X] Serialisierung
+	[X] Deserialisierung (mit Tabelle im Ladescreen auswählen und einladen)
+	[ ] Tastaturmapping einstellbar zur Laufzeit	
+	[ ] Lademenu als eigene Klasse auslagern, da doppelter Code
+	
+[X] Unittests
+	[X] Testabdeckung der Logik per JUnit
+	[X] Serialisierung mit JUnit abgedeckt
+	[X] Deserialisierung mit JUnit abgedeckt
+
+[ ]	Doku (wie in Aufgabenstellung gefordert)
+	[X] Javadoc (wichtigste Funtionen, Klassen mit @author usw.)
+	[X] Installationsanleitung
+	[ ] Flashdemo (zum Schluss zusammen mit "wink" - siehe SWT Praktikumsblatt 2 Aufgabe 2)
+	
+[/] Spec (muss halt konsistent sein)
+	
+[/] Design
+	[ ] auch Änderungen dokumentieren (Exceptions werden erwähnt.. haben wir die? Glaub nich oder?)
+	[ ] UML anpassen
+		[ ] Hauptmenü, Pausemenü, Tastaturhandler gibts nicht
+		[ ] MenuCV ist zu viel (in GameC steht was dazu, der fehlt wohl eher im Code)
+		[ ] TastaturC zu viel bzw. in falscher Schicht (=Tastaturhandler?)
+		[X] Datenschicht fällt weg
+			[X] Factories und Repositories trennen
+			[X] FeldM, TastaturM fallen weg
+			
+	[ ] Kritikpunkte aus der Besprechung verbessern (ka was das genau war, kommentare zur hilfe nehmen)
+	
+[ ] Bugs
+	[X] man kann sich im Pausemenu weiter bewegen
+	[ ] Nachdem man durch einen Eingang geht (Raum wechseln) erscheint die Statusleiste (SpielerV) nochmals oben im Sichtbereich
+	[ ] manchmal kann man beim Interagieren nicht die Nummer drücken (es kommt eine Exception) 
+
+[ ] TODOs im Code
+	[ ] alle wichtigen
+	[ ] alle sonstigen (nice to have etc.)
+
+[ ] CD mit Doku, allen PDFs, Sourcen, Abgabe-JAR etc. (Rohling!)

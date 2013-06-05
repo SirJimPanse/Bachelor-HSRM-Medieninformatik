@@ -1,0 +1,26 @@
+\paragraph{UseCase: Bewegung des Charakters}
+\begin{center}
+	\begin{tabular}{|r l|}
+	  \hline
+	  \textbf{Titel}: & Charakterbewegung\\
+	  \textbf{Akteur}: & Spieler \\
+	  \textbf{Fachlicher Auslöser}: & Spieler drückt Steuerungstasten(Default:Q,E,W,A,S,D) \\
+	  \textbf{Vorbedingungen}: & Spieler ist InGame \\
+	  \hline
+	  \textbf{Standardablauf}:
+		& 1. Spieler: drückt Q um sich nach links und E nach rechts zu drehen \\
+		& 2. Spieler: drückt W um sich nach vorn zu bewegen \\
+		& 3. Spieler: drückt A um nach links und D um nach rechts zu gehen, Sicht bleibt dabei nach vorn gerichtet \\
+		& 4. Spieler: drückt S um sich nach hinten zu bewegen, Sicht bleibt ebenfalls nach vorn gerichtet \\
+		& 5. System:  aktualisiert je nach Bewegung die Position des Spielers auf dem Campus und die Räume/NPC/Items in seinem Sichtfeld \\
+	 \textbf{Änderung}:
+		& 5.a Spieler: ändert Tastenbelegung unter Option \\
+		& 4.b System: ändert die entsprechenden Tasten zu fortbewegung des Charakters \\
+	  \hline
+	  \textbf{Nachbedingung}: & Chrakter kann sich nur auf begehbare Felder bewegen(verschlossene Türen und Wände sind nicht passierbar)\\
+	  \textbf{NF-Anf}.: & k.A. \\
+	  \textbf{Parameter}.: & k.A. \\
+	  \textbf{Nutzungshäufigkeit}: & Sehr Oft(im gesamten InGame Modus) \\
+	  \hline
+	\end{tabular}
+\end{center}

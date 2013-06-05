@@ -1,0 +1,35 @@
+Also, hier ist unsere Spec.. wie man sieht als LATEX-Projekt angelegt.
+Nun könnte man sich fragen "Hm warum TEX?". Naja die Vorteile liegen 
+finde ich auf der Hand: 
+
+  1. Wir können den Text unserer Spec im SVN / TRAC ansehen, weil
+     TEX-Dokumente bekanntlich keine Binärdateien sind.
+
+  2. Daher haben wir auch direkt Änderungen vor Augen, genau wie
+     später im Quellcode auch und können diff nutzen.
+
+  3. Wir können das Dokument schön aufteilen (im Prinzip wie Code)
+     und separat daran arbeiten.
+
+Da kann man sicherlich noch ein paar mehr finden, aber das sind denke
+ich ausreichend gute Gründe, keine .doc, .odt, .$WYSIWYG zu nehmen.
+
+Gut, was braucht ihr also um da was reinzuschreiben? Naja nichts. Nehmt
+Emacs oder Vi oder Nano oder Gedit oder Ed.. es sind ja Textfiles :)
+
+Was braucht ihr um aus den Textfiles eine hübsche PDF zu machen? Fast
+nichts was ihr nicht schon habt.. auf dem Image jedenfalls. Die Pakete
+bekommt man aber auch per
+
+  > sudo apt-get install texlive texlive-doc-de texlive-latex-extra \
+    	 	 	 texlive-lang-german texlive-latex-base
+
+Falls ihr die so holen wollt nur die Info, das sind so einige hundert MB.
+Wenn ihr dann alles beisammen habt, einfach unter doc/spec "make" eingeben.
+Der rattert dann 1-2 Sekunden vor sich hin, macht viel Lärm und am Ende 
+gibts ne PDF, die spec.pdf heißt.
+
+Achso und falls ihr Abbildungen habt: Speichert die am besten im JPG, PNG
+oder PDF Format unter dem jeweiligen Kapitel in den dazugehörigen Ordnern.
+Andere Formate lassen sich zwar auch einbinden, aber da muss man dann neue
+Makros benutzen und so bleibt es einheitlich.

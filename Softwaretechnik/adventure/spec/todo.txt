@@ -1,0 +1,16 @@
+[ ]	einleitung kapitel
+
+
+################################################################
+
+[ ] = noch nicht bearbeitet
+[-] = in arbeit
+[!] = fertig, aber muss abgeglichen/nachgeprüft werden
+[?] = unklar
+[x] = fertig
+
+[ ]	Inspiration / Umsetzungsideen holen:
+		    http://www.stahlforce.com/dev/demo/
+		    http://s3.amazonaws.com/ld48/index.html
+		    http://doom77.sourceforge.net/
+
