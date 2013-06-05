@@ -1,0 +1,33 @@
+'''
+Created on 31.05.2013
+
+@author: tland001
+'''
+import geometry as geo
+
+class MatrixStack(object):
+    
+    def __init__(self):
+        self.modelView = geo.identity()
+        self.projection = geo.identity()
+        
+    def pushModelMatrix(self, matrix):
+        self.modelView = self.modelView * matrix
+    
+    def pushProjectMatrix(self, matrix):
+        self.projection = self.projection * matrix
+        
+    def getMvpMatrix(self):
+        return self.projection * self.modelView
+    
+    def __repr__(self):
+        return repr(self.modelView)
+    
+if __name__ == '__main__':
+    s = MatrixStack()
+    r = geo.rotate(10, (1, 0, 0))
+    print s
+    print r
+    s.pushModelMatrix(r)
+    s.pushModelMatrix(r)
+    print s

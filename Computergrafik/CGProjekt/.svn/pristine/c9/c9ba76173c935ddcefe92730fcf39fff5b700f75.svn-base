@@ -1,0 +1,107 @@
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+from numpy import array
+from mathematics import *
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+from OpenGL.GL.shaders import *
+import Image
+import sys
+import time
+import os
+
+
+class Skybox(object):
+
+    def __init__(self):
+        vertex = open('shader/imageShader.vert', 'r').read()
+        fragment = open('shader/imageShaderFrag.frag', 'r').read()
+        self.program = compileProgram(compileShader(vertex, GL_VERTEX_SHADER),
+                                    compileShader(fragment, GL_FRAGMENT_SHADER))
+        self.texNr = 0
+        
+    def sendMat4(self, shaderProgram, varName, matrix):
+        varLocation = glGetUniformLocation(shaderProgram, varName)
+        glUniformMatrix4fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+    def initSkybox(self, width, height):
+        #files = ['clouds_front.jpg', 'clouds_left.jpg', 'clouds_back.jpg', 'clouds_right.jpg', 'clouds_top.jpg', 'clouds_bottom.jpg']
+        #files = ['FR.jpg', 'LF.jpg', 'BK.jpg', 'RT.jpg', 'UP.jpg', 'DN.jpg']
+        files = ['front.jpg', 'right.jpg', 'back.jpg', 'left.jpg', 'top.jpg', 'bottom.jpg']
+        #files = ['front.png', 'left.png', 'back.png', 'right.png', 'top.png', 'bottom.png']
+        location = 'textures/sky_hell_512'
+        location = 'textures/sky_snow_512'
+        #location = "textures/CloudyLightRays"
+        #location = "textures"
+        #location = "textures/ThickCloudsWater"
+        self.fileLength = len(files)
+    
+        '''self.data = [[-5.0, -5.0, 0.0, 0.0, 0.0],
+                     [5.0, -5.0, 0.0, 1.0, 0.0],
+                     [5.0, 5.0, 0.0, 1.0, 1.0],
+                     [-5.0, 5.0, 0.0, 0.0, 1.0]]
+        '''
+        
+        coords = [[-5.0, 5.0, 5.0], [5.0, 5.0, 5.0], [-5.0, -5.0, 5.0], [5.0, -5.0, 5.0], [-5.0, 5.0, -5.0], [5.0, 5.0, -5.0], [-5.0, -5.0, -5.0], [5.0, -5.0, -5.0]]
+        
+        self.data = [
+                     coords[3] + [0, 0], coords[1] + [0, 1], coords[0] + [1, 1 ], coords[2] + [1, 0], # front
+                     coords[2] + [0, 0], coords[6] + [1, 0], coords[4] + [1, 1 ], coords[0] + [0, 1], # left
+                     coords[6] + [0, 0], coords[7] + [1, 0], coords[5] + [1, 1 ], coords[4] + [0, 1], # back
+                     coords[7] + [0, 0], coords[3] + [1, 0], coords[1] + [1, 1 ], coords[5] + [0, 1], #right
+                     coords[0] + [1, 0], coords[1] + [0, 0], coords[5] + [0, 1 ], coords[4] + [1, 1], # top 
+                     coords[2] + [1, 1], coords[3] + [0, 1], coords[7] + [0, 0 ], coords[6] + [1, 0] # bottom
+                     ]
+        
+        '''self.data = [
+                     coords[2] + [0, 0], coords[3] + [1, 0], coords[1] + [1, 1 ], coords[0] + [0, 1], # front
+                     coords[2] + [0, 0], coords[6] + [1, 0], coords[4] + [1, 1 ], coords[0] + [0, 1], # left
+                     coords[6] + [0, 0], coords[7] + [1, 0], coords[5] + [1, 1 ], coords[4] + [0, 1], # back
+                     coords[3] + [0, 0], coords[7] + [1, 0], coords[5] + [1, 1 ], coords[1] + [0, 1], # right
+                     coords[0] + [0, 0], coords[1] + [1, 0], coords[5] + [1, 1 ], coords[4] + [0, 1], # top 
+                     coords[2] + [0, 0], coords[3] + [1, 0], coords[7] + [1, 1 ], coords[6] + [0, 1] # bottom
+                     ] '''
+        
+            
+        self.myVBO = vbo.VBO(array(self.data, 'f'))
+        
+        self.textureIDs = glGenTextures(self.fileLength)
+
+        for c, curTex in enumerate(map(lambda f: os.path.join(location, f), files)):
+            im = Image.open(curTex)
+            width, height = im.size
+            image = array(im)[::-1, :].tostring()  # mirror image on y-axis
+            glBindTexture(GL_TEXTURE_2D, self.textureIDs[c])
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+                         GL_UNSIGNED_BYTE, image)
+            glGenerateMipmap(GL_TEXTURE_2D)
+
+    def drawSkybox(self, mvpMatrix, mvMatrix):
+        """ zeichnet die Skybox """
+        glEnableClientState(GL_VERTEX_ARRAY)
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY)    
+
+        
+
+        glUseProgram(self.program)
+        self.sendMat4(self.program, "mvMatrix", mvMatrix)
+        self.sendMat4(self.program, "mvpMatrix", mvpMatrix)
+        
+        self.myVBO.bind() 
+        
+        glVertexPointer(3, GL_FLOAT, 20, self.myVBO)
+        glTexCoordPointer(2, GL_FLOAT, 20, self.myVBO + 12)
+        
+        for e in range(0, self.fileLength):
+            glBindTexture(GL_TEXTURE_2D, self.textureIDs[e])
+            glDrawArrays(GL_QUADS, e*4, 4)
+
+        self.myVBO.unbind()
+    
+        glDisableClientState(GL_VERTEX_ARRAY)
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY)

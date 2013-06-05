@@ -1,0 +1,65 @@
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+import sys
+from numpy import array
+import time
+import Image
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+from OpenGL.GL.shaders import *
+from skybox import Skybox
+from mathematics import geometry as geo
+from mathematics import MatrixStack
+
+skybox = None
+stack = None
+WIDTH, HEIGHT = 800, 800
+mvMat = None
+pMat = None
+
+
+def init():
+    global skybox, mvMat, pMat, stack
+    skybox = Skybox()
+    stack = MatrixStack()
+    skybox.initSkybox(WIDTH, HEIGHT)
+    glEnable(GL_DEPTH_TEST)
+
+
+def keyPressed(key, x, y):
+    global mvMat
+    if key == chr(27):
+        sys.exit(1)
+    elif key == 't':  # trehen
+        stack.pushModelMatrix(geo.rotationMatrix(0.1, (0, 1, 0)))
+        glutPostRedisplay()
+
+
+def display():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear screen
+    skybox.drawSkybox(stack.getMvpMatrix(), stack.modelView)
+    glutSwapBuffers()
+
+def reshape(width, height):
+    """ adjust projection matrix to window size"""
+    print width, height
+    aspect = float(height) / width
+    glViewport(0, 0, width, height)
+    stack.pushProjectMatrix(geo.perspectiveMatrix(-30.0, aspect, 0.1, 30))
+    stack.pushModelMatrix(geo.lookAtMatrix(0, 0, 4, 0, 0, 0, 0, 1, 0))
+    
+
+def main():
+    glutInit(sys.argv)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)  # bitmaske
+    glutInitWindowSize(WIDTH, HEIGHT)
+    glutCreateWindow("Testuren Text")
+    glutDisplayFunc(display)
+    glutKeyboardFunc(keyPressed)
+    glutReshapeFunc(reshape)
+    init()
+    glutMainLoop()
+
+if __name__ == '__main__':
+    main()

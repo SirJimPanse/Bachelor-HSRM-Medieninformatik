@@ -1,0 +1,45 @@
+"""
+Matrixklassen
+"""
+
+from math import *
+from numpy import *
+
+
+class Matrix(object):
+    """
+    Matrix klasse fuer Matrixoperationen
+    entspricht dem Standard fuer OpenGL 4.x
+    """
+    def __init__(self):
+        pass
+
+    def lookAtMatrix(self, ex, ey, ez, cx, cy, cz, ux, uy, uz):
+        e = array([ex, ey, ez])  # eye position
+        c = array([cx, cy, cz])  # center
+        up = array([ux, uy, uz])  # up vector
+
+        # normalize UpVector
+        lup = sqrt(dot(up, up))
+        up = up / lup
+        # get the view direction
+        f = c - e
+        lf = sqrt(dot(f, f))
+        f = f / lf
+        # calculate s
+        s = cross(f, up)
+        ls = sqrt(dot(s, s))
+        s = s / ls
+        # calculate u
+        u = cross(s, f)
+        # create LookAtMatrix
+        l = matrix([
+                    [s[0], s[1], s[2], -dot(s, e)],
+                    [u[0], u[1], u[2], -dot(u, e)],
+                    [-f[0], -f[1], -f[2], dot(f, e)],
+                    [0, 0, 0, 1]])
+        return l
+
+if __name__ == '__main__':
+    m = Matrix()
+    print m.lookAtMatrix(0, 0, -1, 0, 0, 0, 0, 1, 0)

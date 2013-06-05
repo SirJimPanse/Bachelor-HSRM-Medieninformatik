@@ -1,0 +1,140 @@
+"""
+Skybox-Klasse fuer die Helicopter-Anwendung im Fach
+generative Computergrafik an der HS-RM
+@author: Albert Justin, Kroell Soeren, Landmann Tino
+@version: 1.0
+"""
+
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+import sys
+from numpy import array
+import time
+import Image
+from OpenGL.GL.shaders import *
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+
+
+def sendValue(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform1f(varLocation, value)
+
+
+def sendVec3(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform3f(varLocation, *value)
+
+
+def sendVec4(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform4f(varLocation, *value)
+
+
+def sendMat3(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix3fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+def sendMat4(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix4fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+class SkyBox():
+
+    def __init__(self, fileName):
+        print "skybox erstellt"
+        self.fileName = fileName
+
+    def sendMatrix4(self, shaderProgram, varName, matrix):
+        varLocation = glGetUniformLocation(shaderProgram, "mvpMatrix")
+        glUniformMatrix4fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+    def loadTexture(self):
+        image = Image.open(self.fileName)
+        imagedata = array(image)
+        imagedata = imagedata[::-1, :]
+        width, height = image.size
+        imagedata = imagedata.tostring()
+
+        data = [(-1.0, -1.0, 1.0, 0.0, 0.0),  # unten links
+                (1.0, -1.0, 1.0, 1.0, 0.0),  # unten rechts
+                (1.0, 1.0, 1.0, 1.0, 1.0),  # oben rechts
+                (-1.0, 1.0, 1.0, 0.0, 1.0)]  # oben links
+        self.len = len(data)
+        self.vbo = vbo.VBO(array(data, 'f'))
+
+        self.textureID = glGenTextures(2)
+
+        glBindTexture(GL_TEXTURE_2D, self.textureID[0])
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+
+#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+#         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+                     GL_UNSIGNED_BYTE, imagedata)
+        glGenerateMipmap(GL_TEXTURE_2D)
+
+#         glBindTexture(GL_TEXTURE_2D, self.textureID[0])
+#         glPixelStorei(GL_UNPACK_ALIGNMENT, self.textureID)
+#         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+#         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+#         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+#         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+#         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 512, 512, 0, GL_RGB,
+#                      GL_UNSIGNED_BYTE, imagedata)
+
+    def drawSkyBox(self, mvp):
+#         glEnable(GL_TEXTURE_2D)
+#         glDisable(GL_DEPTH_TEST)
+#         glColor3f(1, 1, 1)  # front face
+#         glBindTexture(GL_TEXTURE_2D, 1)
+#         glBegin(GL_QUADS)
+#         glTexCoord2f(0, 0)
+#         glVertex3f(-10.0, -10.0, -10.0)
+#         glTexCoord2f(1, 0)
+#         glVertex3f(10.0, -10.0, -10.0)
+#         glTexCoord2f(1, 1)
+#         glVertex3f(10.0, 10.0, -10.0)
+#         glTexCoord2f(0, 1)
+#         glVertex3f(-10.0, 10.0, -10.0)
+#         glEnd()
+#         glBindTexture(GL_TEXTURE_2D, 0)
+#         glEnable(GL_DEPTH_TEST)
+
+        glEnableClientState(GL_VERTEX_ARRAY)
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY)
+
+        self.vbo.bind()
+
+        # shader einlesen
+        vertex = open('imageShader.vert', 'r').read()
+        fragment = open('imageShaderFrag.frag', 'r').read()
+
+        program = compileProgram(compileShader(vertex, GL_VERTEX_SHADER),
+                                 compileShader(fragment, GL_FRAGMENT_SHADER))
+ 
+        glUseProgram(program)
+ 
+        sendMat4(program, "mvpMatrix", mvp)
+
+        glVertexPointer(3, GL_FLOAT, 20, self.vbo)
+        glTexCoordPointer(2, GL_FLOAT, 20, self.vbo + 12)
+        glBindTexture(GL_TEXTURE_2D, self.textureID[0])
+        glDrawArrays(GL_QUADS, 0, self.len)
+        self.vbo.unbind()
+        print self.vbo
+        glDisableClientState(GL_VERTEX_ARRAY)
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY)
+
+if __name__ == '__main__':
+    skyBox = SkyBox('back.png')

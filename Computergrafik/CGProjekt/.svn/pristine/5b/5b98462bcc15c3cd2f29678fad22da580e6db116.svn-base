@@ -1,0 +1,83 @@
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+from numpy import array
+from mathematics import *
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+from OpenGL.GL.shaders import *
+import Image
+import sys
+import time
+import os
+
+class Skybox(object):
+
+    def __init__(self):
+        vertex = open('imageShader.vert', 'r').read()
+        fragment = open('imageShaderFrag.frag', 'r').read()
+        self.program = compileProgram(compileShader(vertex, GL_VERTEX_SHADER),
+                                    compileShader(fragment, GL_FRAGMENT_SHADER))
+        self.texNr = 0
+        
+    def sendMat4(self, shaderProgram, varName, matrix):
+        varLocation = glGetUniformLocation(shaderProgram, varName)
+        glUniformMatrix4fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+    def initSkybox(self, width, height):
+        files = ['clouds_left.jpg', 'clouds_right.jpg']
+        location = 'textures'
+        self.textureNr = len(files)
+        
+        self.pMat = perspectiveMatrix(45, width / float(height), 0, 3)
+    
+        self.data = [[-5.0, -5.0, 0.0, 0.0, 0.0],
+                [5.0, -5.0, 0.0, 1.0, 0.0],
+                [5.0, 5.0, 0.0, 1.0, 1.0],
+                [-5.0, 5.0, 0.0, 0.0, 1.0]]
+    
+        self.myVBO = vbo.VBO(array(self.data, 'f'))
+        
+        self.textureIDs = glGenTextures(self.textureNr)
+
+        for c, curTex in enumerate(map(lambda x: os.path.join(location, x), files)):
+            im = Image.open(curTex)
+            width, height = im.size
+            image = array(im)[::-1, :].tostring()  # mirror image on y-axis
+            glBindTexture(GL_TEXTURE_2D, self.textureIDs[c])
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+                         GL_UNSIGNED_BYTE, image)
+            glGenerateMipmap(GL_TEXTURE_2D)
+
+    def drawSkybox(self):
+        """ zeichnet die Skybox """
+        mvMat = lookAtMatrix(0, 0, 10, 0, 0, 0, 0, 1, 0)
+    
+        mvpMatrix = self.pMat * mvMat
+        glClear(GL_COLOR_BUFFER_BIT)
+        glEnableClientState(GL_VERTEX_ARRAY)
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY)    
+
+        # TODO mit schleife wuerfel erzeugen
+        self.myVBO.bind()
+        
+        glUseProgram(self.program)
+        self.sendMat4(self.program, "mvpMatrix", mvpMatrix)
+    
+        glVertexPointer(3, GL_FLOAT, 20, self.myVBO)
+        glTexCoordPointer(2, GL_FLOAT, 20, self.myVBO + 12)
+        glBindTexture(GL_TEXTURE_2D, self.textureIDs[self.texNr])
+        glDrawArrays(GL_QUADS, 0, len(self.data))
+        self.myVBO.unbind()
+    
+        glDisableClientState(GL_VERTEX_ARRAY)
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY)
+        
+        glutSwapBuffers()
+        
+    def nextTexture(self):
+        self.texNr = (self.texNr + 1) % 2

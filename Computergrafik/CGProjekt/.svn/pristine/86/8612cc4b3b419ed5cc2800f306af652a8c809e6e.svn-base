@@ -1,0 +1,154 @@
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+import sys
+from numpy import array
+import time
+import Image
+from skybox import SkyBox
+from mathematics import *
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+from OpenGL.GL.shaders import *
+from testCow import pMat
+
+myVBO = None
+pMat = None
+texNr = 0
+program = None
+
+
+def sendValue(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform1f(varLocation, value)
+
+
+def sendVec3(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform3f(varLocation, *value)
+
+
+def sendVec4(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform4f(varLocation, *value)
+
+
+def sendMat3(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix3fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+def sendMat4(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix4fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+def init(width, height):
+    global pMat
+    pMat = perspectiveMatrix(45, width / float(height), 0, 3)
+
+    global program
+    vertex = open('imageShader.vert', 'r').read()
+    fragment = open('imageShaderFrag.frag', 'r').read()
+    program = compileProgram(compileShader(vertex, GL_VERTEX_SHADER),
+                                compileShader(fragment, GL_FRAGMENT_SHADER))
+    
+    global data, myVBO
+    data = [[-1.0, -1.0, 0.0, 0.0, 0.0],
+            [1.0, -1.0, 0.0, 1.0, 0.0],
+            [1.0, 1.0, 0.0, 1.0, 1.0],
+            [-1.0, 1.0, 0.0, 0.0, 1.0]]
+    
+    myVBO = vbo.VBO(array(data, 'f'))
+    image = array(Image.open("textures/BK.jpg"))[::-1, :].tostring()
+    image2 = array(Image.open("textures/DN.jpg"))[::-1, :].tostring()
+    
+    
+    global textureIDs
+    textureIDs = glGenTextures(2)
+
+    glBindTexture(GL_TEXTURE_2D, textureIDs[0])
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 256, 256, 0, GL_RGB,
+                 GL_UNSIGNED_BYTE, image)
+    glGenerateMipmap(GL_TEXTURE_2D)
+
+    glBindTexture(GL_TEXTURE_2D, textureIDs[1])
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 256, 256, 0, GL_RGB,
+                 GL_UNSIGNED_BYTE, image2)
+    glGenerateMipmap(GL_TEXTURE_2D)
+
+
+def display():
+#     print "display:", pMat
+    mvMat = lookAtMatrix(0, 0, 1, 0, 0, 0, 0, 1, 0)
+#     mvMat = matrix([[1, 0, 0, 0],
+#                     [0, 1, 0, 0],
+#                     [0, 0, 1, 0],
+#                     [0, 0, 0, 1]])
+    mvpMatrix = pMat * mvMat
+    glClear(GL_COLOR_BUFFER_BIT)
+    glEnableClientState(GL_VERTEX_ARRAY)
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY)
+
+#     mvpMatrix = pMat * mvMat
+#     mvpMatrix = matrix([[1, 0, 0, 0],
+#                     [0, 1, 0, 0],
+#                     [0, 0, 1, 0],
+#                     [0, 0, 0, 1]])
+
+    
+    
+    
+    
+    myVBO.bind()
+    
+    glUseProgram(program)
+    sendMat4(program, "mvpMatrix", mvpMatrix)
+
+    glVertexPointer(3, GL_FLOAT, 20, myVBO)
+    glTexCoordPointer(2, GL_FLOAT, 20, myVBO + 12)
+    glBindTexture(GL_TEXTURE_2D, textureIDs[texNr])
+    glDrawArrays(GL_QUADS, 0, len(data))
+#    glMultMatrixf(mvpMatrix)
+    myVBO.unbind()
+
+    glDisableClientState(GL_VERTEX_ARRAY)
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY)
+    
+    glutSwapBuffers()
+
+
+def keyPressed(key, x, y):
+    print key
+    global texNr
+    if key == chr(27):
+        sys.exit(1)
+    elif key == 't':
+        texNr = (texNr + 1) % 2
+        print texNr
+        glutPostRedisplay()
+
+
+def main():
+    glutInit(sys.argv)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)  # bitmaske
+    glutInitWindowSize(600, 600)
+    glutCreateWindow("Testuren Text")
+    glutDisplayFunc(display)
+    glutKeyboardFunc(keyPressed)
+#     glutReshapeFunc(resizeViewport)
+    init(600, 600)
+    glutMainLoop()
+
+
+if __name__ == '__main__':
+   
+    main()

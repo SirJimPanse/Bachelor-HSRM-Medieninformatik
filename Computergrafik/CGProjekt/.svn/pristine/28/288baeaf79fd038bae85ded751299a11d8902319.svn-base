@@ -1,0 +1,124 @@
+'''
+Created on 20.05.2013
+
+@author: tland001
+'''
+'''
+Created on 20.05.2013
+
+@author: tland001
+'''
+
+from OpenGL.GL import *
+from mathematics.matrix import lookAtMatrix, perspectiveMatrix
+from OpenGL.GLUT import *
+from OpenGL.arrays import vbo
+import math
+from mathematics import *
+from OpenGL.GL import shaders
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+import sys
+from numpy import *
+import time
+import Image
+from OpenGL.GL.shaders import *
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+
+
+points = [[math.cos(i * math.pi / 3), (math.sin(i * math.pi / 3))]\
+          for i in range(6)]
+vbo = vbo.VBO(array(points, 'f'))
+
+
+def sendValue(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform1f(varLocation, value)
+
+
+def sendVec3(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform3f(varLocation, *value)
+
+
+def sendVec4(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform4f(varLocation, *value)
+
+
+def sendMat3(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix3fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+def sendMat4(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix4fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+def initGL(width, heigt):
+    glClearColor(0.0, 0.0, 1.0, 0.0)
+    # glMatrixMode(GL_PROJECTION)
+    # glLoadIdentity()
+    glEnable(GL_DEPTH_TEST)
+    glOrtho(-1.5, 1.5, -1.5, 1.5, -1.0, 1.0)
+    # glMatrixMode(GL_MODELVIEW)
+
+
+def display():
+    glClear(GL_COLOR_BUFFER_BIT)
+    glColor3f(0, 0, 0, 0)
+    mvMat = lookAtMatrix(0, 0, 5, 0, 0, 0, 0, 1, 0)
+    pMat = perspectiveMatrix(45, 1, 0, 10)
+    normalMat = (mvMat[0:3, 0:3]).I.T
+    mvpMat = pMat * mvMat
+
+    print mvpMat
+
+    vertex = open('cartoon.vert', 'r').read()
+    fragment = open('cartoon.frag', 'r').read()
+
+    program = compileProgram(compileShader(vertex, GL_VERTEX_SHADER),
+                             compileShader(fragment, GL_FRAGMENT_SHADER))
+
+    if program:
+        glUseProgram(program)
+#     sendMat4(program, 'mvMatrix', mvMat)
+#     sendMat4(program, 'mvpMatrix', mvpMat)
+#     sendMat3(program, 'normalMatrix', normalMat)
+
+    vbo.bind()
+    glVertexPointer(3, GL_FLOAT, 0, vbo)
+    glNormalPointer(GL_FLOAT, 0, vbo + 12)
+    glDrawArrays(GL_POLYGON, 0, len(points))
+    vbo.unbind()
+    """
+    global vbo
+    glClear(GL_COLOR_BUFFER_BIT)
+    glColor3f(.75, .75, .75)
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
+    vbo.bind()
+    glVertexPointerf(vbo)
+    glEnableClientState(GL_VERTEX_ARRAY)
+    glDrawArrays(GL_POLYGON, 0, len(points))
+    vbo.unbind()
+    glDisableClientState(GL_VERTEX_ARRAY)
+    glFlush()
+    """
+
+
+def main():
+    glutInit(sys.argv)
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+    glutInitWindowSize(500, 500)
+    glutCreateWindow("Einfaches_Open_GL")
+    glutDisplayFunc(display)
+    initGL(500, 500)
+    glutMainLoop()
+
+
+if __name__ == "__main__":
+    main()

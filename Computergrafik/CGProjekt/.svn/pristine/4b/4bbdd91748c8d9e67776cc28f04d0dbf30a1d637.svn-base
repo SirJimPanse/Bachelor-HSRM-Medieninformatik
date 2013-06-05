@@ -1,0 +1,102 @@
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+import sys
+from numpy import array
+import time
+import Image
+from skybox import SkyBox
+from mathematics import *
+
+skybox = SkyBox('tex.png')
+
+
+def sendValue(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform1f(varLocation, value)
+
+
+def sendVec3(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform3f(varLocation, *value)
+
+
+def sendVec4(shaderProgram, varName, value):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniform4f(varLocation, *value)
+
+
+def sendMat3(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix3fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+def sendMat4(shaderProgram, varName, matrix):
+    varLocation = glGetUniformLocation(shaderProgram, varName)
+    glUniformMatrix4fv(varLocation, 1, GL_TRUE, matrix.tolist())
+
+
+def resizeViewport(width, height):
+    """ this is the openGL callback reshape function """
+    if height == 0:
+        height = 1
+    glViewport(0, 0, width, height)
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    if width <= height:
+        glOrtho(-2.0, 2.0, -2.0 * height / width,
+                2.0 * height / width, -2.0, 2.0)
+    else:
+        glOrtho(-1. * width / height, 2. * width / height, -2., 2., -2.0, 2.0)
+    print width, height
+    glMatrixMode(GL_MODELVIEW)
+    glutSwapBuffers()
+
+
+def display():
+    mvMat = lookAtMatrix(0, 0, 3, 0, 0, 0, 0, 1, 0)
+    pMat = perspectiveMatrix(45, 1, 0, 3)
+#     normalMat = (mvMat[0:3, 0:3]).I.T
+    mvpMat = pMat * mvMat
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    #glRotate(3, 0, 1, 0)
+    skybox.loadTexture()
+    skybox.drawSkyBox(mvpMat)
+
+    glutSwapBuffers()
+
+
+def keyEvent(key, xPoint, yPoint):
+    """ OpenGL Callback Function for Keyboard """
+    global ax, ay, az
+    if key == chr(27):
+        sys.exit()
+    if key == 'a':
+        glutPostRedisplay()
+
+
+def initGL(width, height):
+    """ Init OpenGL """
+    glClearColor(1.0, 0.0, 0.0, 0.0)
+    glEnable(GL_DEPTH_TEST)
+    #glMatrixMode(GL_PROJECTION)
+    #glLoadIdentity()
+    glOrtho(-5., 5., -5., 5., -5.0, 5.0)
+    #glMatrixMode(GL_MODELVIEW)
+
+
+def main():
+    glutInit(sys.argv)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)  # bitmaske
+    glutInitWindowSize(512, 512)
+    glutCreateWindow("SkyBox Test")
+    glutDisplayFunc(display)
+    glutKeyboardFunc(keyEvent)
+#     glutReshapeFunc(resizeViewport)
+    initGL(512, 512)
+    glutMainLoop()
+
+if __name__ == '__main__':
+    main()
+    skybox = SkyBox('tex.png')

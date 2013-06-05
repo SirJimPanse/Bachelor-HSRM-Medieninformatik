@@ -1,0 +1,47 @@
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.arrays import vbo
+import sys
+from numpy import array
+import time
+import Image
+from mathematics import *
+from OpenGL.GL.framebufferobjects import glGenerateMipmap
+from OpenGL.GL.shaders import *
+from skybox import Skybox
+
+skybox = None
+
+def init(width, height):
+    global skybox
+    skybox = Skybox()
+    skybox.initSkybox(width, height)
+
+
+def keyPressed(key, x, y):
+    print key
+    global texNr
+    if key == chr(27):
+        sys.exit(1)
+    elif key == 't':
+        skybox.nextTexture()
+        glutPostRedisplay()
+        
+def display():
+    skybox.drawSkybox()
+
+
+def main():
+    glutInit(sys.argv)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)  # bitmaske
+    glutInitWindowSize(800, 800)
+    glutCreateWindow("Testuren Text")
+    glutDisplayFunc(display)
+    glutKeyboardFunc(keyPressed)
+#     glutReshapeFunc(resizeViewport)
+    init(800, 800)
+    glutMainLoop()
+    
+if __name__ == '__main__':
+    main()
