@@ -1,0 +1,17 @@
+lang.playlistModeButton=Umstellen in den Playlistmodus
+lang.playlistPopUp=Zeigt vorhandene Playlisten
+lang.showSongInfosButton=Zeigt Song Infos
+lang.stopCircles=H\u00e4lt TrackCircles an
+lang.searchTextField=Suchtext hier eintippen
+lang.newPlaylistButton=L\u00f6scht tempor\u00e4re Playlist
+lang.toggleCoverLabel =Ein- / Ausblenden des Covers
+lang.colorChangeItem =Farbe \u00e4ndern
+lang.deleteTrackItem =Song l\u00f6schen
+lang.albumColorChangeItem = Album-Farbe \u00e4ndern
+lang.interpretColorChangeItem = Interpret-Farbe \u00e4ndern
+lang.genreColorChangeItem = Genre-Farbe \u00e4ndern
+lang.deleteAllItem = Alle Tracks l\u00f6schen
+lang.deleteAlbumItem = Album entfernen
+lang.exitButton = Schlie\u00dfen
+lang.minimizeButton = Minimieren
+lang.tutorialButton = Tutorial \u00f6ffnen
