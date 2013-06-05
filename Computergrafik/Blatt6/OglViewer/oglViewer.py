@@ -3,6 +3,11 @@ Created on 20.05.2013
 
 @author: tland001
 '''
+"""
+Tastenkonfig:
+W, A, S, D, Q, e: um das Objekt um 
+ensprechende Achse zu drehen
+"""
 #import oglFixme
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -56,7 +61,6 @@ def init(width, height):
 
 def display():
     """ Render all objects"""
-    print "testsaaa"
     glClear(GL_COLOR_BUFFER_BIT)  # clear screen
     glColor(0.0, 0.0, 1.0)  # render stuff
     glLoadIdentity()
