@@ -1,0 +1,30 @@
+<persistence
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+                            http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+    <persistence-unit name="sakila">
+        <class>de.medieninf.webanw.sakila.Actor</class>
+        <class>de.medieninf.webanw.sakila.Category</class>
+        <class>de.medieninf.webanw.sakila.City</class>
+        <class>de.medieninf.webanw.sakila.Country</class>
+        <class>de.medieninf.webanw.sakila.Customer</class>        
+        <class>de.medieninf.webanw.sakila.Film</class>
+        <class>de.medieninf.webanw.sakila.Inventory</class>
+        <class>de.medieninf.webanw.sakila.Paddress</class>
+        <class>de.medieninf.webanw.sakila.Payment</class>
+        <class>de.medieninf.webanw.sakila.Rental</class>
+        <class>de.medieninf.webanw.sakila.Staff</class>
+        <class>de.medieninf.webanw.sakila.Store</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://db.intern.mi.hs-rm.de:5432/tlehw001"/>
+            <property name="javax.persistence.jdbc.user" value="tlehw001"/>
+            <property name="javax.persistence.jdbc.password" value="secret"/>
+            <property name="javax.persistence.logging.level" value="INFO"/>
+        </properties>
+    </persistence-unit>    
+        
+</persistence>

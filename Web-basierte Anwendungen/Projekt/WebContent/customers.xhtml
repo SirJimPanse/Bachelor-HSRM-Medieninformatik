@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Kunden</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="page.xhtml">
+			<!-- Suchfelder um Auswahl der Kunden einzuschränken, Suchefelder sind ein-/ausblendbar-->
+			<ui:define name="content">
+				<h:commandLink action="#{cbb.toggleSearch}" value="#{cbb.searchLink}" />
+					
+				<h:panelGrid columns="2" rendered="#{cbb.searchField}">
+				
+					<h:outputText value = "Vorname"/>
+					<h:inputText id="firstName" value="#{cbb.firstName}" required="false" />
+					
+					<h:outputText value = "Nachname"/>
+					<h:inputText id="lastName" value="#{cbb.lastName}" required="false" />
+					
+					<h:outputText value = "Paddress"/>
+					<h:inputText id="paddress" value="#{cbb.paddress}" required="false" />
+					
+					<h:outputText value = "District"/>
+					<h:inputText id="district" value="#{cbb.district}" required="false" />
+					
+					<h:outputText value = "City"/>
+					<h:inputText id="city" value="#{cbb.city}" required="false" />
+					 
+					<h:outputText value = "Country"/>
+					<h:inputText id="country" value="#{cbb.country}" required="false" />
+					
+					<h:outputText value = "postalCode"/>
+					<h:inputText id="postalcode" value="#{cbb.postalCode}" required="false" />
+					
+					<h:outputText value = "Phone"/>
+					<h:inputText id="phone" value="#{cbb.phone}" required="false" />
+				
+					<h:outputText value="Filiale"/>
+					<h:selectOneMenu value="#{cbb.store}">
+						<f:selectItems value="#{cbb.stores}"/>
+					</h:selectOneMenu>
+					
+					<h:selectBooleanCheckbox value="#{cbb.active}"/>
+					<h:outputText value = "Aktiv"/>
+					
+					<h:commandButton value="Suchen" action="#{cbb.searchCustomers}" />
+				</h:panelGrid>
+				
+				<br />
+				<!-- Reset-Button um alle Einschränkungen rückgängig zu machen -->
+				<h:panelGroup>
+					<h:commandButton value="Reset" action="#{cbb.resetCustomers}" />
+				</h:panelGroup>
+				
+				<!-- Auf- und absteigend sortiebare Ausgabe-->
+				<h:dataTable var="wahl" value="#{cbb.model}" first="#{cbb.first}" rows="#{cbb.noRows}">
+					<h:column>
+						<f:facet name = "header">
+							<h:commandLink action="#{cbb.sortByCustomerId}" value="CustomerID"/>
+						</f:facet>
+							<h:commandLink actionListener="#{cbb.editCustomer}" action="edit">
+								<f:attribute  name="customer" value="#{wahl}"/>
+								<h:outputText value="#{wahl.customerId}"/>
+							</h:commandLink>
+					</h:column>
+					<h:column>
+						<f:facet name = "header">
+							<h:commandLink action="#{cbb.sortByFirstName}" value="Vorname" />
+						</f:facet>
+							<h:outputText value="#{wahl.firstName}"/>
+					</h:column>
+					<h:column>
+						<f:facet name = "header">
+							<h:commandLink action="#{cbb.sortBylastName}" value="Nachname" />
+						</f:facet>
+							<h:outputText value="#{wahl.lastName}"/>
+					</h:column>
+					<h:column>
+						<f:facet name = "header">
+							<h:commandLink action="#{cbb.sortByStore}" value="Filiale" />
+						</f:facet>
+							<h:outputText value="#{wahl.store.storeId}"/>
+					</h:column>
+					<h:column>
+						<f:facet name = "header">
+							<h:commandLink action="#{cbb.sortByActive}" value="Aktiv" />
+						</f:facet>
+							<h:outputText value="#{wahl.active}"/>
+					</h:column>
+				
+				</h:dataTable>
+				<h:panelGroup>
+		            <h:commandButton value="Zurück" action="#{cbb.zurueck}"/>
+		            <h:commandButton value="Weiter" action="#{cbb.weiter}"/>
+	        	</h:panelGroup>
+	        	
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

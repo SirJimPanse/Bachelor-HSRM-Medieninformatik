@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+	  <title><ui:insert name="title"><h:outputText value="#{cdbb.firstName} #{cdbb.lastName}"/></ui:insert></title>
+	</head>
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="2">
+				
+				<h:outputText value="Vorname"/>
+				<h:inputText value="#{cdbb.firstName}"/>
+				
+				<h:outputText value="Nachname"/>
+				<h:inputText value="#{cdbb.lastName}" />
+
+				<h:outputText value="Filiale"/>
+				<h:selectOneMenu value="#{cdbb.store}">
+					<f:selectItems value="#{cdbb.stores}" var="storeVar" itemLabel="#{storeVar}" itemValue="#{storeVar.storeId}"/>
+				</h:selectOneMenu>
+
+				<h:outputText value="Nicht zurückgegebene Filme"/>
+				<h:dataTable var="inventory" value="#{cdbb.notReturnedInventories}">
+					<h:column>
+					 <h:outputText value="#{inventory.inv.film.title}"/>
+					</h:column>
+					<h:column>
+					 <h:outputText value=" - Kopie(#{inventory.inv.inventoryId})"/>
+					</h:column>
+					<h:column>
+						<h:commandLink actionListener="#{cdbb.giveBack}"
+							rendered="#{inventory.rented}">
+							<f:attribute name="invent" value="#{inventory.inv}" />
+							<h:outputText value="Zurück geben" />
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+	
+				<h:outputText value="Telefon"/>
+				<h:inputText value="#{cdbb.phone}" />
+				
+				<h:outputText value="PLZ"/>
+				<h:inputText value="#{cdbb.postal}" />
+				
+				<h:outputText value="Straße"/>
+				<h:inputText value="#{cdbb.street}" />  
+				
+				<h:outputText value="Stadt"/>
+				<h:selectOneMenu value="#{cdbb.city}">
+					<f:selectItems value="#{cdbb.cities}" var="cityVar" itemLabel="#{cityVar}" itemValue="#{cityVar.cityId}"/>
+				</h:selectOneMenu>
+				<h:outputText value="Land"/>
+				<h:selectOneMenu value="#{cdbb.country}">
+					<f:selectItems value="#{cdbb.countries}" var="countryVar" itemLabel="#{countryVar}" itemValue="#{countryVar.countryId}"/>
+				</h:selectOneMenu>
+				<h:commandButton id="submitbutton" value="Submit" action="#{cdbb.submit}" />
+				<h:commandButton value="Cancel" action="#{cdbb.cancel}"/>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>

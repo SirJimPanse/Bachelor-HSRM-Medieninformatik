@@ -1,0 +1,30 @@
+[X] Aufgabe 1
+	[X] Einschränkung der Filme nach Kategorie und/oder Altersfreigabe (Drop-Down Menü)
+
+[X] Aufgabe 2
+	[X] Suche Filme(ebenfalls mit Sortierung und Seiten) 
+	[X] Suche Kunden (ebenfalls mit Sortierung und Seiten) 
+
+[X] Aufgabe 3
+	[X] Klickbare Ergebnisse Kunden/Filme -> Film/Kundendetails + Kopien(mit link auf Ausleiher)
+	[X] editierbare/speicherbare Kundendaten
+	[X] ausgeliehene Kopien sollen Zurückgebbar sein
+	[X] Link zum Ausleiher / auch dort "zurückgebbar"
+	[X] transaktionell sicher (alles)
+
+[X] Aufgabe 4
+	[X] Filme ausleihen
+	[X] in JSP (nur für Kunden)
+	[X] Login für Kunden 
+	[X] nur ein Kunde kann eine Filmkopie ausleihen, welche aktuell nicht ausgeliehen ist
+	[X] transaktionell sicher (alles)
+	
+[X] Bugs...
+	[X] Suchefelder toUpperCase implementieren 
+	[ ] Wenn über JSP (Aufgabe 4) ausgeliehen wird (/Kunde), erscheint es nicht in der JSF-Ansicht (/films.jsf)
+				-> scheint, als müsse man die Session neu starten, dann wird es erst aktualisiert
+
+[ ] Dokumentation
+	[ ] alles mit JavaDoc versehen
+	[ ] Code an kritischen stellen verständlich Kommentiert
+	[ ] ReadMe für Barth geschrieben (nötig?)

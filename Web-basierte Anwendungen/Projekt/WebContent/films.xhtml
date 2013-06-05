@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Film-Suche</title>
+</h:head>
+<h:body>
+	<ui:composition template="page.xhtml">
+
+		<ui:define name="content">
+			<h:commandLink action="#{fbb.toggleSearch}" value="#{fbb.searchLink}" />
+			<br />
+			<h:panelGrid columns="2" rendered="#{fbb.searchField}">
+				<h:outputText value="Title" />
+				<h:inputText id="title" value="#{fbb.title}" required="false" />
+
+				<h:outputText value="Beschreibung" />
+				<h:inputText id="desc" value="#{fbb.description}" required="false" />
+				
+				<h:outputText value="Mindest Ausleihdauer" />
+				<h:inputText id="min_ausleihdauer" value="#{fbb.minRentalDuration}"
+					required="false" >
+					<f:validateLongRange minimum="0" />
+				</h:inputText>
+				
+				<h:outputText value="Maximale Ausleihdauer" />
+				<h:inputText id="max_ausleihdauer" value="#{fbb.maxRentalDuration}"
+					required="false" >
+					<f:validateLongRange minimum="0" />
+				</h:inputText>
+				
+				<h:outputText value="Minimale Ausleihgebühr" />
+				<h:inputText id="min_ausleihgebühr" value="#{fbb.minRentalRate}" required="false" >
+					<f:validateDoubleRange minimum="0" />
+				</h:inputText>
+				
+				<h:outputText value="Maximale Ausleihgebühr" />
+				<h:inputText id="max_ausleihgebühr" value="#{fbb.maxRentalRate}" required="false" >
+					<f:validateDoubleRange minimum="0" />
+				</h:inputText>
+				
+				<h:outputText value="Minimale Länge" />
+				<h:inputText id="min_länge" value="#{fbb.minLength}" required="false" >
+					<f:validateLongRange minimum="0" />
+				</h:inputText>
+				
+				<h:outputText value="Maximale Länge" />
+				<h:inputText id="max_länge" value="#{fbb.maxLength}" required="false" >
+					<f:validateLongRange minimum="0" />
+				</h:inputText>
+				
+				<h:outputText value="Minimale Wiederbeschaffungskosten" />
+				<h:inputText id="min_wiederbeschaffungskosten" value="#{fbb.minReplacementCost}"
+					required="false" >
+					<f:validateDoubleRange minimum="0" />
+				</h:inputText>
+				
+				<h:outputText value="Maximale Wiederbeschaffungskosten" />
+				<h:inputText id="max_wiederbeschaffungskosten" value="#{fbb.maxReplacementCost}"
+					required="false" >
+					<f:validateDoubleRange minimum="0" />
+				</h:inputText>
+
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<h:outputText value="Kategorie" />
+				<h:selectOneMenu id="categories" value="#{fbb.selectedCategory}">
+					<f:selectItems value="#{fbb.categories}"></f:selectItems>
+				</h:selectOneMenu>
+				<h:outputText value="Rating" />
+				<h:selectOneMenu id="ratings" value="#{fbb.selectedRating}">
+					<f:selectItems value="#{fbb.ratings}"></f:selectItems>
+				</h:selectOneMenu>
+			</h:panelGrid>
+			<br />
+			<h:panelGroup>
+				<h:commandButton value="Auswahl einschränken"
+					action="#{fbb.searchFilms}" />
+				<h:commandButton value="Reset" action="#{fbb.reset}" />
+			</h:panelGroup>
+
+			<h:messages style="color:red" />
+
+			<h:dataTable var="wahl" value="#{fbb.model}" first="#{fbb.first}"
+				rows="#{fbb.noRows}">
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByFilmId}" value="FilmID"/>
+					</f:facet>
+					<h:outputText value="#{wahl.filmId}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByTitle}" value="Titel" />
+					</f:facet>
+					<h:commandLink actionListener="#{fbb.filmDetail}" action="detail">
+						<f:attribute name="film" value="#{wahl}" />
+						<h:outputText value="#{wahl.title}" />
+					</h:commandLink>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByCategory}" value="Kategorie" />
+					</f:facet>
+					<h:outputText value="#{wahl.category.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByDescription}" value="Beschreibung" />
+					</f:facet>
+					<h:outputText value="#{wahl.description}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByRating}" value="Altersfreigabe" />
+					</f:facet>
+					<h:outputText value="#{wahl.rating}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByRentalDuration}" value="Ausleihdauer" />
+					</f:facet>
+					<h:outputText value="#{wahl.rentalDuration}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByRentalRate}" value="Ausleihgebühr" />
+					</f:facet>
+					<h:outputText value="#{wahl.rentalRate}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByLength}" value="Filmlänge" />
+					</f:facet>
+					<h:outputText value="#{wahl.length}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:commandLink action="#{fbb.sortByReplacementCost}" value="Pfandkosten" />
+					</f:facet>
+					<h:outputText value="#{wahl.replacementCost}" />
+				</h:column>
+			</h:dataTable>
+
+			<h:panelGroup>
+				<h:commandButton value="Zurück" action="#{fbb.zurueck}" />
+				<h:commandButton value="Weiter" action="#{fbb.weiter}" />
+			</h:panelGroup>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

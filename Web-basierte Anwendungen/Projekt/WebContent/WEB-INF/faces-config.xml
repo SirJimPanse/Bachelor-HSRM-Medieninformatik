@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+   version="2.0">
+
+  <managed-bean>
+    <managed-bean-name>sakila</managed-bean-name>
+    <managed-bean-class>de.medieninf.webanw.sakila.SakilaBean</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>fbb</managed-bean-name>
+    <managed-bean-class>de.medieninf.webanw.sakila.backingbeans.FilmsBackingBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  
+  <managed-bean>
+    <managed-bean-name>fdbb</managed-bean-name>
+    <managed-bean-class>de.medieninf.webanw.sakila.backingbeans.FilmDetailsBackingBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>abb</managed-bean-name>
+    <managed-bean-class>de.medieninf.webanw.sakila.backingbeans.ActorsBackingBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>cbb</managed-bean-name>
+    <managed-bean-class>de.medieninf.webanw.sakila.backingbeans.CustomersBackingBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>cdbb</managed-bean-name>
+    <managed-bean-class>de.medieninf.webanw.sakila.backingbeans.CustomerDetailsBackingBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  
+
+  <navigation-rule>
+    <from-view-id>/customers.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>edit</from-outcome>
+      <to-view-id>/customerdetails.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+   <navigation-rule>
+    <from-view-id>/films.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>detail</from-outcome>
+      <to-view-id>/filmdetails.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+  <navigation-rule>
+    <from-view-id>/filmdetails.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>back</from-outcome>
+      <to-view-id>/films.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+    <navigation-rule>
+    <from-view-id>/filmdetails.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>customerDetails</from-outcome>
+      <to-view-id>/customerdetails.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+
+   <navigation-rule>
+    <from-view-id>/customerdetails.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>cancel</from-outcome>
+      <to-view-id>/customers.xhtml</to-view-id>
+    </navigation-case>
+   </navigation-rule> 
+
+   <navigation-rule>
+    <from-view-id>/customerdetails.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>update</from-outcome>
+      <to-view-id>/customerdetails.xhtml</to-view-id>
+    </navigation-case>
+   </navigation-rule>
+
+</faces-config>

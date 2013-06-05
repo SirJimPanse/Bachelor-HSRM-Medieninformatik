@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Filmdetails</title>
+</h:head>
+<h:body>
+		<h:panelGrid columns="2">
+			<h:outputText value="ID"/>
+			<h:outputText value="#{fdbb.filmId}" />
+			<h:outputText value="Titel"/>
+			<h:outputText value="#{fdbb.title}" />
+			<h:outputText value="Beschreibung"/>
+			<h:outputText value="#{fdbb.description}" />
+			<h:outputText value="Kategorie"/>
+			<h:outputText value="#{fdbb.category}" />
+			<h:outputText value="Ausleih-Dauer"/>
+			<h:outputText value="#{fdbb.rentalDuration}" />
+			<h:outputText value="Ausleihgebühr"/>
+			<h:outputText value="#{fdbb.rentalRate}" />
+			<h:outputText value="Länge"/>
+			<h:outputText value="#{fdbb.length}" />
+			<h:outputText value="Bewertung"/>
+			<h:outputText value="#{fdbb.rating}" />
+			<h:outputText value="Pfandkosten"/>
+			<h:outputText value="#{fdbb.replacementCost}" />
+			<h:outputFormat value="Schauspieler" />
+			<h:dataTable var="actor" value="#{fdbb.model}">
+				<h:column>
+					<h:outputText value="#{actor.firstName}"/>
+				</h:column>
+				<h:column>	
+					<h:outputText value="#{actor.lastName}"/>
+				</h:column>
+			</h:dataTable>
+			<h:outputText value="Kopien"/>
+			<h:dataTable var="inventory" value="#{fdbb.inventories}">
+			<h:column>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{inventory.inv.inventoryId}" />
+					<h:form>
+						<br />
+						<h:commandLink actionListener="#{fdbb.giveBack}" rendered="#{inventory.rented}" value="Zurück geben">
+							<f:attribute name="inv" value="#{inventory.inv}" />
+						</h:commandLink>
+						<br />
+						<h:commandLink actionListener="#{fdbb.changeToCustomer}" action="customerDetails" rendered="#{inventory.rented}" value="Wechseln zu Kunde: #{inventory.customer.customerId}">
+							<f:attribute  name="customer" value="#{inventory.customer}"/>
+						</h:commandLink>
+					</h:form>
+				</h:panelGrid>
+			</h:column>
+		</h:dataTable>
+			 
+		</h:panelGrid>
+		<h:form>
+			<h:commandButton value="Zurück" action="back"/>
+		</h:form>
+</h:body>
+</html>

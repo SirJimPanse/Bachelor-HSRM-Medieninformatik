@@ -1,0 +1,59 @@
+Dokumentation zur Abgabe Blatt 10
+----------------------------------
+
+# Konfiguration der Datenbank
+
+Um eine andere Datenbank zu verwenden muss die XML-Datei
+
+	/JSF_Abgabe/src/META-INF/persistence.xml
+	
+angepasst werden. Dabei müssen folgende Parameter (jeweils der Wet für "value") angepasst werden:
+
+URL zur Datenbank mit Port und Datenbankname
+	<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://db.intern.mi.hs-rm.de:5432/tlehw001"/>
+
+Benutzername
+	<property name="javax.persistence.jdbc.user" value="tlehw001"/>
+
+Passwort
+	<property name="javax.persistence.jdbc.password" value="secret"/>
+
+
+
+# Allgemeine Informationen / Funktionalität
+
+Mitarbeiter können jederzeit über das Template und jeweilige Verlinkung zwischen Kunden, Film und Schauspieleransicht wechseln.
+In den Ansichten werden dem Mitarbeiter der gesamte Inhalt der jeweiligen Datenbank, vorsortiert und auf 20 Einträge pro Seite
+ausgegeben.
+
+Wird der Link "Suche einblenden" ausgewählt, so erscheinen Suchfelder, durch welche die Ausgabe gefiltert werden kann. Ausgelöst
+wird die Filterung über den "Suche-Button". Der permanent sichtbare "Reset"-Button setzt per Klick alle Filterangaben zurück 
+und gibt wieder den vollständigen Inhalt der Datenbank aus. 
+
+In der Schuspieler-Ansicht befindet sich zusätzlich ein "Drop-Down-Menü" mit dessen Hilfe jederzeit die Ausgabe der Filme durch
+die Wahl eines Ratings und/oder einer Kategorie eingeschränkt werden kann.
+
+Klickt man in den Bereichen Schauspieler und Kunde auf die ID eines gewünschten Kundes/Films so gelangt man zur
+jeweiligen Detailansicht.
+
+In der Kundendetailansicht können alle Daten eines Kundes eingesehen und geändert werden. Zudem werden alle Filmkopien aufgelistet, 
+welche der Kunde ausgeliehen hat. Über den Link "Zurück geben" kann dann eine jeweilige Kopie zurück gegeben werden.
+
+In der Filmdetailansicht können ebenfalls alle Daten eines Films eingesehen, jedoch nicht geändert werden. Zusätzlich werden alle
+Filmkopien aufgelistet. Bei nicht ausgeliehenen Filmen erscheint lediglich die Kopienummer. Ist eine Kopie bereits ausgeliehen so
+kann er über diese Ansicht zurück gegeben werden. Zu erkennen sind diese Kopien am "Zurück geben"-Link. Über den "Wechseln zu Kunde: #"-Link, 
+an einer ausgeliehenen Kopie, gelangt man direkt zur Kundendetails-Seite des jeweiligen Kunden, der die kopie ausgeliehen hat. 
+Hier Kann der Film optional auch zurück gegeben werden.
+
+Möchte ein Kunde einen Film ausleihen, welche aber gerade erst ausgeliehen wurde, erscheint eine Meldung welche ihn darauf hinweist das dieser 
+Film (Kopie) derzeit nicht verfügbar ist. Selbiges gilt wenn alle Filme bereits ausgeliehen sind.
+
+
+# Kundenportal (Aufgabe 4)
+Das Kundenportal, erreichbar über /Kunde, bietet nach einem Login dem Kunden die möglichkeit alle Filme aufzulisten und deren Details 
+anzusehen. Über die Detailansicht können freie Kopien des Films ausgeliehen werden. Ebenso sieht der Kunde ständig, ob und welche 
+Kopien er bereits ausgeliehen hat. Das Zurückgeben ist absichtlich nur durch einen Mitarbeiter möglich.
+
+Der Ausleihen-Button erscheint nur, falls gerade freie Kopien bereit stehen. Ebenso erscheint die Liste aktuell ausgeliehener Filme nur, 
+wenn vom aktuellen Benutzer gerade Filme ausgeliehen sind. Über den "zurück zur Übersicht"-Link gelangt der Kunde jeder zeit zur
+Filmübersicht zurück.

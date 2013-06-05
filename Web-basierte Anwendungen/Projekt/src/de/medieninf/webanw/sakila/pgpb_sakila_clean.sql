@@ -1,0 +1,13 @@
+DROP TABLE rental;
+DROP TABLE payment;
+DROP TABLE inventory;
+DROP TABLE film_actor;
+DROP TABLE actor;
+DROP TABLE film;
+DROP TABLE category;
+DROP TABLE customer;
+DROP TABLE store CASCADE;
+DROP TABLE staff;
+DROP TABLE p_address;
+DROP TABLE city;
+DROP TABLE country;
