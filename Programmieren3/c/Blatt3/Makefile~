@@ -1,0 +1,17 @@
+CC = gcc
+CFLAGS = -ansi -g -Wall
+SYMLINK = ln -s
+
+all: komprimier
+	-/bin/rm -f dekomprimier
+	$(SYMLINK) komprimier dekomprimier
+
+komprimier.o: komprimier.c
+	$(CC) -c $(CFLAGS) komprimier.c -o komprimier.o
+
+komprimier: komprimier.o
+	$(CC) $(CFlAGS) komprimier.o -o komprimier
+
+clean:
+	-/bin/rm -f komprimier.o komprimier
+	-/bin/rm -f dekomprimier

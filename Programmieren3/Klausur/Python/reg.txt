@@ -1,0 +1,22 @@
+PLZ	12345					1
+PLZ	12A45					0
+PLZ	1234					0
+Datum	1.2.1993			0
+Datum	01.02.1993			1
+EUR	123,20					1
+EUR	450.500.000				1
+EUR	123.300.00				0
+EUR	12 EUR					1
+EUR	12 E					0
+Tel	06142/898-601			1
+Tel	+49 6142 898-601		1
+Tel	+12 +34-43				0
+Tel	+12 34-43				1
+Tel	+12 3-43				0
+Tel	+1 6123--342			0
+Email	medinformatik@hs-rm.de			1
+Email	peter.barth@hs-rm.de			1
+Email	spam@at@de						0
+Email	susi-sinnlos@nowhere.de			1
+Email	rudi.ratlos@informatik			0
+

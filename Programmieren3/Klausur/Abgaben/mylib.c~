@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+
+extern int my_strcasecmp(const char *s1, const char *s2);
+extern const char *my_index(const char *s, int c);
+
+int main(void){
+  printf("%i\n",strcasecmp("ABC","abc"));
+  printf("%i\n",strcasecmp("xyz","ABC"));
+  printf("%i\n",strcasecmp("abcd","XYZ"));
+
+  return 0;
+};
+
+int my_strcasecmp(const char *s1, const char *s2){
+  while((tolower(*s1++) = tolower(*s2++))){
+    
+  }
+}
+
