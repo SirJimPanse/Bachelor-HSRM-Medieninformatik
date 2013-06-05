@@ -1,0 +1,88 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<body>
+	<h1>Wie füttert man ein Sparschwein?</h1>
+
+	<a href="http://de.wikipedia.org/wiki/Spardose"> <img
+		src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Piggy_bank2.jpg/118px-Piggy_bank2.jpg"
+		alt="Sparschwein" /></a>
+
+	<p>Sparschweine ernähren sich vorwiegend von Euronen, die sie besonders gerne
+	 	von Leuten aus dem sozialen Umfeld annehmen. Zu Beginn sind sie
+		leer. Ihr Besitzer kann durch Entsparen jederzeit Geld entnehmen, aber
+		nie mehr, als zu diesem Zeitpunkt gerade drin ist.</p>
+
+	<div class="example">
+		<h3>Beispiel</h3>
+		<p>
+			Wenn Onkel <span concordion:set="#tante">Friedfert</span> <span
+				concordion:execute="spende(#tante,#TEXT)">50</span> Euro einwirft
+			und Onkel <span concordion:set="#onkel">Jöndhard</span> weitere <span
+				concordion:execute="spende(#onkel,#TEXT)">18</span>, ist dem
+			Sparschwein ein Guthaben von <span
+				concordion:assertEquals="getGuthaben()">68</span> Euro eingebaucht.
+		</p>
+	</div>
+
+	<h2>Topspender</h2>
+	<p>
+		Zu jedem Zeitpunkt ist der <i>Topspender</i> der erste Einzahler, der
+		den bis dahin höchsten Betrag (die Topspende) eingezahlt hat. Bisher
+		ist dies <span concordion:assertEquals="getTopspender()">Friedfert</span>
+		mit <span concordion:assertEquals="getTopspende()">50</span> Euro.
+	</p>
+	<p>
+		Nehmen wir an, nun kommt Onkel 
+		<span concordion:set="#spenderName">Kees</span> und wirft ebenfalls
+		<span concordion:execute="spende(#spenderName, #TEXT)">50</span>
+		ein. Obwohl er ebenfalls den bisher höchsten Betrag eingeworfen hat,
+		bleibt der Topspender <span concordion:assertEquals="getTopspender()">Friedfert</span>,
+		weil <span concordion:echo="#spenderName"/> ihn nicht überboten hat.
+	</p>
+	
+	<h2>Masseneinzahlungen</h2>
+	<p>Nachfolgend eine Serie von weiteren Einzahlungen mit dem sich dadurch
+		ergebenden verfügbaren Guthaben desjenigen, der (das) Schwein hat:</p>
+	<table concordion:execute="spende(#spender,#betrag)">
+		<tr>
+			<th concordion:set="#spender">Spender</th>
+			<th concordion:set="#betrag">Betrag</th>
+			<th concordion:assertEquals="getGuthaben()">Guthaben</th>
+		</tr>
+		<tr>
+			<td>Glogomir</td>
+			<td>51</td>
+			<td>169</td>
+		</tr>
+		<tr>
+			<td>Frits</td>
+			<td>8</td>
+			<td>177</td>
+		</tr>
+		<tr>
+			<td>Marizzibel</td>
+			<td>17</td>
+			<td>194</td>
+		</tr>
+		<tr>
+			<td>Gijsbert</td>
+			<td>20</td>
+			<td>214</td>
+		</tr>
+	</table>
+	<p>
+		Top-Einzahler ist schließlich <span
+			concordion:assertEquals="getTopspender()">Glogomir</span> mit <span
+			concordion:assertEquals="getTopspende()">51</span> Euronen.
+	</p>
+	<div class="commentary">
+		Alle hier gemachten Angaben sind rein fiktiv. Sparschweine existieren
+		ebenso wenig wie die Stadt <a
+			href="http://conspiracy.wikia.com/wiki/Bielefeld">Bielefeld</a>.
+	</div>
+	
+	<h2>Weitere Spezifikationen</h2>
+	<ul>
+	<li><a href="Entsparen.html">Entsparen</a> zur Geldentnahme.</li>
+	</ul>
+</body>
+</html>

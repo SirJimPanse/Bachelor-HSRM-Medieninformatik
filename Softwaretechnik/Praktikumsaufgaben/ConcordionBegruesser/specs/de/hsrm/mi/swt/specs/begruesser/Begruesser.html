@@ -1,0 +1,28 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<body>
+	<h1>Spezifikation: Begruesser</h1>
+
+	<p>Der Begruesser erzeugt einen Gruß für den angegebenen Gast.
+		Dabei gibt er auch an, der wievielte Gast derjenige ist.</p>
+
+	<div class="example">
+		<h3>Beispiel</h3>
+		<p>
+			Der lustige <span concordion:set="#name">Jöndhard</span> trifft als
+			erster ein und wird begrüßt mit '<span
+				concordion:assertEquals="begruesse(#name)">Als Gast Nr. 1
+				begruessen wir Herr Jöndhard</span>'.
+		</p>
+		<p>
+			Die lustige <span concordion:set="#name">Joghurta</span> trifft als
+			zweites ein und wird begrüßt mit '<span
+				concordion:assertEquals="begruesse(#name)">Als Gast Nr. 2
+				begruessen wir Frau Joghurta</span>'.
+		</p>
+	</div>
+	<p>
+		Die Anzahl der Gäste auf der Party beträgt also zu diesem Zeitpunkt <span
+			concordion:assertEquals="getZaehler()">2</span>.
+	</p>
+</body>
+</html>

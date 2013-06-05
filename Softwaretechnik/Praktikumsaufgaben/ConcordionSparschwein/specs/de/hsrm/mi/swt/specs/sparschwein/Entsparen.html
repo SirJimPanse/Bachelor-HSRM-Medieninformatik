@@ -1,0 +1,42 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<body>
+	<h1>Das Entsparen</h1>
+
+	<p>Der Besitzer kann durch Entsparen jederzeit Geld entnehmen, aber
+		nie mehr, als zu diesem Zeitpunkt gerade drin ist. Ein überzogenes
+		Entsparen ist daher ein Fehler.</p>
+
+	<h2>Zulässiges Entsparen</h2>
+
+	<div class="example">
+		<h3>Beispiel</h3>
+		<p>
+			Das Sparschwein enthalte zu Beginn <span
+				concordion:assertEquals="getGuthaben()">0</span> Euro. Frau <span
+				concordion:set="#tante">Joghurta Biffel</span> wirft <span
+				concordion:execute="spende(#tante,#TEXT)">17</span> Euro ein, danach
+			Frau Dr. <span concordion:set="#onkel">Notulen van Vergadering</span>
+			weitere <span concordion:execute="spende(#onkel,#TEXT)">42</span>, so
+			dass wir im Sparschwein ein Guthaben von <span
+				concordion:assertEquals="getGuthaben()">59</span> Euro haben.
+			Entsparen wir nun <span concordion:assertTrue="entspare(#TEXT)">20</span>
+			Euro, so ist das kein Problem.
+		</p>
+	</div>
+
+	<h2>Überzogenes Entsparen</h2>
+	<p>
+		In Fortführung des obigen Beispiels enthält unser Schweinchen nun <span
+			concordion:assertEquals="getGuthaben()">39</span> Euro.
+	</p>
+	<p>
+		Das Schwein muss den Versuch, einen größeren Betrag als <span
+			concordion:set="#res = entspare(#TEXT)">100</span> Euro zu entnehmen,
+	    <span concordion:assertFalse="#res">abweisen</span>.
+	</p>
+	<ul>
+		<li>Zurück zur <a href="Sparschwein.html">Sparschwein</a>-Seite
+		</li>
+	</ul>
+</body>
+</html>
