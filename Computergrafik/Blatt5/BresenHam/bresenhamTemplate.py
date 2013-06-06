@@ -50,34 +50,69 @@ def swap(p1, p2):
     p1[1], p2[1] = p2[1], p1[1]
 
 
+def drawPixel(x, y):
+    """ draw points """
+    global elementList
+    element = can.create_rectangle(x - HPSIZE, y - HPSIZE, x + HPSIZE,
+                                   y + HPSIZE, fill=FCOLOR, outline=FCOLOR)
+    elementList.append(element)
+
+
 def drawBresenhamLine(p, q):
     """ draw a line using bresenhams algorithm """
     # TODO: implement this function
-    global pointList
-    #print p, q
-    x0, y0, x1, y1 = p[0], HEIGHT - p[1], q[0], HEIGHT - q[1]
-    if x1 - x0 == 0:
-        mono = ('inf')
-    else:
-        mono = float(y1 - y0) / (x1 - x0)
-    if mono > 0:
-        swap([x0, y0], [x1, y1])
-    a, b = y1 - y0, x0 - x1
-    #print a, b
-    d = a + b / 2.
-    IncE = a
-    IncNE = a + b
-    y = y0
-    for x in range(x0, x1 + 1, 20):
-        pointList.append([x, HEIGHT - y])
-        print x, HEIGHT - y
-        if d <= 0:
-            d += IncE
-        else:
-            d += IncNE
-            y += 2 * HPSIZE
+    x0, y0 = p[0], p[1]
+    x1, y1 = q[0], q[1]
 
-    drawPoints()
+    rot = False
+    neg = False
+
+    # Sonderfaelle
+    # Steigung berechnen
+    if float(x1 - x0) == 0:
+        m = float('inf')
+    else:
+        m = (y1 - y0) / float(x1 - x0)
+    # Steigung < 0
+    if m < 0:
+        neg = True
+        if x0 > x1:
+            x1 = x0 + (x0 - x1)
+        else:
+            x0 = x1 + (x1 - x0)
+        m = abs(m)
+    if m > 1:
+        rot = True
+        x0, y0 = y0, x0
+        x1, y1 = y1, x1
+
+    if x0 > x1:
+        x0, x1 = x1, x0
+        y0, y1 = y1, y0
+
+    #Bresenham Algo
+    a, b = y1 - y0, x0 - x1
+    d = 2 * a + b
+    incE = 2 * a
+    incNE = 2 * (a + b)
+    y = y0
+
+    for x in range(x0, x1 + 1):
+        if rot and neg:
+            ytemp = y0 - (y - y0)
+            drawPixel(ytemp, x)
+        elif rot:
+            drawPixel(y, x)
+        elif neg:
+            x = x0 - (x - x0)
+            drawPixel(x, y)
+        else:
+            drawPixel(x, y)
+        if d <= 0:
+            d += incE
+        else:
+            d += incNE
+            y += 1
 
 
 def quit(root=None):
