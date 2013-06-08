@@ -1,3 +1,3 @@
-OglViewer-Objekt mit Polygonnetz
+Helikopter in OpenGL
 ==============================
-<img src="https://raw.github.com/SirJimPanse/Bachelor-HSRM-Medieninformatik/master/Computergrafik/Blatt7/PolygonNetz.jpg" title="PolygonNetz"> </img>
+<img src="https://raw.github.com/SirJimPanse/Bachelor-HSRM-Medieninformatik/master/Computergrafik/CGProjekt/CGProjekt.jpg" title="OpenGL Helikopter"> </img>
